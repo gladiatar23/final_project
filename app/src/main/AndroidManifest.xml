@@ -8,12 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".GameActivity">
+        <activity
+            android:name=".LevelMenuActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+            <activity android:name=".StartScreenActivity"
+                android:screenOrientation="landscape"/>
+            <activity android:name=".GameActivity"
+                android:screenOrientation="landscape">>
         </activity>
     </application>
 

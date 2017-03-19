@@ -1,14 +1,18 @@
 package com.gameapps.phillip.singlethreadgame;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.gameapps.phillip.singlethreadgame.sprite_definition.ListOrganizer;
-import com.gameapps.phillip.singlethreadgame.sprite_definition.ListOrganizerInterface;
+import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizer;
+import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizerInterface;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.VisualElement;
 
 /**
@@ -18,12 +22,18 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.VisualElement;
 public class GameGraphics extends SurfaceView
         implements SurfaceHolder.Callback , ListOrganizerInterface<VisualElement> {
 
+    private GameActivity.SpriteEssentialData spriteEssentialData;
+
     private boolean isReadyToDraw;
     private SurfaceHolder sh;
     private ListOrganizer<VisualElement> organizer;
+    private Bitmap bitmap;
 
-    public GameGraphics(Context context) {
-        super(context);
+//constructor
+    public GameGraphics(GameActivity.SpriteEssentialData spriteEssentialData) {
+        super(spriteEssentialData.ctx);
+
+        this.spriteEssentialData = spriteEssentialData;
         ctorStuff();
     }
 
@@ -31,7 +41,7 @@ public class GameGraphics extends SurfaceView
         super(context, attrs);
         ctorStuff();
     }
-
+//Dunno what it's there! No use project
     public GameGraphics(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         ctorStuff();
@@ -43,7 +53,7 @@ public class GameGraphics extends SurfaceView
 //    }
 
 
-
+//Function gets the work surface and receive information about changes to the surface
     private void ctorStuff() {
         sh = getHolder();
         sh.addCallback(this);
@@ -51,16 +61,25 @@ public class GameGraphics extends SurfaceView
         isReadyToDraw = false;
 
         this.organizer = new ListOrganizer<VisualElement>();
+        Resources res = getResources();
+        //get's pic of the background
+        bitmap = BitmapFactory.decodeResource(res, GameSession.currentLevel.pathToBG);
     }
 
 
     //surface-holder callback
-
+//Creates the worktop, get the screen size
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         isReadyToDraw = true;
-    }
 
+        if(spriteEssentialData != null) {
+            spriteEssentialData.reSetCanvasSize(this.getWidth() , this.getHeight());
+        }
+
+        Log.i("surface created w sizes" , "" + getWidth() + " , " + getHeight());
+    }
+//Start the program ready to draw the game
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
         isReadyToDraw = true;
@@ -73,16 +92,21 @@ public class GameGraphics extends SurfaceView
 
 
 
-
+//Draw the screen. Re-paint the screen animation purposes
     public void redrawEverything() {
         if(!isReadyToDraw) return;
 
         Canvas canvas = sh.lockCanvas();
 
+        //a one-time thing
+        bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
+
         if(canvas != null) {
             synchronized (sh) {
-                canvas.drawColor(Color.BLACK);
+                canvas.drawColor(Color.WHITE);
+                canvas.drawBitmap(bitmap , 0 , 0 , null);
 
+//Running a synchronization between graphic elements and logic on the surface
                 synchronized (organizer.getManagedListCopy()) {
                     for (VisualElement ve : organizer.getManagedListCopy()) {
                         ve.drawSelf(canvas);
@@ -92,11 +116,11 @@ public class GameGraphics extends SurfaceView
                 removeDeadItems();
 
             }
-            sh.unlockCanvasAndPost(canvas);
+            sh.unlockCanvasAndPost(canvas);//Retrieve the current size of the surface
         }
     }
 
-
+    //Calls Adds list management
     @Override
     public void addToManagedList(VisualElement type) {organizer.addToManagedList(type);}
 
@@ -111,5 +135,8 @@ public class GameGraphics extends SurfaceView
 
     @Override
     public void removeDeadItems() {organizer.removeDeadItems();}
+
+    @Override
+    public void removeAllItems() {organizer.removeAllItems();}
 
 }
