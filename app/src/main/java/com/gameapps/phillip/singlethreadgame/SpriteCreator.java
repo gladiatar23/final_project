@@ -121,7 +121,7 @@ public class SpriteCreator {
         Log.i("added sprite" , "" + enemy);
     }
 
-//Function accepts parameters of the bullet, and adds it to the list of logic, graphics and annihilation
+//Function accepts parameters of the pathToPicBullet, and adds it to the list of logic, graphics and annihilation
     public void createBullet(int bulletCenterX , int bulletCenterY , double angle) {
         BulletSprite bulletSprite = new BulletSprite(spriteEssentialData ,
                 bulletCenterX , bulletCenterY , angle);

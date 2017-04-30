@@ -41,7 +41,7 @@ public class SpriteCollisions implements LogicalElement {
 
 
     @Override
-    //Function checks if the bullet hit the enemy
+    //Function checks if the pathToPicBullet hit the enemy
     //If yes the function marks the specific elements for deletion
     public void change() {
         //check for enemy kills

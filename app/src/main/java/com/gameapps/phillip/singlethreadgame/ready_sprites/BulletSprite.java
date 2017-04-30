@@ -3,28 +3,26 @@ package com.gameapps.phillip.singlethreadgame.ready_sprites;
 import android.util.Size;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
-import com.gameapps.phillip.singlethreadgame.MyMath;
-import com.gameapps.phillip.singlethreadgame.R;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 
 /**
  * Created by user on 18/01/2017.
  */
-//The class defines all connected to bullet shooting. height, width, speed, angle, ballistics, direction and image set
+//The class defines all connected to pathToPicBullet shooting. height, width, speed, angle, ballistics, direction and image set
 public class BulletSprite extends Sprite {
 
     public static final int BULLET_WIDTH = 100;
     public static final int BULLET_HEIGHT = 100;
-    public static final int BULLET_INIT_VELOCITY = 100;//movement speed
 
     private static final double VERTICAL_ACCELERATION = 1; //gravity
+
     private double verticalDropSpeed; //gravity-influenced
-
-
-
     private double direction;
+
+
+
     private int velocity;
-//Settings drawing and movment bullet
+//Settings drawing and movment pathToPicBullet
     public BulletSprite(GameActivity.SpriteEssentialData spriteEssentialData , int centerX, int centerY , double directionAngle) {
         super(spriteEssentialData , centerX , centerY , BULLET_WIDTH, BULLET_HEIGHT);
         isRemovedWhenOffScreen = true;
@@ -32,14 +30,14 @@ public class BulletSprite extends Sprite {
 
         this.rotation = (float)directionAngle;
         direction = directionAngle;
-        velocity = BULLET_INIT_VELOCITY;
+        velocity = spriteEssentialData.gameSession.currentHero.bullet.initSpeed;
 
-        verticalDropSpeed = 17;
+        verticalDropSpeed = 13;
 
         rotation = 0;
         size = new Size(BULLET_WIDTH, BULLET_HEIGHT);
-//gets the bullet pic
-        setImage(spriteEssentialData.gameSession.currentHero.bullet);
+//gets the pathToPicBullet pic
+        setImage(spriteEssentialData.gameSession.currentHero.getPathToPicBullet());
     }
 
     @Override

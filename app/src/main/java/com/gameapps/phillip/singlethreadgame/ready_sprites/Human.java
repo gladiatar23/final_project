@@ -32,7 +32,7 @@ public class Human extends Sprite {
     public void change() {
 
     }
-//The function receives location coordinates of the click on the screen and calculates arc tangent a bullet fired.
+//The function receives location coordinates of the click on the screen and calculates arc tangent a pathToPicBullet fired.
     public void shootBullet(int xToShootAt , int yToShootAt) {
 
         double distanceX = xToShootAt - location.getX();

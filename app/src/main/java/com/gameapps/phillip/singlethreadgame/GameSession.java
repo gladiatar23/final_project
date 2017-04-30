@@ -119,26 +119,53 @@ public class GameSession {
     }
     public enum Human
     {
-        DEFAULT(R.drawable.stickman,R.drawable.shuriken,3),
-        BEAR(R.drawable.russianbear_l,R.drawable.sickle_l,8),
-        MARIO(R.drawable.mario,R.drawable.special_star,8),
-        TERMINATOR(R.drawable.terminatorr_l,R.drawable.grenade1,5),
-        ROBORABI(R.drawable.robo_rabi_l,R.drawable.sevivon,6),
-        SOLDIER(R.drawable.soldier,R.drawable.missile_l,7),
-        MINYON(R.drawable.wolverine_l,R.drawable.banan,8),
-        BENDEL(R.drawable.bendel_l,R.drawable.gayka,8),
+        DEFAULT(R.drawable.stickman, Bullet.SHURIKEN,3),
+        BEAR(R.drawable.russianbear_l,Bullet.SICKLE,8),
+        MARIO(R.drawable.mario,Bullet.SPECIAL_STAR,8),
+        TERMINATOR(R.drawable.terminatorr_l,Bullet.GRENADE,5),
+        ROBORABI(R.drawable.robo_rabi_l,Bullet.SEVIVON,6),
+        SOLDIER(R.drawable.soldier,Bullet.MISSILE,7),
+        MINYON(R.drawable.wolverine_l,Bullet.BANANA,8),
+        BENDEL(R.drawable.bendel_l,Bullet.GAYKA,8),
         ;
 
         public int pathToPicHero;
-        public int bullet;
+//        public int pathToPicBullet;
+        public Bullet bullet;
         public int fireRate;
 
-        Human(int pathToPic, int bullet, int fireRate)
+        Human(int pathToPic, Bullet bullet, int fireRate)
         {
             this.pathToPicHero = pathToPic;
-            this.bullet=bullet;
+            this.bullet = bullet;
             this.fireRate=fireRate;
 
+        }
+
+        public int getPathToPicBullet() {
+            return bullet.pathToPicBullet;
+        }
+
+    }
+    public enum Bullet
+    {
+        SHURIKEN(R.drawable.shuriken,100),
+        SICKLE(R.drawable.sickle_l,90),
+        SPECIAL_STAR(R.drawable.special_star,80),
+        GRENADE(R.drawable.grenade1,70),
+        SEVIVON(R.drawable.sevivon,60),
+        MISSILE(R.drawable.missile_l,70),
+        BANANA(R.drawable.banan,30),
+        GAYKA(R.drawable.gayka,70),
+        ;
+
+        public int pathToPicBullet;
+        public int initSpeed;
+
+        Bullet(int pathToPicBullet, int initSpeed)
+        {
+            this.pathToPicBullet = pathToPicBullet;
+            this.initSpeed=initSpeed;
         }
 
 
