@@ -1,6 +1,7 @@
 package com.gameapps.phillip.singlethreadgame.ready_sprites;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
+import com.gameapps.phillip.singlethreadgame.GameSession;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.LogicalElement;
 
 /**
@@ -26,7 +27,7 @@ public class WorldManager implements LogicalElement {
         currentIteration++;
 //Calculating the chances of creating a new enemy
         if(currentIteration % interatoinsForEnemyCreation == 0) {
-            createEnemy();
+            createEnemy(GameSession.currentLevel.enemyType);
         }
     }
 //Addressing a function to check if an object out of the screen
@@ -45,8 +46,9 @@ public class WorldManager implements LogicalElement {
         return false;
     }
 
-    private void createEnemy() {
-        spriteEssentialData.spriteCreator.createEnemy();
+    private void createEnemy(Enemy.EnemyType et) {
+        spriteEssentialData.spriteCreator.createEnemy(et);
     }
+
 
 }

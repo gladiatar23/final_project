@@ -102,11 +102,11 @@ public class SpriteCreator {
 
 //Function creates a new enemy, data sets width and height enemy,
 // receives a random number (for creating height location of the enemy). Adds to the list logic, graphics and annihilation
-    public void createEnemy() {
+    public void createEnemy(Enemy.EnemyType et) {
         int width = 130;
         int height = 170;
 
-        Enemy enemy = new Enemy(spriteEssentialData ,
+        Enemy enemy = new Enemy(et , spriteEssentialData ,
           spriteEssentialData.canvasRect.right+width/3 ,
                 MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , width , height
         );

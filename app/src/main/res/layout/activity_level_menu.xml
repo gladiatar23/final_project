@@ -11,6 +11,22 @@
     tools:context="com.gameapps.phillip.singlethreadgame.LevelMenuActivity">
 
 
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="eraseDB"/>
+
+    <Button
+        android:text="Show In Log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/button"
+        android:id="@+id/button4"
+        android:onClick="printDBToLog"/>
+
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

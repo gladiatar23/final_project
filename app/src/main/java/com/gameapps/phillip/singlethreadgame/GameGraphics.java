@@ -83,6 +83,8 @@ public class GameGraphics extends SurfaceView
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
         isReadyToDraw = true;
+        //a one-time thing
+        bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
     }
 
     @Override
@@ -98,8 +100,6 @@ public class GameGraphics extends SurfaceView
 
         Canvas canvas = sh.lockCanvas();
 
-        //a one-time thing
-        bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
 
         if(canvas != null) {
             synchronized (sh) {

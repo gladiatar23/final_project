@@ -22,7 +22,7 @@ public class Human extends Sprite {
         int height = spriteEssentialData.canvasSize.y/3;
         this.size = new Size((int)(height/hToWRatio) , height);
 
-        setImage(R.drawable.obama);
+        setImage(spriteEssentialData.gameSession.currentHero.pathToPicHero);
 
 
     }

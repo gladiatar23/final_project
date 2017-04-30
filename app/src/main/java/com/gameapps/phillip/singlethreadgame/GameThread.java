@@ -24,6 +24,7 @@ public class GameThread extends Thread {
     }
 
     public void terminateRun() {
+        Log.i("terminating thread" , "terminated " + this.toString());
         isRunning = false;
     }
 
@@ -59,6 +60,8 @@ public class GameThread extends Thread {
 
             startTime = new Date();
         }
+
+        Log.i("terminating thread" , "fully stopped");
 
 
     }

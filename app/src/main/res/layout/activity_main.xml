@@ -13,18 +13,6 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/textViewMyScore"
-        android:ems="10"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="18sp"
-        android:layout_alignStart="@+id/imageButton1" />
-
     <com.gameapps.phillip.singlethreadgame.GameGraphics
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,6 +20,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/scores"
+        android:ems="10"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        android:layout_alignStart="@+id/imageButton1" />
     <ImageButton
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -75,6 +75,15 @@
         android:layout_marginStart="20dp"
         android:layout_alignBottom="@+id/imageButton1"
         android:layout_toEndOf="@+id/imageButton4" />
+
+    <Button
+        android:text="Reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scores"
+        android:layout_alignStart="@+id/imageButton4"
+        android:id="@+id/restart"
+        android:onClick="restartGame"/>
 
 
 </RelativeLayout>

@@ -37,7 +37,7 @@ public class DroppingStar extends Sprite {
         if(MyMath.doRandomChance(CHANCE_FOR_SPECIAL_STAR))
             setImage(R.drawable.special_star);
         else
-            setImage(R.drawable.regular_star);
+            setImage(R.drawable.shit);
     }
 
     @Override

@@ -78,7 +78,10 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
             flagForRemoval();
     }
     @Override
-    public void flagForRemoval() {isRemoved = true;}
+    public void flagForRemoval() {
+        isRemoved = true;
+        spriteEssentialData.gameSession.handleSpriteRemoval(this);
+    }
     @Override
     public boolean isFlaggedForRemoval() {return isRemoved;}
 

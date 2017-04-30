@@ -1,4 +1,6 @@
 package com.gameapps.phillip.singlethreadgame.ready_sprites;
+import android.util.Log;
+
 import com.gameapps.phillip.singlethreadgame.GameActivity;
 import com.gameapps.phillip.singlethreadgame.MyMath;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.LogicalElement;
@@ -19,7 +21,6 @@ public class SpriteCollisions implements LogicalElement {
     Human human;
     Set<BulletSprite> allBullets;
     Set<Enemy> allEnemies;
-    public static int myScore=0;
 
 
     protected GameActivity.SpriteEssentialData spriteEssentialData;
@@ -59,6 +60,8 @@ public class SpriteCollisions implements LogicalElement {
             if(MyMath.areRectanglesIntersecting(human.getAreaRect() , e.getAreaRect())) {
 //                allBullets = new HashSet<>();
 //                allEnemies = new HashSet<>();
+
+                Log.i("ending game" , "lose!!!!!!");
 
                 spriteEssentialData.logics.removeAllItems();
                 spriteEssentialData.graphics.removeAllItems();

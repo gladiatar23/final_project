@@ -14,6 +14,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
+import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
 public class LevelMenuActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final double buttonRelativeToWidth = 0.3;
@@ -21,6 +29,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
 
     private int buttonWidth, buttonHeight;
     LinearLayout levelsLayout;
+    List<ImageButton> levelButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,8 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         levelsLayout=(LinearLayout)findViewById(R.id.levelSelection);
 
         int numOfLevels= GameSession.Level.values().length;
+        levelButtons = new ArrayList<>();
+        levelsLayout.removeAllViews();
         for (int i=0 ; i<numOfLevels ; i++){
             ImageButton bLevel =new ImageButton(this);
             bLevel.setOnClickListener(this);
@@ -46,8 +57,12 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
             bitmap = Bitmap.createScaledBitmap(bitmap , buttonWidth , buttonHeight , false);
             bLevel.setImageBitmap(bitmap);
             levelsLayout.addView(bLevel);
+            levelButtons.add(bLevel);
         }
 
+        placeAllLevelsInDB();
+
+        lockLevels();
 
     }
 
@@ -55,8 +70,61 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         int indexOfPressedButton = levelsLayout.indexOfChild(v);
         GameSession.currentLevel= GameSession.Level.values()[indexOfPressedButton];
-        startActivity(new Intent(this, GameActivity.class));
+
+        HeroMenuActivity.isBackFromStage = false;
+        startActivity(new Intent(this, HeroMenuActivity.class));
 
         Log.i("level button" , "index is " + indexOfPressedButton);
     }
+
+    public void eraseDB(View v) {
+        DBLevelHandler db = DBLevelHandler.getInstance(this);
+
+        db.deleteTable();
+    }
+
+    public void printDBToLog(View v) {
+        DBLevelHandler db = DBLevelHandler.getInstance(this);
+
+        List<LevelForTable> levelForTables = db.getAllLevels();
+        for(LevelForTable lev : levelForTables) {
+            Log.i("level: " , "" + lev.toString());
+        }
+    }
+
+    private void placeAllLevelsInDB() {
+        DBLevelHandler db = DBLevelHandler.getInstance(this);
+
+        for(GameSession.Level lv : GameSession.Level.values()) {
+            LevelForTable lft = new LevelForTable(lv.id , "" , 0 , 0);
+            db.addLevel(lft , false);
+        }
+    }
+
+    private void lockLevels() {
+        DBLevelHandler db = DBLevelHandler.getInstance(this);
+
+        GameSession.availableHeroes = new HashSet<>();
+        GameSession.availableHeroes.add(GameSession.Human.DEFAULT);
+
+        for(int i = 0 ; i < levelButtons.size()-1 ; i++) {
+            if(db.isWon(i)) {
+                levelButtons.get(i+1).setEnabled(true);
+                levelButtons.get(i+1).setImageAlpha(0xFF);
+                GameSession.availableHeroes.add(GameSession.Level.values()[i].unlocledPlayable);
+            }
+            else {
+                levelButtons.get(i+1).setEnabled(false);
+                levelButtons.get(i+1).setImageAlpha(50);
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onPostResume();
+
+        lockLevels();
+    }
+
 }

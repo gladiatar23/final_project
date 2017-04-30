@@ -15,7 +15,7 @@ public class BulletSprite extends Sprite {
 
     public static final int BULLET_WIDTH = 100;
     public static final int BULLET_HEIGHT = 100;
-    public static final int BULLET_INIT_VELOCITY = 60;//movement speed
+    public static final int BULLET_INIT_VELOCITY = 100;//movement speed
 
     private static final double VERTICAL_ACCELERATION = 1; //gravity
     private double verticalDropSpeed; //gravity-influenced
@@ -39,7 +39,7 @@ public class BulletSprite extends Sprite {
         rotation = 0;
         size = new Size(BULLET_WIDTH, BULLET_HEIGHT);
 //gets the bullet pic
-        setImage(R.drawable.shit);
+        setImage(spriteEssentialData.gameSession.currentHero.bullet);
     }
 
     @Override
