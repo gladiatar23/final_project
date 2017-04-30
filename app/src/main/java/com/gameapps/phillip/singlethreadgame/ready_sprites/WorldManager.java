@@ -12,6 +12,9 @@ public class WorldManager implements LogicalElement {
     //how many interactions to wait create an enemy
     public static int interatoinsForEnemyCreation = 30;
 
+    public static boolean isTapped;
+    public static int tapX , tapY;
+
     GameActivity.SpriteEssentialData spriteEssentialData;
 
     long currentIteration;
@@ -20,6 +23,7 @@ public class WorldManager implements LogicalElement {
         this.spriteEssentialData = spriteEssentialData;
 
         currentIteration = 1;
+        isTapped = false;
     }
 
     @Override
@@ -28,6 +32,12 @@ public class WorldManager implements LogicalElement {
 //Calculating the chances of creating a new enemy
         if(currentIteration % interatoinsForEnemyCreation == 0) {
             createEnemy(GameSession.currentLevel.enemyType);
+        }
+        
+        //create a bullet for player
+        if(isTapped) {
+            spriteEssentialData.spriteCreator.getHuman().shootBullet(tapX , tapY);
+            isTapped = false;
         }
     }
 //Addressing a function to check if an object out of the screen
@@ -50,5 +60,8 @@ public class WorldManager implements LogicalElement {
         spriteEssentialData.spriteCreator.createEnemy(et);
     }
 
+    private void createBullet() {
+
+    }
 
 }

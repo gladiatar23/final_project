@@ -48,6 +48,10 @@ public class GameSession {
             }
     }
 
+    public void handleBossSpriteRemoval() {
+
+    }
+
     public void doWin() {
         //TODO - deploy boss
     }
@@ -120,24 +124,26 @@ public class GameSession {
     }
     public enum Human
     {
-        DEFAULT(R.drawable.stickman, Bullet.SHURIKEN,3),
-        BEAR(R.drawable.russianbear_l,Bullet.SICKLE,8),
-        MARIO(R.drawable.mario,Bullet.SPECIAL_STAR,8),
-        TERMINATOR(R.drawable.terminatorr_l,Bullet.GRENADE,5),
-        ROBORABI(R.drawable.robo_rabi_l,Bullet.SEVIVON,6),
-        SOLDIER(R.drawable.soldier,Bullet.MISSILE,7),
-        MINYON(R.drawable.wolverine_l,Bullet.BANANA,8),
-        BENDEL(R.drawable.bendel_l,Bullet.GAYKA,8),
+        DEFAULT(R.drawable.stickman,R.drawable.stickman, Bullet.SHURIKEN,3),
+        BEAR(R.drawable.russianbear_l,R.drawable.russianbear_r,Bullet.SICKLE,8),
+        MARIO(R.drawable.mario,R.drawable.marior,Bullet.SPECIAL_STAR,8),
+        TERMINATOR(R.drawable.terminatorr_l,R.drawable.terminatorh_r,Bullet.GRENADE,5),
+        ROBORABI(R.drawable.robo_rabi_l,R.drawable.robo_rabi_r,Bullet.SEVIVON,6),
+        SOLDIER(R.drawable.soldier,R.drawable.soldier,Bullet.MISSILE,7),
+        MINYON(R.drawable.wolverine_l,R.drawable.wolverine_r,Bullet.BANANA,8),
+        BENDEL(R.drawable.bendel_l,R.drawable.bendel_r,Bullet.GAYKA,8),
         ;
 
         public int pathToPicHero;
+        public int pathToPicBoss;
 //        public int pathToPicBullet;
         public Bullet bullet;
         public int fireRate;
 
-        Human(int pathToPic, Bullet bullet, int fireRate)
+        Human(int pathToHeroPic, int pathToBossPic , Bullet bullet, int fireRate)
         {
-            this.pathToPicHero = pathToPic;
+            this.pathToPicHero = pathToHeroPic;
+            this.pathToPicBoss = pathToBossPic;
             this.bullet = bullet;
             this.fireRate=fireRate;
 

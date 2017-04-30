@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
@@ -16,10 +17,12 @@ import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.SpriteCollisions;
 
 //The main Class that Runs all the other classes.
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button restart;
     TextView scoreText;
+
+    ImageButton upButton , downButton;
 
     private SpriteEssentialData activityData;
 
@@ -34,6 +37,11 @@ public class GameActivity extends AppCompatActivity {
 
         restart=(Button)findViewById(R.id.restart);
         scoreText = (TextView)findViewById(R.id.scores);
+        upButton = (ImageButton)findViewById(R.id.upButton);
+        downButton = (ImageButton)findViewById(R.id.downButton);
+
+        upButton.setOnClickListener(this);
+        downButton.setOnClickListener(this);
 
         activityData = new SpriteEssentialData(this);
         singleThreadRunner = new GameThread(activityData.graphics , activityData.logics);
@@ -73,7 +81,21 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
-//This Class takes care of the initial settings to start the game
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.upButton:
+                activityData.spriteCreator.getHuman().setUpToPressed();
+                break;
+            case R.id.downButton:
+                activityData.spriteCreator.getHuman().setDownToPressed();
+                break;
+            default:
+                ;
+        }
+    }
+
+    //This Class takes care of the initial settings to start the game
     public class SpriteEssentialData {
 
         public GameActivity ctx;

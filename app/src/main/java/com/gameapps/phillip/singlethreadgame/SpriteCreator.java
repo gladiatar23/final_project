@@ -59,7 +59,11 @@ public class SpriteCreator {
 //        }
 //Working on lowering finger on the screen
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
-            human.shootBullet(touchX , touchY);
+//            human.shootBullet(touchX , touchY);
+            WorldManager.tapX = touchX;
+            WorldManager.tapY = touchY;
+            WorldManager.isTapped = true;
+
         }
     }
 
@@ -148,5 +152,5 @@ public class SpriteCreator {
         Log.i("added sprite" , "" + barsSprite);
     }
 
-
+    public Human getHuman() {return human;}
 }

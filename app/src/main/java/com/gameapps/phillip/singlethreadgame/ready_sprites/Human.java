@@ -13,6 +13,11 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 
 public class Human extends Sprite {
 
+    private static final int MOVE_SPEED = 10;
+
+    private boolean isUpPressed;
+    private boolean isDownPressed;
+
 //This function provides definitions (height and width, position on the screen, an image), the main character.
     public Human(GameActivity.SpriteEssentialData spriteEssentialData) {
         super(spriteEssentialData, 0, 0, 0, 0);
@@ -30,7 +35,14 @@ public class Human extends Sprite {
 
     @Override
     public void change() {
-
+        if(isUpPressed) {
+            this.location.setY(location.getY()-MOVE_SPEED);
+            isUpPressed = false;
+        }
+        if(isDownPressed) {
+            this.location.setY(location.getY()+MOVE_SPEED);
+            isDownPressed = false;
+        }
     }
 //The function receives location coordinates of the click on the screen and calculates arc tangent a pathToPicBullet fired.
     public void shootBullet(int xToShootAt , int yToShootAt) {
@@ -45,5 +57,8 @@ public class Human extends Sprite {
                 angle
                 );
     }
+
+    public void setUpToPressed() {this.isUpPressed = true;}
+    public void setDownToPressed() {this.isDownPressed = true;}
 
 }

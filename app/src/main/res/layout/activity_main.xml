@@ -59,10 +59,10 @@
         android:layout_height="40dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/arrow_up"
-        android:id="@+id/imageButton4"
+        android:id="@+id/upButton"
         android:background="@null"
         android:layout_marginStart="21dp"
-        android:layout_alignTop="@+id/imageButton3"
+        android:layout_alignTop="@+id/downButton"
         android:layout_alignParentStart="true" />
 
     <ImageButton
@@ -70,18 +70,18 @@
         android:layout_height="40dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/arrow_down"
-        android:id="@+id/imageButton3"
+        android:id="@+id/downButton"
         android:background="@null"
         android:layout_marginStart="20dp"
         android:layout_alignBottom="@+id/imageButton1"
-        android:layout_toEndOf="@+id/imageButton4" />
+        android:layout_toEndOf="@+id/upButton" />
 
     <Button
         android:text="Reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/scores"
-        android:layout_alignStart="@+id/imageButton4"
+        android:layout_alignStart="@+id/upButton"
         android:id="@+id/restart"
         android:onClick="restartGame"/>
 
