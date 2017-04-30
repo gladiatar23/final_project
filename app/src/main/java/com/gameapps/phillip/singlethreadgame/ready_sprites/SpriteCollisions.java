@@ -50,7 +50,11 @@ public class SpriteCollisions implements LogicalElement {
                 //check if colliding
                 if(MyMath.areRectanglesIntersecting(b.getAreaRect() , e.getAreaRect())) {
                     b.flagForRemoval();
-                    e.flagForRemoval();
+
+                    e.decHitPoints();
+                    if(e.getHitPoints() <= 0) {
+                        e.flagForRemovalDead();
+                    }
                 }
             }
         }

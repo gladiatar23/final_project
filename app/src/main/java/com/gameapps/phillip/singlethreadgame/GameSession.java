@@ -35,9 +35,8 @@ public class GameSession {
 
     }
 
-    public void handleSpriteRemoval(Sprite s) {
+    public void handleEnemySpriteRemoval(Enemy s) {
 
-        if(s instanceof Enemy) {
             enemiesHit++;
 
             PointsUpdateThread pointsUpdateThread = new PointsUpdateThread();
@@ -47,10 +46,12 @@ public class GameSession {
             {
                 doWin();
             }
-        }
     }
 
     public void doWin() {
+        //TODO - deploy boss
+    }
+    public void doWinBoss() {
         gameActivity.killThread();
 
         Log.i("game over" , "WIN!!");

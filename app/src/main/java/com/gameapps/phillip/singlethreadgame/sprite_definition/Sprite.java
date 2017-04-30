@@ -8,7 +8,6 @@ import android.util.Size;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
 import com.gameapps.phillip.singlethreadgame.MyMath;
-import com.gameapps.phillip.singlethreadgame.R;
 
 /**
  * Created by Phillip on 1/6/2017.
@@ -89,7 +88,6 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
     @Override
     public void flagForRemoval() {
         isRemoved = true;
-        spriteEssentialData.gameSession.handleSpriteRemoval(this);
     }
     @Override
     public boolean isFlaggedForRemoval() {return isRemoved;}

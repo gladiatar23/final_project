@@ -23,6 +23,8 @@ public class Enemy extends Sprite implements LosingNPCSprite {
     private int MAX_VERTICAL_SPEED = 1;
     private int HORIZONTAL_SPEED = 1;
     private int verticalSpeed;
+
+    private int hitPoints;
 //Function creates enemies, some of the features of their logical (as vertical speed), and adds a picture
     public Enemy(EnemyType type , GameActivity.SpriteEssentialData spriteEssentialData, int centerX, int centerY, int width, int height) {
         super(spriteEssentialData, centerX, centerY, width, height);
@@ -36,6 +38,8 @@ public class Enemy extends Sprite implements LosingNPCSprite {
         isRemovedWhenOffScreen = false;
         isStillMoving = true;
         isFramedForKillingPoorHuman = false;
+
+        hitPoints = 1;
 
 
         setImage(type.drawableID);
@@ -131,6 +135,19 @@ public class Enemy extends Sprite implements LosingNPCSprite {
             this.maxHorizontalSpeed = maxHorizontalSpeed;
         }
     }
+
+    public void flagForRemovalDead() {
+        super.flagForRemoval();
+        spriteEssentialData.gameSession.handleEnemySpriteRemoval(this);
+    }
+
+    public void flagForRemovalScreenConstraints() {
+        super.flagForRemoval();
+    }
+
+    public int getHitPoints() {return hitPoints;}
+
+    public void decHitPoints() {this.hitPoints--;}
 
     public enum EnemyBoss {
         TERMINATOR(R.drawable.waze , 100 , 5 , 7),
