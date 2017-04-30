@@ -17,13 +17,13 @@ public class Human extends Sprite {
     public Human(GameActivity.SpriteEssentialData spriteEssentialData) {
         super(spriteEssentialData, 0, 0, 0, 0);
 
-        this.location = new Location(spriteEssentialData.canvasSize.x/14 , spriteEssentialData.canvasSize.y * 4/7);
-        double hToWRatio = 2;
-        int height = spriteEssentialData.canvasSize.y/3;
-        this.size = new Size((int)(height/hToWRatio) , height);
+//        double hToWRatio = 2;
+//        int height = spriteEssentialData.canvasSize.y/3;
+//        this.size = new Size((int)(height/hToWRatio) , height);
 
-        setImage(spriteEssentialData.gameSession.currentHero.pathToPicHero);
+        setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero);
 
+        this.location = new Location(size.getWidth()/2 , spriteEssentialData.canvasSize.y * 4/7);
 
     }
 
