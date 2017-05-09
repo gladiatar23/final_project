@@ -40,10 +40,10 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 
         bitmap = Bitmap.createScaledBitmap(bitmap , size.getWidth() , size.getHeight() , false);
     }
-    protected void setImageAndSizes(int drawableId) {
+    protected void setImageAndSizes(int drawableId , double screenHeightRation) {
         bitmap = BitmapFactory.decodeResource(spriteEssentialData.ctx.getResources(), drawableId);
 
-        int height = spriteEssentialData.canvasSize.y/3;    //hight of sprite img
+        int height = (int) (spriteEssentialData.canvasSize.y * screenHeightRation);    //hight of sprite img
         double ratio = bitmap.getHeight() / height;
         this.size = new Size((int)(bitmap.getWidth()/ ratio) , height);
 

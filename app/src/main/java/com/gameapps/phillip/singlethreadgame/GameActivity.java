@@ -2,6 +2,7 @@ package com.gameapps.phillip.singlethreadgame;
 
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +16,15 @@ import android.widget.TextView;
 import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.SpriteCollisions;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.WorldManager;
 
 //The main Class that Runs all the other classes.
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button restart;
     TextView scoreText;
+    MediaPlayer shootSound;
+
 
     ImageButton upButton , downButton;
 
@@ -34,6 +38,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
+        shootSound = MediaPlayer.create(this,R.raw.xara);
 
         restart=(Button)findViewById(R.id.restart);
         scoreText = (TextView)findViewById(R.id.scores);
@@ -44,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         downButton.setOnClickListener(this);
 
         activityData = new SpriteEssentialData(this);
-        singleThreadRunner = new GameThread(activityData.graphics , activityData.logics);
+        singleThreadRunner = new GameThread(activityData.graphics , activityData.logics , activityData.worldManager, activityData.spriteCollisions);
         singleThreadRunner.start();
     }
 //Defines what happens onPause in the game. Currently the game annihilated
@@ -77,6 +82,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onTouchEvent(event);
 
         activityData.spriteCreator.handleMotionEvent(event);
+        shootSound.start();
 
         return false;
     }
@@ -103,10 +109,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         public Rect canvasRect;
         public GameGraphics graphics;
         public GameLogics logics;
-        public SpriteCollisions spriteCollisions;
         public SpriteCreator spriteCreator;
         public GameSession gameSession;
-//Function gets the Settings of the screen and sets the canvas
+        public WorldManager worldManager;
+        public SpriteCollisions spriteCollisions;
+        //Function gets the Settings of the screen and sets the canvas
         public SpriteEssentialData(GameActivity ctx) {
 
             this.ctx = ctx;
@@ -122,7 +129,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             spriteCollisions = new SpriteCollisions(this);
             //Creates a new surface for creating sprites
             spriteCreator = new SpriteCreator(this);
-            gameSession = new GameSession(ctx);
+            gameSession = new GameSession(ctx , this);
+
+            worldManager = new WorldManager(this);
+//            spriteEssentialData.logics.addToManagedList(worldManager);
+//            spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCollisions);
         }
 //Restores the canvas location
         public void reSetCanvasSize(int width , int height) {
@@ -184,6 +195,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         recreate();
 
+    }
+    public void playSound(View view){
+        shootSound.start();
     }
 
     public void killThread() {

@@ -6,7 +6,6 @@ import android.util.Log;
 import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
-import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 
 import java.util.List;
 import java.util.Set;
@@ -24,9 +23,11 @@ public class GameSession {
     int enemiesToKill;
 
     GameActivity gameActivity;
+    GameActivity.SpriteEssentialData spriteEssentialData;
 
-    public GameSession(GameActivity gameActivity){
+    public GameSession(GameActivity gameActivity , GameActivity.SpriteEssentialData spriteEssentialData){
         this.gameActivity = gameActivity;
+        this.spriteEssentialData = spriteEssentialData;
 
 
         enemiesHit=0;
@@ -44,7 +45,8 @@ public class GameSession {
 
             if (enemiesHit>=enemiesToKill)
             {
-                doWin();
+//                doWinAgainstMinions();    //TODO
+                doWinBoss();  //switch to this in order to finish stage
             }
     }
 
@@ -52,8 +54,9 @@ public class GameSession {
 
     }
 
-    public void doWin() {
-        //TODO - deploy boss
+    public void doWinAgainstMinions() {
+        spriteEssentialData.worldManager.emptyAllBesidesPlayer();
+        spriteEssentialData.spriteCreator.createBoss(currentLevel.unlocledPlayable);
     }
     public void doWinBoss() {
         gameActivity.killThread();
@@ -156,23 +159,25 @@ public class GameSession {
     }
     public enum Bullet
     {
-        SHURIKEN(R.drawable.shuriken,100),
-        SICKLE(R.drawable.sickle_l,90),
-        SPECIAL_STAR(R.drawable.special_star,80),
-        GRENADE(R.drawable.grenade1,70),
-        SEVIVON(R.drawable.sevivon,60),
-        MISSILE(R.drawable.missile_l,70),
-        BANANA(R.drawable.banan,30),
-        GAYKA(R.drawable.gayka,70),
+        SHURIKEN(R.drawable.shuriken,30,5),
+        SICKLE(R.drawable.sickle_l,45,15),
+        SPECIAL_STAR(R.drawable.special_star,50,20),
+        GRENADE(R.drawable.grenade1,55,25),
+        SEVIVON(R.drawable.sevivon,60,30),
+        MISSILE(R.drawable.missile_l,65,40),
+        BANANA(R.drawable.banan,70,43),
+        GAYKA(R.drawable.gayka,80,45),
         ;
 
         public int pathToPicBullet;
         public int initSpeed;
+        public int VDSpeed;
 
-        Bullet(int pathToPicBullet, int initSpeed)
+        Bullet(int pathToPicBullet, int initSpeed,int VDSpeed)
         {
             this.pathToPicBullet = pathToPicBullet;
             this.initSpeed=initSpeed;
+            this.VDSpeed=VDSpeed;
         }
 
 

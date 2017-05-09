@@ -60,8 +60,12 @@ public class WorldManager implements LogicalElement {
         spriteEssentialData.spriteCreator.createEnemy(et);
     }
 
-    private void createBullet() {
+    public void emptyAllBesidesPlayer() {
+        spriteEssentialData.logics.removeAllItems();
+        spriteEssentialData.graphics.removeAllItems();
 
+        spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCreator.getHuman());
+        spriteEssentialData.graphics.addToManagedList(spriteEssentialData.spriteCreator.getHuman());
     }
 
 }

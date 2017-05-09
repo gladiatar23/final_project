@@ -1,10 +1,12 @@
 package com.gameapps.phillip.singlethreadgame;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.gameapps.phillip.singlethreadgame.gameplay_events.SpriteCreationCause;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.BarsSprite;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.BossEnemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.BulletSprite;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Human;
@@ -22,6 +24,7 @@ public class SpriteCreator {
 
     private Human human;
 
+
     GameActivity.SpriteEssentialData spriteEssentialData;
 
     private List<SpriteCreationCause> spriteCreators;
@@ -37,10 +40,6 @@ public class SpriteCreator {
 //At the beginning of the running of the program function creates a new world list and adds it to the lists Logic,
 //Further created main character
     public void initializeSprites() {
-        WorldManager worldManager = new WorldManager(spriteEssentialData);
-        spriteEssentialData.logics.addToManagedList(worldManager);
-        spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCollisions);
-
         //createRandomStar();
         createHuman();
     }
@@ -64,6 +63,7 @@ public class SpriteCreator {
             WorldManager.tapY = touchY;
             WorldManager.isTapped = true;
 
+
         }
     }
 
@@ -82,26 +82,6 @@ public class SpriteCreator {
 
         Log.i("added human" , "" + h);
     }
-//    private void createRandomStar() {
-//        createStar(
-//                MyMath.getRandomUpTo(spriteEssentialData.canvasSize.x),
-//                MyMath.getRandomUpTo(spriteEssentialData.canvasSize.y),
-//                (int)(spriteEssentialData.canvasSize.x/20),
-//                (int)(spriteEssentialData.canvasSize.y/20)
-//        );
-//    }
-//    private void createStar(int starCenterX , int starCenterY , int starWidth , int starHeight) {
-//        DroppingStar droppingStar = new DroppingStar(spriteEssentialData ,
-//                starCenterX ,
-//                starCenterY ,
-//                starWidth ,
-//                starHeight);
-//
-//        spriteEssentialData.graphics.addToManagedList(droppingStar);
-//        spriteEssentialData.logics.addToManagedList(droppingStar);
-////Print log
-//        Log.i("added sprite" , "" + droppingStar);
-//    }
 
 
 //Function creates a new enemy, data sets width and height enemy,
@@ -125,14 +105,28 @@ public class SpriteCreator {
         Log.i("added sprite" , "" + enemy);
     }
 
+    public void createBoss(GameSession.Human humanEnum) {
+        BossEnemy bossEnemy = new BossEnemy(humanEnum , spriteEssentialData);
+
+        spriteEssentialData.graphics.addToManagedList(bossEnemy);
+        spriteEssentialData.logics.addToManagedList(bossEnemy);
+
+        spriteEssentialData.spriteCollisions.addEnemy(bossEnemy);
+
+        Log.i("added boss" , "" + bossEnemy);
+    }
+
+
 //Function accepts parameters of the pathToPicBullet, and adds it to the list of logic, graphics and annihilation
     public void createBullet(int bulletCenterX , int bulletCenterY , double angle) {
         BulletSprite bulletSprite = new BulletSprite(spriteEssentialData ,
                 bulletCenterX , bulletCenterY , angle);
 
+
         spriteEssentialData.graphics.addToManagedList(bulletSprite);
         spriteEssentialData.logics.addToManagedList(bulletSprite);
         spriteEssentialData.spriteCollisions.addBullet(bulletSprite);
+
 //Print log
         Log.i("added sprite" , "" + bulletSprite);
     }
@@ -153,4 +147,6 @@ public class SpriteCreator {
     }
 
     public Human getHuman() {return human;}
+
+
 }

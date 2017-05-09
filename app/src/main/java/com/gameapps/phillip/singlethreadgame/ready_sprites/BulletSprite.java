@@ -1,5 +1,6 @@
 package com.gameapps.phillip.singlethreadgame.ready_sprites;
 
+import android.media.MediaPlayer;
 import android.util.Size;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
@@ -13,6 +14,9 @@ public class BulletSprite extends Sprite {
 
     public static final int BULLET_WIDTH = 100;
     public static final int BULLET_HEIGHT = 100;
+
+
+
 
     private static final double VERTICAL_ACCELERATION = 1; //gravity
 
@@ -32,7 +36,7 @@ public class BulletSprite extends Sprite {
         direction = directionAngle;
         velocity = spriteEssentialData.gameSession.currentHero.bullet.initSpeed;
 
-        verticalDropSpeed = 13;
+        verticalDropSpeed = spriteEssentialData.gameSession.currentHero.bullet.VDSpeed;
 
         rotation = 0;
         size = new Size(BULLET_WIDTH, BULLET_HEIGHT);

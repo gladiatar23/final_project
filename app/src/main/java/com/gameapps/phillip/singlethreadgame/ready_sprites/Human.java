@@ -14,6 +14,7 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 public class Human extends Sprite {
 
     private static final int MOVE_SPEED = 10;
+    private static final double RATIO_TO_SCREEN_HEIGHT = (double)1/3;
 
     private boolean isUpPressed;
     private boolean isDownPressed;
@@ -26,7 +27,7 @@ public class Human extends Sprite {
 //        int height = spriteEssentialData.canvasSize.y/3;
 //        this.size = new Size((int)(height/hToWRatio) , height);
 
-        setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero);
+        setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero , RATIO_TO_SCREEN_HEIGHT);
 
         this.location = new Location(size.getWidth()/2 , spriteEssentialData.canvasSize.y * 4/7);
 

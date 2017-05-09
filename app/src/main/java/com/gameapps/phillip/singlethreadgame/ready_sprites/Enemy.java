@@ -3,6 +3,7 @@ package com.gameapps.phillip.singlethreadgame.ready_sprites;
 import android.graphics.Rect;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
+import com.gameapps.phillip.singlethreadgame.GameSession;
 import com.gameapps.phillip.singlethreadgame.MyMath;
 import com.gameapps.phillip.singlethreadgame.R;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.LosingNPCSprite;
@@ -20,8 +21,8 @@ public class Enemy extends Sprite implements LosingNPCSprite {
 
     private long iterationsExisted;
 
-    private int MAX_VERTICAL_SPEED = 1;
-    private int HORIZONTAL_SPEED = 1;
+    private int MAX_VERTICAL_SPEED;
+    private int HORIZONTAL_SPEED;
     private int verticalSpeed;
 
     private int hitPoints;
@@ -33,6 +34,16 @@ public class Enemy extends Sprite implements LosingNPCSprite {
         MAX_VERTICAL_SPEED = type.maxVerticalSpeed;
         HORIZONTAL_SPEED = type.maxHorizontalSpeed;
 
+        ctor(type.drawableID);
+
+    }
+
+    public Enemy(GameSession.Human humanEnum , GameActivity.SpriteEssentialData spriteEssentialData, int centerX, int centerY, int width, int height) {
+        super(spriteEssentialData, centerX, centerY, width, height);
+    }
+
+    private void ctor(int imageId) {
+
         iterationsExisted = 0;
         verticalSpeed = 0;
         isRemovedWhenOffScreen = false;
@@ -41,8 +52,7 @@ public class Enemy extends Sprite implements LosingNPCSprite {
 
         hitPoints = 1;
 
-
-        setImage(type.drawableID);
+        setImage(imageId);
     }
 
 //    public Enemy(GameActivity.SpriteEssentialData spriteEssentialData, int centerX, int centerY, int width, int height) {

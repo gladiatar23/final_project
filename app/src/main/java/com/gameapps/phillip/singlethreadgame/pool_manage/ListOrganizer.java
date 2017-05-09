@@ -92,6 +92,7 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
         while(managedList.size() != 0) {
             managedList.remove(0);
         }
+
     }
 
 

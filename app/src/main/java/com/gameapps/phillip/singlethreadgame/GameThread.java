@@ -3,6 +3,9 @@ package com.gameapps.phillip.singlethreadgame;
 
 import android.util.Log;
 
+import com.gameapps.phillip.singlethreadgame.ready_sprites.SpriteCollisions;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.WorldManager;
+
 import java.util.Date;
 
 /**
@@ -18,9 +21,15 @@ public class GameThread extends Thread {
     private GameGraphics graphics;
     private GameLogics logics;
 
-    public GameThread(GameGraphics graphics , GameLogics gameLocgics) {
+    private WorldManager worldManager;
+    private SpriteCollisions spriteCollisions;
+
+
+    public GameThread(GameGraphics graphics, GameLogics logics, WorldManager worldManager, SpriteCollisions spriteCollisions) {
         this.graphics = graphics;
-        this.logics = gameLocgics;
+        this.logics = logics;
+        this.worldManager = worldManager;
+        this.spriteCollisions = spriteCollisions;
     }
 
     public void terminateRun() {
@@ -42,6 +51,11 @@ public class GameThread extends Thread {
         startTime = new Date();
         while (isRunning) {
 
+            //special logical frames
+            worldManager.change();
+            spriteCollisions.change();
+
+            //logical-visual
             logics.recalculateEverything();
             graphics.redrawEverything();
 //Time Iteration, subtraction running start time, end time running subtraction
