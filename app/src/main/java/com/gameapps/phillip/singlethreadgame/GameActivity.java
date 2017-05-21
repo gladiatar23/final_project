@@ -91,10 +91,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.upButton:
-                activityData.spriteCreator.getHuman().setUpToPressed();
+                activityData.spriteCreator.getPlayer().setUpToPressed();
                 break;
             case R.id.downButton:
-                activityData.spriteCreator.getHuman().setDownToPressed();
+                activityData.spriteCreator.getPlayer().setDownToPressed();
                 break;
             default:
                 ;

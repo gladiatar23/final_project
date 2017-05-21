@@ -6,6 +6,7 @@ import android.util.Log;
 import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
 
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class GameSession {
 
     }
 
-    public void handleEnemySpriteRemoval(Enemy s) {
+    public void handleOnEnemySpriteRemoval(Enemy s) {
 
             enemiesHit++;
 
@@ -49,6 +50,24 @@ public class GameSession {
                 doWinBoss();  //switch to this in order to finish stage
             }
     }
+
+    public void handleOnPlayerSpriteHit(Player p , Enemy enemyToBlame) {
+//
+//
+//        enemyToBlame.frameForKillingPoorHuman();
+//
+//        enemiesHit++;
+//
+//        PointsUpdateThread pointsUpdateThread = new PointsUpdateThread();
+//        pointsUpdateThread.execute(gameActivity);
+//
+//        if (enemiesHit>=enemiesToKill)
+//        {
+////                doWinAgainstMinions();    //TODO
+//            doWinBoss();  //switch to this in order to finish stage
+//        }
+    }
+
 
     public void handleBossSpriteRemoval() {
 

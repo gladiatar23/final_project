@@ -1,6 +1,5 @@
 package com.gameapps.phillip.singlethreadgame;
 
-import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -9,7 +8,7 @@ import com.gameapps.phillip.singlethreadgame.ready_sprites.BarsSprite;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.BossEnemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.BulletSprite;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
-import com.gameapps.phillip.singlethreadgame.ready_sprites.Human;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.WorldManager;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 
@@ -22,7 +21,7 @@ import java.util.List;
 
 public class SpriteCreator {
 
-    private Human human;
+    private Player player;
 
 
     GameActivity.SpriteEssentialData spriteEssentialData;
@@ -58,7 +57,7 @@ public class SpriteCreator {
 //        }
 //Working on lowering finger on the screen
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
-//            human.shootBullet(touchX , touchY);
+//            player.shootBullet(touchX , touchY);
             WorldManager.tapX = touchX;
             WorldManager.tapY = touchY;
             WorldManager.isTapped = true;
@@ -71,16 +70,16 @@ public class SpriteCreator {
 
 //Function creates the hero from parameters that she received from spriteEssentialData.Adds to the list of logic and graphics
     private void createHuman() {
-        Human h = new Human(spriteEssentialData);
+        Player h = new Player(spriteEssentialData);
 
         spriteEssentialData.graphics.addToManagedList(h);
         spriteEssentialData.logics.addToManagedList(h);
 
         spriteEssentialData.spriteCollisions.addHuman(h);
 
-        this.human = h;
+        this.player = h;
 
-        Log.i("added human" , "" + h);
+        Log.i("added player" , "" + h);
     }
 
 
@@ -146,7 +145,7 @@ public class SpriteCreator {
         Log.i("added sprite" , "" + barsSprite);
     }
 
-    public Human getHuman() {return human;}
+    public Player getPlayer() {return player;}
 
 
 }

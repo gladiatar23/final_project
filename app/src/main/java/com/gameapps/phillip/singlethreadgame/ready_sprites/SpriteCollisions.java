@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class SpriteCollisions implements LogicalElement {
 
-    Human human;
+    Player player;
     Set<BulletSprite> allBullets;
     Set<Enemy> allEnemies;
 
@@ -34,7 +34,7 @@ public class SpriteCollisions implements LogicalElement {
 
     public void addBullet(BulletSprite bulletSprite) {allBullets.add(bulletSprite);}
     public void addEnemy(Enemy enemySprite) {allEnemies.add(enemySprite);}
-    public void addHuman(Human h) {this.human = h;}
+    public void addHuman(Player h) {this.player = h;}
 
 
 
@@ -61,20 +61,22 @@ public class SpriteCollisions implements LogicalElement {
        //  checks if the enemy hit (enters rectangle) main hero
         //If yes mark all other elements for deletion, except an enemy that hit the main hero
         for(Enemy e : allEnemies) {
-            if(MyMath.areRectanglesIntersecting(human.getAreaRect() , e.getAreaRect())) {
+            if(MyMath.areRectanglesIntersecting(player.getAreaRect() , e.getAreaRect())) {
 //                allBullets = new HashSet<>();
 //                allEnemies = new HashSet<>();
 
-                Log.i("ending game" , "lose!!!!!!");
+                Log.i("player hit" , "" + e.toString() + " hit player");
 
-                spriteEssentialData.logics.removeAllItems();
-                spriteEssentialData.graphics.removeAllItems();
-
-                spriteEssentialData.logics.addToManagedList(e);
-                spriteEssentialData.graphics.addToManagedList(e);
-                e.frameForKillingPoorHuman();
-
+                player.getHit(e);
                 break;
+
+//                spriteEssentialData.logics.removeAllItems();
+//                spriteEssentialData.graphics.removeAllItems();
+//
+//                spriteEssentialData.logics.addToManagedList(e);
+//                spriteEssentialData.graphics.addToManagedList(e);
+//                e.frameForKillingPoorHuman();
+
 
             }
         }
@@ -94,6 +96,7 @@ public class SpriteCollisions implements LogicalElement {
             }
         }
     }
+
 
     @Override
     public void setFlagIfOutsideScreen() {

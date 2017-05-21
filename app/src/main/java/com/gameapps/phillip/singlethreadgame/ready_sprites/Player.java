@@ -11,7 +11,7 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
  * Created by user on 11/01/2017.
  */
 
-public class Human extends Sprite {
+public class Player extends Sprite {
 
     private static final int MOVE_SPEED = 10;
     private static final double RATIO_TO_SCREEN_HEIGHT = (double)1/3;
@@ -20,7 +20,7 @@ public class Human extends Sprite {
     private boolean isDownPressed;
 
 //This function provides definitions (height and width, position on the screen, an image), the main character.
-    public Human(GameActivity.SpriteEssentialData spriteEssentialData) {
+    public Player(GameActivity.SpriteEssentialData spriteEssentialData) {
         super(spriteEssentialData, 0, 0, 0, 0);
 
 //        double hToWRatio = 2;
@@ -57,6 +57,14 @@ public class Human extends Sprite {
                 location.getY(),
                 angle
                 );
+    }
+
+    public void getHit(Enemy e) {
+        //still alive
+        //TODO
+
+        //dead (rest in piss)
+        spriteEssentialData.gameSession.handleOnPlayerSpriteHit(this , e);
     }
 
     public void setUpToPressed() {this.isUpPressed = true;}

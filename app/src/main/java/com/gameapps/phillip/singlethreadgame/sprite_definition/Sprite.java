@@ -8,6 +8,9 @@ import android.util.Size;
 
 import com.gameapps.phillip.singlethreadgame.GameActivity;
 import com.gameapps.phillip.singlethreadgame.MyMath;
+import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizerInterface;
+
+import java.util.List;
 
 /**
  * Created by Phillip on 1/6/2017.
@@ -19,6 +22,7 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 
     protected boolean isRemovedWhenOffScreen;
     protected boolean isRemoved;    //sprite death
+//    protected List<ListOrganizerInterface<Sprite>> listManagersSubscribed;
 
     protected GameActivity.SpriteEssentialData spriteEssentialData;
 
@@ -88,11 +92,15 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
     @Override
     public void flagForRemoval() {
         isRemoved = true;
+        eraseSelfFromManagers();
     }
     @Override
     public boolean isFlaggedForRemoval() {return isRemoved;}
 
 
+    public void eraseSelfFromManagers() {
+
+    }
 
     ///////////////////////////////Logical-Visual
 

@@ -148,7 +148,7 @@ public class Enemy extends Sprite implements LosingNPCSprite {
 
     public void flagForRemovalDead() {
         super.flagForRemoval();
-        spriteEssentialData.gameSession.handleEnemySpriteRemoval(this);
+        spriteEssentialData.gameSession.handleOnEnemySpriteRemoval(this);
     }
 
     public void flagForRemovalScreenConstraints() {
@@ -180,5 +180,18 @@ public class Enemy extends Sprite implements LosingNPCSprite {
             this.maxVerticalSpeed = maxVerticalSpeed;
             this.maxHorizontalSpeed = maxHorizontalSpeed;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Enemy{" +
+                "isFramedForKillingPoorHuman=" + isFramedForKillingPoorHuman +
+                ", isStillMoving=" + isStillMoving +
+                ", iterationsExisted=" + iterationsExisted +
+                ", MAX_VERTICAL_SPEED=" + MAX_VERTICAL_SPEED +
+                ", HORIZONTAL_SPEED=" + HORIZONTAL_SPEED +
+                ", verticalSpeed=" + verticalSpeed +
+                ", hitPoints=" + hitPoints +
+                '}';
     }
 }

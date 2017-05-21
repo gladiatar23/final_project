@@ -36,7 +36,7 @@ public class WorldManager implements LogicalElement {
         
         //create a bullet for player
         if(isTapped) {
-            spriteEssentialData.spriteCreator.getHuman().shootBullet(tapX , tapY);
+            spriteEssentialData.spriteCreator.getPlayer().shootBullet(tapX , tapY);
             isTapped = false;
         }
     }
@@ -64,8 +64,8 @@ public class WorldManager implements LogicalElement {
         spriteEssentialData.logics.removeAllItems();
         spriteEssentialData.graphics.removeAllItems();
 
-        spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCreator.getHuman());
-        spriteEssentialData.graphics.addToManagedList(spriteEssentialData.spriteCreator.getHuman());
+        spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCreator.getPlayer());
+        spriteEssentialData.graphics.addToManagedList(spriteEssentialData.spriteCreator.getPlayer());
     }
 
 }
