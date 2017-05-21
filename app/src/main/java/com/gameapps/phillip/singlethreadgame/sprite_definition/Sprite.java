@@ -10,7 +10,11 @@ import com.gameapps.phillip.singlethreadgame.GameActivity;
 import com.gameapps.phillip.singlethreadgame.MyMath;
 import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizerInterface;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Phillip on 1/6/2017.
@@ -22,7 +26,7 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 
     protected boolean isRemovedWhenOffScreen;
     protected boolean isRemoved;    //sprite death
-//    protected List<ListOrganizerInterface<Sprite>> listManagersSubscribed;
+    protected Set<ListOrganizerInterface<? extends Discardable>> listManagersSubscribed;
 
     protected GameActivity.SpriteEssentialData spriteEssentialData;
 
@@ -33,6 +37,7 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 //The function is responsible to provide data essential sprite of the initial creation.Its height, its location and the it's existence.
     public Sprite(GameActivity.SpriteEssentialData spriteEssentialData , int centerX, int centerY, int width, int height) {
         this.isRemoved = false;
+        listManagersSubscribed = new HashSet<>();
         this.location = new Location(centerX , centerY);
         this.size = new Size(width , height);
 
@@ -98,8 +103,17 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
     public boolean isFlaggedForRemoval() {return isRemoved;}
 
 
+    public void addToListManagersSubscribed(ListOrganizerInterface<? extends Discardable> manager) {
+        listManagersSubscribed.add(manager);
+    }
+    public void ridFromListManagersSubscribed(ListOrganizerInterface<? extends Discardable> manager) {
+        listManagersSubscribed.remove(manager);
+    }
     public void eraseSelfFromManagers() {
-
+        List<ListOrganizerInterface> browseList = new ArrayList<ListOrganizerInterface>(listManagersSubscribed);
+        for(ListOrganizerInterface l : browseList) {
+            l.removeFromManagedList(this);
+        }
     }
 
     ///////////////////////////////Logical-Visual

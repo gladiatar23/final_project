@@ -47,6 +47,7 @@ public class Player extends Sprite {
     }
 //The function receives location coordinates of the click on the screen and calculates arc tangent a pathToPicBullet fired.
     public void shootBullet(int xToShootAt , int yToShootAt) {
+        if(isFlaggedForRemoval()) return;
 
         double distanceX = xToShootAt - location.getX();
         double distanceY = yToShootAt - location.getY();
@@ -60,10 +61,13 @@ public class Player extends Sprite {
     }
 
     public void getHit(Enemy e) {
+        //TODO - if testing for death
+
         //still alive
         //TODO
 
         //dead (rest in piss)
+        flagForRemoval();
         spriteEssentialData.gameSession.handleOnPlayerSpriteHit(this , e);
     }
 

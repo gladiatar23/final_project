@@ -3,6 +3,8 @@ package com.gameapps.phillip.singlethreadgame.pool_manage;
 import android.util.Log;
 
 import com.gameapps.phillip.singlethreadgame.sprite_definition.Discardable;
+import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
+import com.gameapps.phillip.singlethreadgame.sprite_definition.VisualElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
         synchronized (managedList) {
             managedList.add(type);
         }
+        subscribeSelf(type);
     }
 
     @Override
@@ -48,6 +51,7 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
         synchronized (managedList) {
             managedList.add(i , type);
         }
+        subscribeSelf(type);
     }
 //Adds a new sprite to a managed list
     @Override
@@ -55,6 +59,7 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
         isCopyOutdated = true;
         int after = managedList.indexOf(afterMe) + 1;
         addToManagedList(after , addMe);
+        subscribeSelf(addMe);
     }
     //removs a dead sprite to a managed list
     @Override
@@ -64,27 +69,28 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
             managedList.remove(type);
             Log.i("list removed object" , "" + this);
         }
+        unsubscribeSelf(type);
     }
 ////function run on the list of sprites and remove that not in the rectangle of the screen
     @Override
     public void removeDeadItems() {
-        synchronized (managedList) {
-//            Iterator<T> iterator = managedList.iterator();
-//            while (iterator.hasNext()) {
-//                T t = iterator.next();
-//                if (t.isFlaggedForRemoval()) {
-//                    removeFromManagedList(t);
+//        synchronized (managedList) {
+////            Iterator<T> iterator = managedList.iterator();
+////            while (iterator.hasNext()) {
+////                T t = iterator.next();
+////                if (t.isFlaggedForRemoval()) {
+////                    removeFromManagedList(t);
+////                }
+////            }
+// //The function checks the list of elements each have a flag is annihilation. If so delete them from the list
+//            for (int i = 0 ; i < managedList.size() ; i++) {
+//                if(managedList.get(i).isFlaggedForRemoval()){
+//                    removeFromManagedList(managedList.get(i));
+//                    i--;
 //                }
 //            }
- //The function checks the list of elements each have a flag is annihilation. If so delete them from the list
-            for (int i = 0 ; i < managedList.size() ; i++) {
-                if(managedList.get(i).isFlaggedForRemoval()){
-                    removeFromManagedList(managedList.get(i));
-                    i--;
-                }
-            }
-
-        }
+//
+//        }
     }
 //function run on the list of sprites and remove all of them
     @Override
@@ -93,6 +99,17 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
             managedList.remove(0);
         }
 
+    }
+
+    private void subscribeSelf(T type) {
+        if(type instanceof Sprite) {
+            ((Sprite)type).addToListManagersSubscribed(this);
+        }
+    }
+    private void unsubscribeSelf(T type) {
+        if(type instanceof Sprite) {
+            ((Sprite)type).ridFromListManagersSubscribed(this);
+        }
     }
 
 

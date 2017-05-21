@@ -13,6 +13,8 @@ import android.view.SurfaceView;
 
 import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizer;
 import com.gameapps.phillip.singlethreadgame.pool_manage.ListOrganizerInterface;
+import com.gameapps.phillip.singlethreadgame.sprite_definition.LogicalElement;
+import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.VisualElement;
 
 /**

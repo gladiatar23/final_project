@@ -30,12 +30,12 @@ public class GameLogics implements ListOrganizerInterface<LogicalElement> {
             }
         }
         removeDeadItems();
-       // If interacting divided by modulo garbage cleaning rate, is zero so call private call collectGarbage
+       // If interacting divided by modulo garbage cleaning rate, is zero so call private call checkDriftersOutsideScreen
         if(++(iterationCounter) % GARBAGE_COLLECTION_FREQUENCY == 0)
-            collectGarbage();
+            checkDriftersOutsideScreen();
     }
 //Junk Cleaner goes through the list calls for review Did the sprites beyond the scope of screen
-    private void collectGarbage() {
+    private void checkDriftersOutsideScreen() {
         synchronized (organizer.getManagedListCopy()) {
             for (LogicalElement le : organizer.getManagedListCopy()) {
                 le.setFlagIfOutsideScreen();
