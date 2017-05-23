@@ -136,6 +136,7 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
         String str = "";
         str += "Location: " + location.getX() + " , " + location.getY();
         str += "\nSize: " + size.getWidth() + " , " + size.getHeight();
+        str += "\nList: " + listManagersSubscribed;
 
         return str;
     }

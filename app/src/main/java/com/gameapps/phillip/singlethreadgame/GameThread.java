@@ -23,13 +23,15 @@ public class GameThread extends Thread {
 
     private WorldManager worldManager;
     private SpriteCollisions spriteCollisions;
+    private GameSession gameSession;
 
 
-    public GameThread(GameGraphics graphics, GameLogics logics, WorldManager worldManager, SpriteCollisions spriteCollisions) {
+    public GameThread(GameGraphics graphics, GameLogics logics, WorldManager worldManager, SpriteCollisions spriteCollisions , GameSession gameSession) {
         this.graphics = graphics;
         this.logics = logics;
         this.worldManager = worldManager;
         this.spriteCollisions = spriteCollisions;
+        this.gameSession = gameSession;
     }
 
     public void terminateRun() {
@@ -58,6 +60,9 @@ public class GameThread extends Thread {
             //logical-visual
             logics.recalculateEverything();
             graphics.redrawEverything();
+
+            gameSession.determinePhase();
+
 //Time Iteration, subtraction running start time, end time running subtraction
             endTime = new Date();
             long remainingSleep = ITERATION_TIME - (endTime.getTime() - startTime.getTime());

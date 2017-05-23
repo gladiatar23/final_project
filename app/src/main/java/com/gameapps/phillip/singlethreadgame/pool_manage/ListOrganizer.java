@@ -96,7 +96,7 @@ public class ListOrganizer<T extends Discardable> implements ListOrganizerInterf
     @Override
     public void removeAllItems() {
         while(managedList.size() != 0) {
-            managedList.remove(0);
+            removeFromManagedList(managedList.get(0));
         }
 
     }

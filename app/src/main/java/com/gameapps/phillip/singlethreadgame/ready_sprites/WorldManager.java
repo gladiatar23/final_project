@@ -61,8 +61,11 @@ public class WorldManager implements LogicalElement {
     }
 
     public void emptyAllBesidesPlayer() {
+
+        spriteEssentialData.spriteCollisions.dumpEnemiesAndBullets();
         spriteEssentialData.logics.removeAllItems();
         spriteEssentialData.graphics.removeAllItems();
+
 
         spriteEssentialData.logics.addToManagedList(spriteEssentialData.spriteCreator.getPlayer());
         spriteEssentialData.graphics.addToManagedList(spriteEssentialData.spriteCreator.getPlayer());

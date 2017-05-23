@@ -49,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         downButton.setOnClickListener(this);
 
         activityData = new SpriteEssentialData(this);
-        singleThreadRunner = new GameThread(activityData.graphics , activityData.logics , activityData.worldManager, activityData.spriteCollisions);
+        singleThreadRunner = new GameThread(activityData.graphics , activityData.logics , activityData.worldManager, activityData.spriteCollisions , activityData.gameSession);
         singleThreadRunner.start();
     }
 //Defines what happens onPause in the game. Currently the game annihilated

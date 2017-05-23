@@ -10,6 +10,8 @@ import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
 
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by USER on 07/03/2017.
@@ -17,9 +19,13 @@ import java.util.Set;
 
 public class GameSession {
 
+    public static final long GAME_OVER_TIME_TILL_QUIT = 3000;
     public static Level currentLevel;
     public static Human currentHero;
     public static Set<Human> availableHeroes;
+    StagePhase stagePhase;
+    boolean isDoneWithPhase;
+
     int enemiesHit;
     int enemiesToKill;
 
@@ -29,7 +35,8 @@ public class GameSession {
     public GameSession(GameActivity gameActivity , GameActivity.SpriteEssentialData spriteEssentialData){
         this.gameActivity = gameActivity;
         this.spriteEssentialData = spriteEssentialData;
-
+        this.isDoneWithPhase = false;
+        stagePhase = StagePhase.MAIN_PHASE;
 
         enemiesHit=0;
         enemiesToKill = currentLevel.killsToWin;
@@ -44,28 +51,19 @@ public class GameSession {
             PointsUpdateThread pointsUpdateThread = new PointsUpdateThread();
             pointsUpdateThread.execute(gameActivity);
 
-            if (enemiesHit>=enemiesToKill)
-            {
-//                doWinAgainstMinions();    //TODO
-                doWinBoss();  //switch to this in order to finish stage
+        if(stagePhase == StagePhase.MAIN_PHASE) {
+            if (!isDoneWithPhase && enemiesHit >= enemiesToKill) {
+                isDoneWithPhase = true;
             }
+        }
     }
 
     public void handleOnPlayerSpriteHit(Player p , Enemy enemyToBlame) {
-//
-//
-//        enemyToBlame.frameForKillingPoorHuman();
-//
-//        enemiesHit++;
-//
-//        PointsUpdateThread pointsUpdateThread = new PointsUpdateThread();
-//        pointsUpdateThread.execute(gameActivity);
-//
-//        if (enemiesHit>=enemiesToKill)
-//        {
-////                doWinAgainstMinions();    //TODO
-//            doWinBoss();  //switch to this in order to finish stage
-//        }
+
+
+        enemyToBlame.frameForKillingPoorHuman();
+
+        doLose();
     }
 
 
@@ -112,7 +110,28 @@ public class GameSession {
 
     }
     public void doLose() {
+        Log.i("game over" , "LOSE!!");
 
+       new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                gameActivity.killThread();
+
+                gameActivity.goBackToLevelSelect();
+            }
+        } , GAME_OVER_TIME_TILL_QUIT);
+
+
+
+    }
+
+    public void determinePhase() {
+        if (isDoneWithPhase) {
+            if(stagePhase == StagePhase.MAIN_PHASE) {
+                stagePhase = StagePhase.FINAL_BOSS;
+                doWinAgainstMinions();  //switch to this in order to finish stage
+            }
+        }
     }
 
     public enum Level {
@@ -223,6 +242,11 @@ public class GameSession {
         protected void onPostExecute(String... strs) {
 
         }
+    }
+
+    public enum StagePhase{
+        MAIN_PHASE,
+        FINAL_BOSS;
     }
 
 }

@@ -74,4 +74,10 @@ public class Player extends Sprite {
     public void setUpToPressed() {this.isUpPressed = true;}
     public void setDownToPressed() {this.isDownPressed = true;}
 
+    @Override
+    public void flagForRemoval() {
+        super.flagForRemoval();
+        //transport to a distant location
+        this.location = new Location(100000 , 100000);
+    }
 }
