@@ -12,7 +12,6 @@ public class BossEnemy extends Enemy {
 
     private static final double RATIO_TO_SCREEN_HEIGHT = (double)2/3;
     private static final int ENTERING_SPEED = 4;
-    boolean isStillEntering;
 
     GameSession.Human humanEnum;
 
@@ -24,15 +23,16 @@ public class BossEnemy extends Enemy {
 
         this.location = new Location(spriteEssentialData.canvasRect.right + size.getWidth() / 2 , spriteEssentialData.canvasRect.height() / 2);
 
-        isStillEntering = true;
-
     }
 
     private void phaseEnter() {
         location.setX(location.getX() - ENTERING_SPEED);
 
-        if(location.getX()  + size.getWidth() / 2 < spriteEssentialData.canvasRect.right)
-            isStillEntering = false;
+        if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_ENTERING) {
+            if (location.getX() + size.getWidth() / 2 < spriteEssentialData.canvasRect.right) {
+                spriteEssentialData.gameSession.isDoneWithPhase = true;
+            }
+        }
     }
 
     private void phaseFight() {
@@ -41,10 +41,10 @@ public class BossEnemy extends Enemy {
 
     @Override
     public void change() {
-        if(isStillEntering) {
+        if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_ENTERING) {
             phaseEnter();
         }
-        else {
+        else if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_FIGHT) {
             phaseFight();
         }
     }

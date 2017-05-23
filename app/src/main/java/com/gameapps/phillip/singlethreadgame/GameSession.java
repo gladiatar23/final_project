@@ -8,6 +8,7 @@ import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.Timer;
@@ -23,8 +24,9 @@ public class GameSession {
     public static Level currentLevel;
     public static Human currentHero;
     public static Set<Human> availableHeroes;
-    StagePhase stagePhase;
-    boolean isDoneWithPhase;
+    public StagePhase stagePhase;
+    public boolean isDoneWithPhase;
+    public long timeStartedPhase;
 
     int enemiesHit;
     int enemiesToKill;
@@ -42,6 +44,10 @@ public class GameSession {
         enemiesToKill = currentLevel.killsToWin;
 
 
+    }
+
+    public long getTimeElapsed() {
+        return new Date().getTime() - timeStartedPhase;
     }
 
     public void handleOnEnemySpriteRemoval(Enemy s) {
@@ -128,8 +134,15 @@ public class GameSession {
     public void determinePhase() {
         if (isDoneWithPhase) {
             if(stagePhase == StagePhase.MAIN_PHASE) {
-                stagePhase = StagePhase.FINAL_BOSS;
+                isDoneWithPhase = false;
+                timeStartedPhase = new Date().getTime();
+                stagePhase = StagePhase.FINAL_BOSS_ENTERING;
                 doWinAgainstMinions();  //switch to this in order to finish stage
+            }
+            else if(stagePhase == StagePhase.FINAL_BOSS_ENTERING) {
+                isDoneWithPhase = false;
+                timeStartedPhase = new Date().getTime();
+                stagePhase = StagePhase.FINAL_BOSS_FIGHT;
             }
         }
     }
@@ -246,7 +259,9 @@ public class GameSession {
 
     public enum StagePhase{
         MAIN_PHASE,
-        FINAL_BOSS;
+        FINAL_BOSS_ENTERING,
+        FINAL_BOSS_FIGHT;
+
     }
 
 }

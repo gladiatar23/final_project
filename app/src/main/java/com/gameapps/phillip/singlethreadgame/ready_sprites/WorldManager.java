@@ -11,6 +11,7 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.LogicalElement;
 public class WorldManager implements LogicalElement {
     //how many interactions to wait create an enemy
     public static int interatoinsForEnemyCreation = 30;
+    public static final int BOSS_CEASEFIRE_TIME = 2000;
 
     public static boolean isTapped;
     public static int tapX , tapY;
@@ -29,17 +30,37 @@ public class WorldManager implements LogicalElement {
     @Override
     public void change() {
         currentIteration++;
-//Calculating the chances of creating a new enemy
-        if(currentIteration % interatoinsForEnemyCreation == 0) {
+
+        if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.MAIN_PHASE) {
+            spawnEnemy();
+            doShooting();
+        }
+        else if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_FIGHT) {
+            if(spriteEssentialData.gameSession.getTimeElapsed() > BOSS_CEASEFIRE_TIME) {
+                doShooting();
+            }
+        }
+
+    }
+
+    /**
+     * Calculating the chances of creating a new enemy
+     */
+    private void spawnEnemy() {
+        if (currentIteration % interatoinsForEnemyCreation == 0) {
             createEnemy(GameSession.currentLevel.enemyType);
         }
-        
-        //create a bullet for player
-        if(isTapped) {
-            spriteEssentialData.spriteCreator.getPlayer().shootBullet(tapX , tapY);
+    }
+    /**
+     * create a bullet for player
+     */
+    private void doShooting() {
+        if (isTapped) {
+            spriteEssentialData.spriteCreator.getPlayer().shootBullet(tapX, tapY);
             isTapped = false;
         }
     }
+
 //Addressing a function to check if an object out of the screen
     @Override
     public void setFlagIfOutsideScreen() {
