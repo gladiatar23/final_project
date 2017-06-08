@@ -52,9 +52,7 @@ public class SpriteCollisions implements LogicalElement {
     public synchronized void change() {
         //check for enemy kills
 
-        Log.i("sizes" , "bullets " + allBullets.size() + " enemies " + allEnemies.size());
-
-        if (!allEnemies.isEmpty() && !allBullets.isEmpty()) {
+//        Log.i("sizes" , "bullets " + allBullets.size() + " enemies " + allEnemies.size());
 
             for (BulletSprite b : allBullets) {
                 for (Enemy e : allEnemies) {
@@ -65,20 +63,17 @@ public class SpriteCollisions implements LogicalElement {
                         b.flagForRemoval();
 
                         e.decHitPoints();
-                        if (e.getHitPoints() <= 0) {
-                            e.flagForRemovalDead();
-                        }
+
                     } else {
                         Log.i("collision enemy bullet", "miss");
                     }
                 }
             }
-        }
+
 
 
         //  checks if the enemy hit (enters rectangle) main hero
         //If yes mark all other elements for deletion, except an enemy that hit the main hero
-        if (!allEnemies.isEmpty()) {
             for (Enemy e : allEnemies) {
                 if (MyMath.areRectanglesIntersecting(player.getAreaRect(), e.getAreaRect())) {
 //                allBullets = new HashSet<>();
@@ -99,7 +94,7 @@ public class SpriteCollisions implements LogicalElement {
                 }
 
             }
-        }
+
 
 
         //garbage collector

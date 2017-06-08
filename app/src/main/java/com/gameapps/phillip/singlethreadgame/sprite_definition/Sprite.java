@@ -85,6 +85,9 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 
     public boolean isRemovedWhenOffScreen() {return isRemovedWhenOffScreen;}
 
+    public Location getLocation() {
+        return location;
+    }
 
     ///////////////////////////////Drawable
 // / Is the area of the rectangle of the screen does not intersects with the rectangle area of the element

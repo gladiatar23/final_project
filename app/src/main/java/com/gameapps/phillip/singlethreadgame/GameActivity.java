@@ -82,7 +82,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onTouchEvent(event);
 
         activityData.spriteCreator.handleMotionEvent(event);
-        shootSound.start();
+        shootSound.start(); //TODO - move to doShooting in world manager
 
         return false;
     }

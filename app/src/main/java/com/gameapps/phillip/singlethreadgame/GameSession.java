@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.gameapps.phillip.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.phillip.singlethreadgame.data_handle.LevelForTable;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.BossEnemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
 
@@ -60,6 +61,11 @@ public class GameSession {
         if(stagePhase == StagePhase.MAIN_PHASE) {
             if (!isDoneWithPhase && enemiesHit >= enemiesToKill) {
                 isDoneWithPhase = true;
+            }
+        }
+        else if(stagePhase == StagePhase.FINAL_BOSS_FIGHT) {
+            if(s instanceof BossEnemy) {
+                doWinBoss();
             }
         }
     }
@@ -149,13 +155,13 @@ public class GameSession {
 
     public enum Level {
         //write these down in the order of ID!!!
-        MOSCOW (6 , 6, R.drawable.moscow , Enemy.EnemyType.JIHADIST,Human.BEAR),
-        HONGKONG (2 , 6, R.drawable.hongkong , Enemy.EnemyType.TURTLE,Human.MARIO),
-        NEW_YORK (0 , 6 , R.drawable.newyork , Enemy.EnemyType.SHVARCNEGER, Human.TERMINATOR),
-        JERUSALEM(1 , 6, R.drawable.jerusalem , Enemy.EnemyType.WAZE,Human.ROBORABI),
-        PARIS (3 , 30, R.drawable.paris , Enemy.EnemyType.VAMINYON,Human.MINYON),
-        LONDON(4 , 6, R.drawable.london , Enemy.EnemyType.MOTARO,Human.BENDEL),
-        TOKYO (5 , 6, R.drawable.tokyo , Enemy.EnemyType.JIHADIST,Human.BEAR),
+        MOSCOW (0 , 6, R.drawable.moscow , Enemy.EnemyType.JIHADIST,Human.BEAR),
+        HONGKONG (1 , 6, R.drawable.hongkong , Enemy.EnemyType.TURTLE,Human.MARIO),
+        NEW_YORK (2 , 6 , R.drawable.newyork , Enemy.EnemyType.SHVARCNEGER, Human.TERMINATOR),
+        JERUSALEM(3 , 6, R.drawable.jerusalem , Enemy.EnemyType.WAZE,Human.ROBORABI),
+        PARIS (4 , 30, R.drawable.paris , Enemy.EnemyType.VAMINYON,Human.MINYON),
+        LONDON(5 , 6, R.drawable.london , Enemy.EnemyType.MOTARO,Human.BENDEL),
+        TOKYO (6 , 6, R.drawable.tokyo , Enemy.EnemyType.JIHADIST,Human.BEAR),
         ROME (7 , 6, R.drawable.rome , Enemy.EnemyType.JIHADIST,Human.BEAR),
 
         ;
@@ -178,14 +184,14 @@ public class GameSession {
     }
     public enum Human
     {
-        DEFAULT(R.drawable.stickman,R.drawable.stickman, Bullet.SHURIKEN,3),
-        BEAR(R.drawable.russianbear_l,R.drawable.russianbear_r,Bullet.SICKLE,8),
-        MARIO(R.drawable.mario,R.drawable.marior,Bullet.SPECIAL_STAR,8),
-        TERMINATOR(R.drawable.terminatorr_l,R.drawable.terminatorh_r,Bullet.GRENADE,5),
-        ROBORABI(R.drawable.robo_rabi_l,R.drawable.robo_rabi_r,Bullet.SEVIVON,6),
-        SOLDIER(R.drawable.soldier,R.drawable.soldier,Bullet.MISSILE,7),
-        MINYON(R.drawable.wolverine_l,R.drawable.wolverine_r,Bullet.BANANA,8),
-        BENDEL(R.drawable.bendel_l,R.drawable.bendel_r,Bullet.GAYKA,8),
+        DEFAULT(R.drawable.stickman,R.drawable.stickman, Bullet.SHURIKEN,3 , 5),
+        BEAR(R.drawable.russianbear_l,R.drawable.russianbear_r,Bullet.SICKLE,8 , 30),
+        MARIO(R.drawable.mario,R.drawable.marior,Bullet.SPECIAL_STAR,8 , 10),
+        TERMINATOR(R.drawable.terminatorr_l,R.drawable.terminatorh_r,Bullet.GRENADE,5 , 40),
+        ROBORABI(R.drawable.robo_rabi_l,R.drawable.robo_rabi_r,Bullet.SEVIVON,6 , 18),
+        SOLDIER(R.drawable.soldier,R.drawable.soldier,Bullet.MISSILE,7 , 22),
+        MINYON(R.drawable.wolverine_l,R.drawable.wolverine_r,Bullet.BANANA,8 , 2),
+        BENDEL(R.drawable.bendel_l,R.drawable.bendel_r,Bullet.GAYKA,8 , 15),
         ;
 
         public int pathToPicHero;
@@ -194,13 +200,15 @@ public class GameSession {
         public Bullet bullet;
         public int fireRate;
 
-        Human(int pathToHeroPic, int pathToBossPic , Bullet bullet, int fireRate)
+        public long initialBossHP;
+
+        Human(int pathToHeroPic, int pathToBossPic , Bullet bullet, int fireRate , long initialBossHP)
         {
             this.pathToPicHero = pathToHeroPic;
             this.pathToPicBoss = pathToBossPic;
             this.bullet = bullet;
             this.fireRate=fireRate;
-
+            this.initialBossHP = initialBossHP;
         }
 
         public int getPathToPicBullet() {
@@ -210,7 +218,7 @@ public class GameSession {
     }
     public enum Bullet
     {
-        SHURIKEN(R.drawable.shuriken,30,5),
+        SHURIKEN(R.drawable.shuriken,80,45),
         SICKLE(R.drawable.sickle_l,45,15),
         SPECIAL_STAR(R.drawable.special_star,50,20),
         GRENADE(R.drawable.grenade1,55,25),

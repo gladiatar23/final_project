@@ -22,17 +22,17 @@ public class Enemy extends Sprite implements LosingNPCSprite {
     private long iterationsExisted;
 
     private int MAX_VERTICAL_SPEED;
-    private int HORIZONTAL_SPEED;
+    private int horizontalSpeed;
     private int verticalSpeed;
 
-    private int hitPoints;
+    protected long hitPoints;
 //Function creates enemies, some of the features of their logical (as vertical speed), and adds a picture
     public Enemy(EnemyType type , GameActivity.SpriteEssentialData spriteEssentialData, int centerX, int centerY, int width, int height) {
         super(spriteEssentialData, centerX, centerY, width, height);
 
         ITERATIONS_PERSISTING_VETICAL = type.iterationsToChangeVertical;
         MAX_VERTICAL_SPEED = type.maxVerticalSpeed;
-        HORIZONTAL_SPEED = type.maxHorizontalSpeed;
+        horizontalSpeed = type.maxHorizontalSpeed;
 
         ctor(type.drawableID);
 
@@ -81,7 +81,7 @@ public class Enemy extends Sprite implements LosingNPCSprite {
             }
         }
         else {
-            location.setX(location.getX() - HORIZONTAL_SPEED);
+            location.setX(location.getX() - horizontalSpeed);
             if ((++iterationsExisted) % ITERATIONS_PERSISTING_VETICAL == 0) {
                 verticalSpeed = MyMath.getRandomUpToIncludingNegative(MAX_VERTICAL_SPEED);
             }
@@ -155,9 +155,15 @@ public class Enemy extends Sprite implements LosingNPCSprite {
         super.flagForRemoval();
     }
 
-    public int getHitPoints() {return hitPoints;}
+    public long getHitPoints() {return hitPoints;}
 
-    public void decHitPoints() {this.hitPoints--;}
+    public void decHitPoints() {
+        this.hitPoints--;
+
+        if(hitPoints <= 0) {
+            flagForRemovalDead();
+        }
+    }
 
     public enum EnemyBoss {
         TERMINATOR(R.drawable.waze , 100 , 5 , 7),
@@ -189,7 +195,7 @@ public class Enemy extends Sprite implements LosingNPCSprite {
                 ", isStillMoving=" + isStillMoving +
                 ", iterationsExisted=" + iterationsExisted +
                 ", MAX_VERTICAL_SPEED=" + MAX_VERTICAL_SPEED +
-                ", HORIZONTAL_SPEED=" + HORIZONTAL_SPEED +
+                ", horizontalSpeed=" + horizontalSpeed +
                 ", verticalSpeed=" + verticalSpeed +
                 ", hitPoints=" + hitPoints +
                 '}';

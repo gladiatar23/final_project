@@ -16,8 +16,6 @@ public class BulletSprite extends Sprite {
     public static final int BULLET_HEIGHT = 100;
 
 
-
-
     private static final double VERTICAL_ACCELERATION = 1; //gravity
 
     private double verticalDropSpeed; //gravity-influenced
@@ -53,7 +51,7 @@ public class BulletSprite extends Sprite {
         location.setX(location.getX() + (int)(velocity * Math.cos(direction)));
         location.setY(location.getY() + (int)(velocity * Math.sin(direction)) + (int)verticalDropSpeed);
 //Addressing a function to check if an object out of the screen
-        setFlagIfOutsideScreen();
+        setFlagIfOutsideScreen();   //TODO - remove?
     }
 
 

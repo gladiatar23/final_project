@@ -11,10 +11,12 @@ import com.gameapps.phillip.singlethreadgame.sprite_definition.LogicalElement;
 public class WorldManager implements LogicalElement {
     //how many interactions to wait create an enemy
     public static int interatoinsForEnemyCreation = 30;
-    public static final int BOSS_CEASEFIRE_TIME = 2000;
+    public static final int BOSS_CEASEFIRE_TIME = 0;
 
     public static boolean isTapped;
     public static int tapX , tapY;
+
+    public static boolean isMinionThrown;
 
     GameActivity.SpriteEssentialData spriteEssentialData;
 
@@ -25,6 +27,7 @@ public class WorldManager implements LogicalElement {
 
         currentIteration = 1;
         isTapped = false;
+        isMinionThrown = false;
     }
 
     @Override
@@ -38,6 +41,10 @@ public class WorldManager implements LogicalElement {
         else if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_FIGHT) {
             if(spriteEssentialData.gameSession.getTimeElapsed() > BOSS_CEASEFIRE_TIME) {
                 doShooting();
+            }
+
+            if(isMinionThrown) {
+                spriteEssentialData.spriteCreator.createThrownEnemy();
             }
         }
 

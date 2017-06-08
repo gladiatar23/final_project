@@ -9,6 +9,7 @@ import com.gameapps.phillip.singlethreadgame.ready_sprites.BossEnemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.BulletSprite;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.Player;
+import com.gameapps.phillip.singlethreadgame.ready_sprites.ThrownEnemy;
 import com.gameapps.phillip.singlethreadgame.ready_sprites.WorldManager;
 import com.gameapps.phillip.singlethreadgame.sprite_definition.Sprite;
 
@@ -22,6 +23,10 @@ import java.util.List;
 public class SpriteCreator {
 
     private Player player;
+    private BossEnemy boss;
+
+    private static final int enemy_width = 130;
+    private static final int enemy_height = 170;
 
 
     GameActivity.SpriteEssentialData spriteEssentialData;
@@ -86,12 +91,10 @@ public class SpriteCreator {
 //Function creates a new enemy, data sets width and height enemy,
 // receives a random number (for creating height location of the enemy). Adds to the list logic, graphics and annihilation
     public void createEnemy(Enemy.EnemyType et) {
-        int width = 130;
-        int height = 170;
 
         Enemy enemy = new Enemy(et , spriteEssentialData ,
-          spriteEssentialData.canvasRect.right+width/3 ,
-                MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , width , height
+          spriteEssentialData.canvasRect.right+enemy_width/3 ,
+                MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , enemy_width , enemy_height
         );
 
 
@@ -130,6 +133,17 @@ public class SpriteCreator {
         Log.i("added sprite" , "" + bulletSprite);
     }
 
+    public void createThrownEnemy() {
+
+        //TODO - get angle and initial speed
+        ThrownEnemy thrownEnemySprite = new ThrownEnemy(GameSession.currentLevel.enemyType , spriteEssentialData ,
+                boss.getLocation().getX(), boss.getLocation().getY(), enemy_width, enemy_height , boss.getAngleOfThrow() , boss.getThrowSpeed());
+
+        spriteEssentialData.graphics.addToManagedList(thrownEnemySprite);
+        spriteEssentialData.logics.addToManagedList(thrownEnemySprite);
+        spriteEssentialData.spriteCollisions.addEnemy(thrownEnemySprite);
+    }
+
 //Function creates a new bars, checks the midpoint of the screen and adds to the list of logic and graphics
     public void createBars(Sprite onto) {
         BarsSprite barsSprite = new BarsSprite(spriteEssentialData ,
@@ -147,5 +161,7 @@ public class SpriteCreator {
 
     public Player getPlayer() {return player;}
 
-
+    public void setBoss(BossEnemy boss) {
+        this.boss = boss;
+    }
 }
