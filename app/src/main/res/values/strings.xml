@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">SingleThreadGame</string>
     <string name="player_sav_name">progressSave</string>
-
+    <string name="facebook_app_id">296377324122631</string>
 </resources>
