@@ -1,4 +1,4 @@
-package com.gameapps.alex.singlethreadgame;
+package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.gameapps.alex.singlethreadgame.GameSession;
+import com.gameapps.alex.singlethreadgame.R;
 import com.gameapps.alex.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.alex.singlethreadgame.data_handle.LevelForTable;
 
@@ -66,6 +68,27 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onPostResume();
+//
+//        lockLevels();
+//    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        lockLevels();
+    }
+
+
+
+
+    ///---------------------------------Clicks---------------------------------///
+    //////////////////////////////////////////////////////////////////////////////
+
     @Override
     public void onClick(View v) {
         int indexOfPressedButton = levelsLayout.indexOfChild(v);
@@ -83,6 +106,10 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         db.deleteTable();
     }
 
+    public void goToFB(View view) {
+        startActivity(new Intent(this , FacebookActivity.class));
+    }
+
     public void printDBToLog(View v) {
         DBLevelHandler db = DBLevelHandler.getInstance(this);
 
@@ -91,6 +118,12 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
             Log.i("level: " , "" + lev.toString());
         }
     }
+
+
+
+    ///------------------------activity layout handling-------------------------///
+    //////////////////////////////////////////////////////////////////////////////
+
 
     private void placeAllLevelsInDB() {
         DBLevelHandler db = DBLevelHandler.getInstance(this);
@@ -120,11 +153,6 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onPostResume();
 
-        lockLevels();
-    }
 
 }

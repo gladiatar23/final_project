@@ -3,6 +3,7 @@ package com.gameapps.alex.singlethreadgame;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.gameplay_events.SpriteCreationCause;
 import com.gameapps.alex.singlethreadgame.ready_sprites.BarsSprite;
 import com.gameapps.alex.singlethreadgame.ready_sprites.BossEnemy;

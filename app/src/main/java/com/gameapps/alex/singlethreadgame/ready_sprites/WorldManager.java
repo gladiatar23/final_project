@@ -1,6 +1,6 @@
 package com.gameapps.alex.singlethreadgame.ready_sprites;
 
-import com.gameapps.alex.singlethreadgame.GameActivity;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.sprite_definition.LogicalElement;
 

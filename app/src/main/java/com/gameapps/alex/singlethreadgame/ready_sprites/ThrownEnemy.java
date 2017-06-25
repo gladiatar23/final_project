@@ -1,6 +1,6 @@
 package com.gameapps.alex.singlethreadgame.ready_sprites;
 
-import com.gameapps.alex.singlethreadgame.GameActivity;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 
 /**
  * Created by USER on 28/05/2017.

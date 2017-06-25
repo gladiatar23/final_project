@@ -1,4 +1,4 @@
-package com.gameapps.alex.singlethreadgame;
+package com.gameapps.alex.singlethreadgame.activities;
 
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -13,6 +13,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.gameapps.alex.singlethreadgame.GameGraphics;
+import com.gameapps.alex.singlethreadgame.GameLogics;
+import com.gameapps.alex.singlethreadgame.GameSession;
+import com.gameapps.alex.singlethreadgame.GameThread;
+import com.gameapps.alex.singlethreadgame.R;
+import com.gameapps.alex.singlethreadgame.SpriteCreator;
 import com.gameapps.alex.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.alex.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.alex.singlethreadgame.ready_sprites.SpriteCollisions;

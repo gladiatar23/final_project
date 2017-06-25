@@ -1,6 +1,7 @@
 package com.gameapps.alex.singlethreadgame;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -15,9 +16,13 @@ import java.security.NoSuchAlgorithmException;
  */
 
 public class MyApp extends Application {
+
+    private static Context context;
+
     @Override
     public void onCreate(){
         super.onCreate();
+        MyApp.context = getApplicationContext();
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -33,6 +38,11 @@ public class MyApp extends Application {
         } catch (NoSuchAlgorithmException e) {
 
         }
+    }
+
+
+    public static Context getAppContext() {
+        return MyApp.context;
     }
 }
 

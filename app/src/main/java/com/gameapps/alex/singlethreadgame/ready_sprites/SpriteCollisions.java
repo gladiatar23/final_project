@@ -2,7 +2,7 @@ package com.gameapps.alex.singlethreadgame.ready_sprites;
 
 import android.util.Log;
 
-import com.gameapps.alex.singlethreadgame.GameActivity;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.MyMath;
 import com.gameapps.alex.singlethreadgame.sprite_definition.LogicalElement;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Sprite;

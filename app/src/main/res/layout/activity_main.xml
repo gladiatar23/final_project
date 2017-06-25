@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin_game"
     android:paddingTop="@dimen/activity_vertical_margin_game"
 
-    tools:context="com.gameapps.alex.singlethreadgame.GameActivity"
+    tools:context="com.gameapps.alex.singlethreadgame.activities.GameActivity"
     android:layout_height="match_parent">
 
 

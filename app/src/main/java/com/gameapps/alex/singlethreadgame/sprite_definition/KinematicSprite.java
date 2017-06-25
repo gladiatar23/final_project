@@ -1,6 +1,6 @@
 package com.gameapps.alex.singlethreadgame.sprite_definition;
 
-import com.gameapps.alex.singlethreadgame.GameActivity;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 
 /**
  * Created by Phillip on 1/7/2017.

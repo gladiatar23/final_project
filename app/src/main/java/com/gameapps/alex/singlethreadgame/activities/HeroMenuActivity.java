@@ -1,4 +1,4 @@
-package com.gameapps.alex.singlethreadgame;
+package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +13,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.gameapps.alex.singlethreadgame.GameSession;
+import com.gameapps.alex.singlethreadgame.R;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 
 import java.util.ArrayList;
 import java.util.List;

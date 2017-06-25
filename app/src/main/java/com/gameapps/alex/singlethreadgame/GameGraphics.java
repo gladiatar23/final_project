@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizer;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizerInterface;
 import com.gameapps.alex.singlethreadgame.sprite_definition.VisualElement;

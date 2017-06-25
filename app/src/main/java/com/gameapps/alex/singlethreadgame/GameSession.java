@@ -3,6 +3,7 @@ package com.gameapps.alex.singlethreadgame;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.data_handle.DBLevelHandler;
 import com.gameapps.alex.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.alex.singlethreadgame.ready_sprites.BossEnemy;
@@ -167,9 +168,9 @@ public class GameSession  {
         ;
 
 
-        int id;
-        int killsToWin;
-        int pathToBG;
+        public int id;
+        public int killsToWin;
+        public int pathToBG;
         public Enemy.EnemyType enemyType;
         public Human unlocledPlayable;
 

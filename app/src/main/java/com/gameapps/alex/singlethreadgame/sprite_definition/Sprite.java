@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Size;
 
-import com.gameapps.alex.singlethreadgame.GameActivity;
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.MyMath;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizerInterface;
 

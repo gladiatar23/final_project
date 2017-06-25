@@ -1,5 +1,6 @@
 package com.gameapps.alex.singlethreadgame;
 
+import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizer;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizerInterface;
 import com.gameapps.alex.singlethreadgame.sprite_definition.LogicalElement;
