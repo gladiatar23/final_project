@@ -147,48 +147,30 @@ public class FacebookActivity extends AppCompatActivity {
 
 
     public void getDataFromFBProfile(Profile profile) {
-        if (profile != null) {
-            textView.setText(profile.getName());
-
-            Uri url = profile.getProfilePictureUri(150, 150);
-//            Bitmap bitmap = null;
-//            try {
-//                bitmap = getThumbnail(url);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            Log.i("get img", " " + url);
-
-//            Glide.with(getApplicationContext())
-//                    .load(url)
-//                    .error(R.mipmap.ic_launcher)
-//                    .into(imageView);
-
-            Picasso.with(getApplicationContext())
-                    .load(url)
-                    .into(imageView, new com.squareup.picasso.Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Log.i("getdsgsedimg", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
-                            launchPopup();
-                        }
-
-                        @Override
-                        public void onError() {
-                            Log.i("getdsgsedimg2", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
-                        }
-                    });
-
-           /* Glide.with(MainActivity.this).load(url).asBitmao().into(new BitmapImageViewTarget(imageView)){
-                @Override
-                        protected void setResourse(Bitmap resource){
-                RoundedBitmapDrawable circularBitmapDrawable=
-                circularBitmapDrawableFactory.create(getApplicationContext().getResources(),resource);
-                circularBitmapDrawable.setCircular(true);
-                imageView.setImageDrawable(circularBitmapDrawable);}*/
-
+        if (profile == null) {
+            return;
         }
+        textView.setText(profile.getName());
+
+        Uri url = profile.getProfilePictureUri(150, 150);
+
+        Log.i("get img", " " + url);
+
+        Picasso.with(getApplicationContext())
+                .load(url)
+                .into(imageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.i("getdsgsedimg", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
+                        launchPopup();
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.i("getdsgsedimg2", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
+                    }
+                });
+
 
     }
 
@@ -224,39 +206,10 @@ public class FacebookActivity extends AppCompatActivity {
     }
 
     public void getFriendsAndMoveAct(boolean isRunning) {
-        if(!isRunning) return;
+        if (!isRunning) return;
         Profile profile = Profile.getCurrentProfile();
         if (profile == null)
             return;
-
-//        Log.i("profile_id", " profile id is: " + profile.getId());
-//
-//
-//        GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
-//                AccessToken.getCurrentAccessToken(),
-//                //AccessToken.getCurrentAccessToken(),
-////                "/" +"me" + "/photos?type=uploaded",
-////                        "/me/invitable_friends",
-//                "/me/friends?fields=picture.width(400).height(400)",
-//                null,
-//                HttpMethod.GET,
-//                new GraphRequest.Callback() {
-//                    public void onCompleted(GraphResponse response) {
-//                        Log.i("responseFromFB", "response is: " + response);
-//                        Intent intent = new Intent(FacebookActivity.this, FriendsListActivity.class);
-//                        try {
-//                            JSONArray rawName = response.getJSONObject().getJSONArray("data");
-//                            Log.i("rawName", "raw name is: " + rawName);
-//                            intent.putExtra(FriendsListActivity.EXTRA_JSON_FRIENDS, rawName.toString());
-//                            intent.putExtra(FriendsListActivity.EXTRA_USER_IMG, Profile.getCurrentProfile().getProfilePictureUri(150, 150).toString());
-//
-//                            startActivity(intent);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//        ).executeAsync();
 
 
         Drawable imageDrawable = imageView.getDrawable();
@@ -305,21 +258,5 @@ public class FacebookActivity extends AppCompatActivity {
         return accessToken != null && !accessToken.isExpired();
     }
 
-
-//    public static Bitmap decodeUriToBitmap(Context mContext, Uri sendUri) {
-//        Bitmap getBitmap = null;
-//        try {
-//            InputStream image_stream;
-//            try {
-//                image_stream = mContext.getContentResolver().openInputStream(sendUri);
-//                getBitmap = BitmapFactory.decodeStream(image_stream);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return getBitmap;
-//    }
 
 }

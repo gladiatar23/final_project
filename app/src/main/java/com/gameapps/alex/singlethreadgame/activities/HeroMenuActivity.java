@@ -74,6 +74,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         int indexOfPressedButton = heroLayout.indexOfChild(v);
+        GameSession.initializeStatics(false);
         GameSession.currentHero= heroesAvailableList.get(indexOfPressedButton);
         startActivity(new Intent(this, GameActivity.class));
 
@@ -90,7 +91,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
 
 
     @Override
-    protected void onResume() {
+    protected void onPostResume() {
         super.onPostResume();
 
         if(isBackFromStage) {

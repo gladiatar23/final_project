@@ -24,8 +24,12 @@ public class Player extends Sprite {
 //        int height = spriteEssentialData.canvasSize.y/3;
 //        this.size = new Size((int)(height/hToWRatio) , height);
 
-        setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero , RATIO_TO_SCREEN_HEIGHT);
-
+        if(spriteEssentialData.gameSession.currentHeroBitmap != null) {
+            setImageAndSizes(spriteEssentialData.gameSession.currentHeroBitmap , RATIO_TO_SCREEN_HEIGHT);
+        }
+        else {
+            setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero, RATIO_TO_SCREEN_HEIGHT);
+        }
         this.location = new Location(size.getWidth()/2 , spriteEssentialData.canvasSize.y * 4/7);
 
     }

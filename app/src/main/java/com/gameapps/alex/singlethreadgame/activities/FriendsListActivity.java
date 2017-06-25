@@ -1,40 +1,16 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseArray;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
 
+import com.gameapps.alex.singlethreadgame.GameSession;
+import com.gameapps.alex.singlethreadgame.ImageProcessing;
 import com.gameapps.alex.singlethreadgame.R;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.face.Face;
-import com.google.android.gms.vision.face.FaceDetector;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
 
 public class FriendsListActivity extends AppCompatActivity {
 
@@ -60,7 +36,20 @@ public class FriendsListActivity extends AppCompatActivity {
 
         userAvatar = (ImageView) findViewById(R.id.userAvatar);
         if(playerImage != null) {
-            userAvatar.setImageDrawable(playerImage);
+            Bitmap bitmapUserStickman = ImageProcessing.drawableToBitmap(playerImage);
+            bitmapUserStickman = ImageProcessing.identifyFace(this , bitmapUserStickman);
+
+            Bitmap drawableBm = BitmapFactory.decodeResource(getResources(), R.drawable.stickman);
+            bitmapUserStickman = ImageProcessing.layBitmapOnTop(bitmapUserStickman, drawableBm);   //head on stickman bitmapUserStickman
+
+            //random lavel
+            GameSession.currentHeroBitmap = bitmapUserStickman;
+            GameSession.currentLevel = GameSession.Level.values()[0];
+            GameSession.initializeStatics(true);
+            startActivity(new Intent(this, GameActivity.class));
+//            userAvatar.setImageBitmap(bitmapUserStickman);
+
+
         }
 //        try {
 //            Log.i("daliughfdgiuh" , "here: " +imageUri.toString());
@@ -94,59 +83,8 @@ public class FriendsListActivity extends AppCompatActivity {
     }
 
 
-    public BitmapDrawable identifyFace(int jpgDrawableId) {
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inMutable=true;
-        Bitmap myBitmap = BitmapFactory.decodeResource(
-                getApplicationContext().getResources(),jpgDrawableId,
-                // R.drawable.test1,
-                options);
-        Paint myRectPaint = new Paint();
-        myRectPaint.setStrokeWidth(5);
-        myRectPaint.setColor(Color.RED);
-        myRectPaint.setStyle(Paint.Style.STROKE);
-        Bitmap tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), Bitmap.Config.RGB_565);
-        Canvas tempCanvas = new Canvas(tempBitmap);
-        tempCanvas.drawBitmap(myBitmap, 0, 0, null);
-        FaceDetector faceDetector = new
-                FaceDetector.Builder(getApplicationContext()).setTrackingEnabled(false)
-                .build();
-        if(!faceDetector.isOperational()){
-            new AlertDialog.Builder(this).setMessage("Could not set up the face detector!").show();
-            return null;
-        }
-        Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
-        SparseArray<Face> faces = faceDetector.detect(frame);
-        for(int i=0; i<faces.size(); i++) {
-            Face thisFace = faces.valueAt(i);
-            float x1 = thisFace.getPosition().x;
-            float y1 = thisFace.getPosition().y;
-            float x2 = x1 + thisFace.getWidth();
-            float y2 = y1 + thisFace.getHeight();
-            tempBitmap = getCroppedBitmap(tempBitmap , new Rect((int)x1, (int)y1, (int)x2, (int)y2));
-        }
-        return new BitmapDrawable(getResources(),tempBitmap);
-    }
 
-    public Bitmap getCroppedBitmap(Bitmap bitmap , Rect rectEllipse) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
 
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-                bitmap.getWidth() / 2, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rectEllipse, rect, paint);
-        return output;
-    }
 
 }

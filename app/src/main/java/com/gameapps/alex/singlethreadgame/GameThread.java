@@ -68,7 +68,7 @@ public class GameThread extends Thread {
             long remainingSleep = ITERATION_TIME - (endTime.getTime() - startTime.getTime());
             //If enough sleep time, sleep time remaining if not print Exception
             if(remainingSleep > 0) {
-//                Log.i("time sleeping" , "" + remainingSleep);
+
 
                 try {
                     sleep(remainingSleep);

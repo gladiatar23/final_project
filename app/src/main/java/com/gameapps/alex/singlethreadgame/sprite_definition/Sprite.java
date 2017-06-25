@@ -50,12 +50,16 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
     }
     protected void setImageAndSizes(int drawableId , double screenHeightRation) {
         bitmap = BitmapFactory.decodeResource(spriteEssentialData.ctx.getResources(), drawableId);
-
+        setImageAndSizes(bitmap , screenHeightRation);
+        }
+    protected void setImageAndSizes(Bitmap drawableBitmap , double screenHeightRation) {
+        bitmap = drawableBitmap;
         int height = (int) (spriteEssentialData.canvasSize.y * screenHeightRation);    //hight of sprite img
         double ratio = bitmap.getHeight() / height;
         this.size = new Size((int)(bitmap.getWidth()/ ratio) , height);
 
         bitmap = Bitmap.createScaledBitmap(bitmap , size.getWidth() , size.getHeight() , false);
+
     }
 //The function returns the size of  occupies the area
     public Rect getAreaRect() {

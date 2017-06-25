@@ -4,37 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context="com.gameapps.alex.singlethreadgame.activities.MainMenuActivity">
 
 
+    <ImageView
+        android:background="#ffffffff"
+
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/world" />
+
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textAlignment="center"
-            android:text="place text here" />
+            android:text="place text here"
+            android:textAlignment="center" />
 
         <Button
+            android:scaleType="centerCrop"
             android:id="@+id/campaign_mode"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="campaign mode" />
+            android:text="campaign mode"
+            />
 
         <Button
+            android:scaleType="centerCrop"
             android:id="@+id/vs_friends"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/campaign_mode"
             android:layout_centerHorizontal="true"
-            android:text="vs friends via facebook" />
+            android:text="vs friends via facebook"
+            android:layout_weight="0.02" />
 
     </LinearLayout>
 

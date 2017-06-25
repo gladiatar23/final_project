@@ -62,9 +62,16 @@ public class GameGraphics extends SurfaceView
         isReadyToDraw = false;
 
         this.organizer = new ListOrganizer<VisualElement>();
+        placeBackground();
+    }
+    public void placeBackground() {
+        //gets pic of the background
         Resources res = getResources();
-        //get's pic of the background
         bitmap = BitmapFactory.decodeResource(res, GameSession.currentLevel.pathToBG);
+
+        if(isReadyToDraw) {
+            bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
+        }
     }
 
 
