@@ -1,5 +1,8 @@
 package com.gameapps.alex.singlethreadgame.ready_sprites;
 
+import android.graphics.Bitmap;
+import android.util.Size;
+
 import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
@@ -18,6 +21,8 @@ public class BossEnemy extends Enemy {
 
     private final double MIN_THROW_ANGLE = Math.PI *3/4;
     private final double MAX_THROW_ANGLE = Math.PI *3/2;
+
+    private final double MAX_WIDTH_TO_SCREEN = 0.25;
 
 
     private static final double RATIO_TO_SCREEN_HEIGHT = (double)2/3;
@@ -126,4 +131,18 @@ public class BossEnemy extends Enemy {
     private int oneOrMinusOne () {
         return (Math.random() < 0.5) ? 1 : -1;
     }
+
+    @Override
+    protected void setImageAndSizes(Bitmap drawableBitmap, double screenHeightRation) {
+        super.setImageAndSizes(drawableBitmap, screenHeightRation);
+
+        if(size.getWidth() > spriteEssentialData.canvasSize.x * MAX_WIDTH_TO_SCREEN) {
+            //constraint into smaller version
+            int width = (int) (spriteEssentialData.canvasSize.x * MAX_WIDTH_TO_SCREEN);    //hight of sprite img
+            double ratio = bitmap.getWidth() / width;
+            this.size = new Size(width , (int)(bitmap.getHeight() / ratio));
+            bitmap = Bitmap.createScaledBitmap(bitmap , size.getWidth() , size.getHeight() , false);
+        }
+    }
+
 }
