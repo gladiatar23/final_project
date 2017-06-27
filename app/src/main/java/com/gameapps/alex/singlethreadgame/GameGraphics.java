@@ -16,6 +16,10 @@ import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizer;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizerInterface;
 import com.gameapps.alex.singlethreadgame.sprite_definition.VisualElement;
 
+import java.io.IOException;
+
+import pl.droidsonroids.gif.GifDrawable;
+
 /**
  * Created by Phillip on 1/4/2017.
  */
@@ -63,6 +67,7 @@ public class GameGraphics extends SurfaceView
 
         this.organizer = new ListOrganizer<VisualElement>();
         placeBackground();
+
     }
     public void placeBackground() {
         //gets pic of the background

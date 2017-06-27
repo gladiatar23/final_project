@@ -9,25 +9,33 @@
 
 
     <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/fworld" />
+
+    <ImageView
         android:id="@+id/imageView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/com_facebook_button_background"
-        android:layout_marginLeft="246dp"
-        android:layout_marginBottom="99dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="243dp" />
 
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:textColor="#0000CC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.385"
+        app:layout_constraintHorizontal_bias="0.031" />
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         app:layout_constraintBottom_toBottomOf="parent"

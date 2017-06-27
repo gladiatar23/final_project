@@ -184,15 +184,15 @@ public class GameSession {
     }
 
     public enum Level {
-        //write these down in the order of ID!!!
         MOSCOW(0, 6, R.drawable.moscow, Enemy.EnemyType.JIHADIST, Human.BEAR),
         HONGKONG(1, 6, R.drawable.hongkong, Enemy.EnemyType.TURTLE, Human.MARIO),
         NEW_YORK(2, 6, R.drawable.newyork, Enemy.EnemyType.SHVARCNEGER, Human.TERMINATOR),
         JERUSALEM(3, 6, R.drawable.jerusalem, Enemy.EnemyType.WAZE, Human.ROBORABI),
         PARIS(4, 30, R.drawable.paris, Enemy.EnemyType.VAMINYON, Human.MINYON),
-        LONDON(5, 6, R.drawable.london, Enemy.EnemyType.MOTARO, Human.BENDEL),
-        TOKYO(6, 6, R.drawable.tokyo, Enemy.EnemyType.JIHADIST, Human.BEAR),
-        ROME(7, 6, R.drawable.rome, Enemy.EnemyType.JIHADIST, Human.BEAR),;
+        LONDON(5, 6, R.drawable.london, Enemy.EnemyType.BENDEL, Human.GOBLIN),
+        TOKYO(6, 6, R.drawable.tokyo, Enemy.EnemyType.HAUNTER, Human.MOTARO),
+        ROME(7, 6, R.drawable.rome, Enemy.EnemyType.SOLDIER, Human.FRADY),
+        ;
 
 
         public int id;
@@ -226,13 +226,14 @@ public class GameSession {
 
     public enum Human {
         DEFAULT(R.drawable.stickman, R.drawable.stickman, Bullet.SHURIKEN, 3, 5),
-        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, Bullet.SICKLE, 8, 30),
-        MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 8, 10),
-        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorh_r, Bullet.GRENADE, 5, 40),
-        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 6, 18),
-        SOLDIER(R.drawable.soldier, R.drawable.soldier, Bullet.MISSILE, 7, 22),
+        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, Bullet.SICKLE, 8, 5),
+        MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 8, 5),
+        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, Bullet.GRENADE, 5, 5),
+        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 6, 5),
         MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, Bullet.BANANA, 8, 2),
-        BENDEL(R.drawable.bendel_l, R.drawable.bendel_r, Bullet.GAYKA, 8, 15),;
+        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.GAYKA , 8,5),
+        FRADY(R.drawable.frady_l , R.drawable.frady_r , Bullet.PIZZA , 8,5),
+        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , Bullet.MISSILE , 8,5);
 
         public int pathToPicHero;
         public int pathToPicBoss;
@@ -264,7 +265,8 @@ public class GameSession {
         SEVIVON(R.drawable.sevivon, 60, 30),
         MISSILE(R.drawable.missile_l, 65, 40),
         BANANA(R.drawable.banan, 70, 43),
-        GAYKA(R.drawable.gayka, 80, 45),;
+        GAYKA(R.drawable.gayka, 80, 45),
+        PIZZA(R.drawable.pizza,80,48);
 
         public int pathToPicBullet;
         public int initSpeed;

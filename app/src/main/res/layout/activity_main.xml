@@ -31,7 +31,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/holo_orange_dark"
         android:textSize="18sp"
-        android:layout_alignStart="@+id/imageButton1" />
+         />
     <ImageButton
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -39,20 +39,10 @@
         app:srcCompat="@drawable/shield_donkey"
         android:id="@+id/imageButton2"
         android:background="@null"
-        android:layout_alignTop="@+id/imageButton1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp" />
 
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/law_book"
-        android:id="@+id/imageButton1"
-        android:layout_marginBottom="11dp"
-        android:background="@null"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/imageButton2" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="11dp" />
 
     <ImageButton
         android:layout_width="40dp"
@@ -72,18 +62,10 @@
         app:srcCompat="@drawable/arrow_down"
         android:id="@+id/downButton"
         android:background="@null"
-        android:layout_marginStart="20dp"
-        android:layout_alignBottom="@+id/imageButton1"
-        android:layout_toEndOf="@+id/upButton" />
+        android:layout_marginStart="37dp"
 
-    <Button
-        android:text="Reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/scores"
-        android:layout_alignStart="@+id/upButton"
-        android:id="@+id/restart"
-        android:onClick="restartGame"/>
+        android:layout_alignBottom="@+id/imageButton2"
+        android:layout_toEndOf="@+id/upButton" />
 
 
 </RelativeLayout>

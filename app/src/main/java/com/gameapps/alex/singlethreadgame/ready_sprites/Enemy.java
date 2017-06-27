@@ -55,19 +55,6 @@ public class Enemy extends Sprite implements LosingNPCSprite {
         setImage(imageId);
     }
 
-//    public Enemy(GameActivity.SpriteEssentialData spriteEssentialData, int centerX, int centerY, int width, int height) {
-//        super(spriteEssentialData, centerX, centerY, width, height);
-//
-//        iterationsExisted = 0;
-//        verticalSpeed = 0;
-//        isRemovedWhenOffScreen = false;
-//        isStillMoving = true;
-//
-//        setImage(R.drawable.rabi);
-//
-//        isFramedForKillingPoorHuman = false;
-//    }
-//Function calls to check if main character was killed, then calls the enemy reach the center of the screen and activates the bars
     @Override
     public void change() {
         if(!isStillMoving)
@@ -124,12 +111,13 @@ public class Enemy extends Sprite implements LosingNPCSprite {
 
     public enum EnemyType {
         WAZE(R.drawable.waze , 100 , 5 , 7),
-        KAMIKAZE(R.drawable.frady_l, 1000 , 3 , 26),
+        HAUNTER(R.drawable.haunter, 1000 , 3 , 26),
         JIHADIST(R.drawable.karatedoglr , 1000 , 3 , 26),
         SHVARCNEGER(R.drawable.terminatorh_r , 1000 , 3 , 26),
         TURTLE(R.drawable.cheripashka_mario, 1000 , 3 , 26),
         VAMINYON(R.drawable.minyon , 1000 , 6 , 7),
-        MOTARO(R.drawable.motaro_r , 1000 , 6 , 7)
+        BENDEL(R.drawable.bendel_r , 1000 , 6 , 7),
+        SOLDIER(R.drawable.soldier, 1000, 6, 7)
         ;
 
         int drawableID;
@@ -169,9 +157,9 @@ public class Enemy extends Sprite implements LosingNPCSprite {
         TERMINATOR(R.drawable.waze , 100 , 5 , 7),
         ROBORABI(R.drawable.frady_l, 1000 , 3 , 26),
         MARIO(R.drawable.karatedoglr , 1000 , 3 , 26),
-        MINYON(R.drawable.terminatorh_r , 1000 , 3 , 26),
-        LAAHLIF(R.drawable.cheripashka_mario, 1000 , 3 , 26),
-        BEAR(R.drawable.minyon , 1000 , 6 , 7),
+        MINYON(R.drawable.terminatorr_r , 1000 , 3 , 26),
+        MOTARO(R.drawable.motaro_r, 1000 , 3 , 26),
+        BEAR(R.drawable.goblin_r , 1000 , 6 , 7),
         ;
 
         int drawableID;

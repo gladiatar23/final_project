@@ -27,7 +27,7 @@ import com.gameapps.alex.singlethreadgame.ready_sprites.WorldManager;
 //The main Class that Runs all the other classes.
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button restart;
+
     TextView scoreText;
     MediaPlayer shootSound;
 
@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         shootSound = MediaPlayer.create(this,R.raw.xara);
 
-        restart=(Button)findViewById(R.id.restart);
+
         scoreText = (TextView)findViewById(R.id.scores);
         upButton = (ImageButton)findViewById(R.id.upButton);
         downButton = (ImageButton)findViewById(R.id.downButton);

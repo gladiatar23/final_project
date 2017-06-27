@@ -150,7 +150,7 @@ public class FacebookActivity extends AppCompatActivity {
         if (profile == null) {
             return;
         }
-        textView.setText(profile.getName());
+        textView.setText("Hello "+profile.getName());
 
         Uri url = profile.getProfilePictureUri(150, 150);
 

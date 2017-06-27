@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
+    android:background="#ffffffff"
     tools:context="com.gameapps.alex.singlethreadgame.activities.MainMenuActivity">
 
 
     <ImageView
-        android:background="#ffffffff"
-
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

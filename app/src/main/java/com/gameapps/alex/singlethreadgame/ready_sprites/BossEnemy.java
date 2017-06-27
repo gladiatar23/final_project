@@ -13,8 +13,8 @@ import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
 
 public class BossEnemy extends Enemy {
 
-    private final long ITERATIONS_UNTIL_SHOOT = 300;
-    private final long ITERATIONS_UNTIL_SHOOT_DEVIATION = 100;
+    private final long ITERATIONS_UNTIL_SHOOT = 30;
+    private final long ITERATIONS_UNTIL_SHOOT_DEVIATION = 4;
 
     private final int THROW_SPEED = 20;
     private final int THROW_SPEED_DEVIATION = 5;
