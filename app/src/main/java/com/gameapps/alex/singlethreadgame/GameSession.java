@@ -94,7 +94,6 @@ public class GameSession {
 
     public void handleOnPlayerSpriteHit(Player p, Enemy enemyToBlame) {
 
-
         enemyToBlame.frameForKillingPoorHuman();
 
         doLose();
@@ -116,6 +115,8 @@ public class GameSession {
             currentLevel = Level.getNextLevelFor(currentLevel);
             ctorStuff();
             spriteEssentialData.graphics.placeBackground();
+
+            spriteEssentialData.spriteCreator.getPlayer().lowerShield();
 
         } else {
 

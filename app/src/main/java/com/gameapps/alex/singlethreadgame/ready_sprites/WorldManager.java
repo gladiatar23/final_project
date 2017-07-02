@@ -30,6 +30,7 @@ public class WorldManager implements LogicalElement {
         isMinionThrown = false;
     }
 
+
     @Override
     public void change() {
         currentIteration++;

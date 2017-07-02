@@ -107,6 +107,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void activateShield(View view) {
+        activityData.spriteCreator.getPlayer().raiseShield();
+
+        view.setEnabled(false);
+        view.setAlpha((float)0.5);
+    }
+
+
     //This Class takes care of the initial settings to start the game
     public class SpriteEssentialData {
 

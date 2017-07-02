@@ -6,6 +6,9 @@ package com.gameapps.alex.singlethreadgame.sprite_definition;
 
 public interface LogicalElement extends Discardable {
 
+    /**
+     * hi
+     */
     public void change();
 
 }

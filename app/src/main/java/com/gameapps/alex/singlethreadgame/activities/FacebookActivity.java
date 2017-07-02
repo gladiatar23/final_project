@@ -159,8 +159,7 @@ public class FacebookActivity extends AppCompatActivity {
         }
     }
 
-
-    public void getDataFromFBProfile(Profile profile) {
+    void getDataFromFBProfile(Profile profile) {
         if (profile == null) {
             return;
         }
@@ -186,17 +185,6 @@ public class FacebookActivity extends AppCompatActivity {
                 });
 
 
-    }
-
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
     }
 
     @Override
@@ -231,46 +219,9 @@ public class FacebookActivity extends AppCompatActivity {
         startActivity(new Intent(this, FriendsListActivity.class));
     }
 
-
-    public Bitmap getThumbnail(Uri uri) throws FileNotFoundException, IOException {
-        InputStream input = this.getContentResolver().openInputStream(uri);
-
-        BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
-        onlyBoundsOptions.inJustDecodeBounds = true;
-        onlyBoundsOptions.inDither = true;//optional
-        onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//optional
-        BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
-        input.close();
-
-        if ((onlyBoundsOptions.outWidth == -1) || (onlyBoundsOptions.outHeight == -1)) {
-            return null;
-        }
-
-        int originalSize = (onlyBoundsOptions.outHeight > onlyBoundsOptions.outWidth) ? onlyBoundsOptions.outHeight : onlyBoundsOptions.outWidth;
-
-//        double ratio = (originalSize > THUMBNAIL_SIZE) ? (originalSize / THUMBNAIL_SIZE) : 1.0;
-        double ratio = 1.0;
-
-        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        bitmapOptions.inSampleSize = getPowerOfTwoForSampleRatio(ratio);
-        bitmapOptions.inDither = true; //optional
-        bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//
-        input = this.getContentResolver().openInputStream(uri);
-        Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
-        input.close();
-        return bitmap;
-    }
-
-    private static int getPowerOfTwoForSampleRatio(double ratio) {
-        int k = Integer.highestOneBit((int) Math.floor(ratio));
-        if (k == 0) return 1;
-        else return k;
-    }
-
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null && !accessToken.isExpired();
     }
-
 
 }

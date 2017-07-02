@@ -16,10 +16,6 @@ import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizer;
 import com.gameapps.alex.singlethreadgame.pool_manage.ListOrganizerInterface;
 import com.gameapps.alex.singlethreadgame.sprite_definition.VisualElement;
 
-import java.io.IOException;
-
-import pl.droidsonroids.gif.GifDrawable;
-
 /**
  * Created by Phillip on 1/4/2017.
  */
@@ -32,7 +28,7 @@ public class GameGraphics extends SurfaceView
     private boolean isReadyToDraw;
     private SurfaceHolder sh;
     private ListOrganizer<VisualElement> organizer;
-    private Bitmap bitmap;
+    private Bitmap bgBitmap;
 
 //constructor
     public GameGraphics(GameActivity.SpriteEssentialData spriteEssentialData) {
@@ -72,10 +68,10 @@ public class GameGraphics extends SurfaceView
     public void placeBackground() {
         //gets pic of the background
         Resources res = getResources();
-        bitmap = BitmapFactory.decodeResource(res, GameSession.currentLevel.pathToBG);
+        bgBitmap = BitmapFactory.decodeResource(res, GameSession.currentLevel.pathToBG);
 
         if(isReadyToDraw) {
-            bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
+            bgBitmap = Bitmap.createScaledBitmap(bgBitmap, getWidth(), getHeight(), false);
         }
     }
 
@@ -97,7 +93,7 @@ public class GameGraphics extends SurfaceView
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
         isReadyToDraw = true;
         //a one-time thing
-        bitmap = Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), false);
+        bgBitmap = Bitmap.createScaledBitmap(bgBitmap, getWidth(), getHeight(), false);
     }
 
     @Override
@@ -117,7 +113,7 @@ public class GameGraphics extends SurfaceView
         if(canvas != null) {
             synchronized (sh) {
                 canvas.drawColor(Color.WHITE);
-                canvas.drawBitmap(bitmap , 0 , 0 , null);
+                canvas.drawBitmap(bgBitmap, 0 , 0 , null);
 
 //Running a synchronization between graphic elements and logic on the surface
                 synchronized (organizer.getManagedListCopy()) {

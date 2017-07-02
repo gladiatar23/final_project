@@ -81,7 +81,15 @@ public class SpriteCollisions implements LogicalElement {
 
                     Log.i("player hit", "" + e.toString() + " hit player");
 
-                    player.getHit(e);
+                    boolean isPlayerHit = player.getHit(e);
+
+                    if(isPlayerHit) {
+                        spriteEssentialData.gameSession.handleOnPlayerSpriteHit(player , e);
+                    }
+                    else {
+                        e.flagForRemovalDead();
+                    }
+
                     break;
 
 //                spriteEssentialData.logics.removeAllItems();

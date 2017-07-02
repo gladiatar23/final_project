@@ -2,6 +2,7 @@ package com.gameapps.alex.singlethreadgame.ready_sprites;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.util.Log;
 
 import com.gameapps.alex.singlethreadgame.GameSession;
@@ -22,16 +23,27 @@ public class Player extends Sprite {
     private static final int MOVE_SPEED = 10;
     private static final double RATIO_TO_SCREEN_HEIGHT = (double)1/3;
 
-    private static final double SHIELD_RATIO = 1.3;
+    private static final double SHIELD_RATIO_MAX = 1.7;
+    private static final double SHIELD_RATIO_MIN = 1.5;
+    private static final double DEGREES_PER_ITERATION = 0.33;
+    private double shieldSineValue;
 
     private boolean isUpPressed;
     private boolean isDownPressed;
+
+    private boolean isThereShieldLeft;
+    private boolean isShieldActivated;
 
     pl.droidsonroids.gif.GifDrawable gifFromResource;
 
 //This function provides definitions (height and width, position on the screen, an image), the main character.
     public Player(GameActivity.SpriteEssentialData spriteEssentialData) {
         super(spriteEssentialData, 0, 0, 0, 0);
+
+        isThereShieldLeft = true;
+        isShieldActivated = false;
+
+        shieldSineValue = DEGREES_PER_ITERATION;
 
 //        double hToWRatio = 2;
 //        int height = spriteEssentialData.canvasSize.y/3;
@@ -47,7 +59,8 @@ public class Player extends Sprite {
 
         try {
             gifFromResource = new pl.droidsonroids.gif.GifDrawable(spriteEssentialData.ctx.getResources(), R.drawable.oie_trans);
-            gifFromResource.setVisible(true, true);
+            gifFromResource.setBounds(getShieldRect());
+            gifFromResource.setVisible(isShieldActivated, true);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,6 +68,30 @@ public class Player extends Sprite {
 
     }
 
+    public void raiseShield() {
+        isShieldActivated = true;
+        isThereShieldLeft = false;
+    }
+    public void lowerShield() {
+        isShieldActivated = false;
+    }
+    public Rect getShieldRect() {
+        double currentShieldRatio = SHIELD_RATIO_MIN + (SHIELD_RATIO_MAX-SHIELD_RATIO_MIN) * Math.sin(shieldSineValue);
+        Rect r = new Rect();
+        r.set(
+                location.getX() - (int)(currentShieldRatio*(size.getWidth()/2)) ,
+                location.getY() - (int)(currentShieldRatio*(size.getHeight()/2)) ,
+                location.getX() + (int)(currentShieldRatio*(size.getWidth()/2)) ,
+                location.getY() + (int)(currentShieldRatio*(size.getHeight()/2))
+        );
+
+        return r;
+    }
+
+    public boolean isThereShieldLeft() {return isThereShieldLeft;}
+//    public void setThereShieldLeft(boolean thereShieldLeft) {isThereShieldLeft = thereShieldLeft;}
+    public boolean isShieldActivated() {return isShieldActivated;}
+//    public void setShieldActivated(boolean shieldActivated) {isShieldActivated = shieldActivated;}
 
     @Override
     public void change() {
@@ -68,7 +105,10 @@ public class Player extends Sprite {
         }
 
         //update shield
-        gifFromResource.setBounds(getAreaRect().left , getAreaRect().top , getAreaRect().right , getAreaRect().bottom);
+        if(isShieldActivated) {
+            gifFromResource.setBounds(getShieldRect());
+            shieldSineValue += DEGREES_PER_ITERATION;
+        }
 
     }
 //The function receives location coordinates of the click on the screen and calculates arc tangent a pathToPicBullet fired.
@@ -121,15 +161,17 @@ public class Player extends Sprite {
 
     }
 
-    public void getHit(Enemy e) {
-        //TODO - if testing for death
+    public boolean getHit(Enemy e) {
 
-        //still alive
-        //TODO
+        if(isShieldActivated) {//still alive
+            isShieldActivated = false;
+            return false; //not even a scratch
+        }
 
         //dead (rest in piss)
         flagForRemoval();
-        spriteEssentialData.gameSession.handleOnPlayerSpriteHit(this , e);
+//        spriteEssentialData.gameSession.handleOnPlayerSpriteHit(this , e);
+        return true;
     }
 
     public void setUpToPressed() {this.isUpPressed = true;}
@@ -146,7 +188,8 @@ public class Player extends Sprite {
     public void drawSelf(Canvas canvas) {
         super.drawSelf(canvas);
 
-        Log.i("dsfedagdfg" , "" + gifFromResource.isPlaying());
-//        gifFromResource.draw(canvas);
+        if(isShieldActivated) {
+            gifFromResource.draw(canvas);
+        }
     }
 }

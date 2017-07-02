@@ -26,6 +26,7 @@ public class GameThread extends Thread {
     private GameSession gameSession;
 
 
+
     public GameThread(GameGraphics graphics, GameLogics logics, WorldManager worldManager, SpriteCollisions spriteCollisions , GameSession gameSession) {
         this.graphics = graphics;
         this.logics = logics;
@@ -36,7 +37,7 @@ public class GameThread extends Thread {
 
     public void terminateRun() {
         Log.i("terminating thread" , "terminated " + this.toString());
-        isRunning = false;
+        isRunning = false;  //indicating that thread needs to stop running
     }
 
     /**
