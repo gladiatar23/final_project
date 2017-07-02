@@ -31,7 +31,7 @@ public abstract class Sprite implements LogicalElement , VisualElement , Discard
 
     protected float rotation;
     protected Location location;  //center location
-    protected Size size;//size pic
+    public Size size;//size pic
     protected Bitmap bitmap;
 //The function is responsible to provide data essential sprite of the initial creation.Its height, its location and the it's existence.
     public Sprite(GameActivity.SpriteEssentialData spriteEssentialData , int centerX, int centerY, int width, int height) {

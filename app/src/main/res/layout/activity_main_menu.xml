@@ -20,15 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="31dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="place text here"
-            android:textAlignment="center" />
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="510dp"
+            android:layout_height="135dp"
+            app:srcCompat="@drawable/throw_it" />
 
         <Button
             android:scaleType="centerCrop"
@@ -41,14 +42,14 @@
             />
 
         <Button
-            android:scaleType="centerCrop"
             android:id="@+id/vs_friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/campaign_mode"
             android:layout_centerHorizontal="true"
-            android:text="vs friends via facebook"
-            android:layout_weight="0.02" />
+            android:layout_weight="0.02"
+            android:scaleType="centerCrop"
+            android:text="vs friends via facebook" />
 
     </LinearLayout>
 

@@ -110,14 +110,14 @@ public class Enemy extends Sprite implements LosingNPCSprite {
     }
 
     public enum EnemyType {
-        WAZE(R.drawable.waze , 100 , 5 , 7),
-        HAUNTER(R.drawable.haunter, 1000 , 3 , 26),
-        JIHADIST(R.drawable.karatedoglr , 1000 , 3 , 26),
-        SHVARCNEGER(R.drawable.terminatorh_r , 1000 , 3 , 26),
-        TURTLE(R.drawable.cheripashka_mario, 1000 , 3 , 26),
-        VAMINYON(R.drawable.minyon , 1000 , 6 , 7),
-        BENDEL(R.drawable.bendel_r , 1000 , 6 , 7),
-        SOLDIER(R.drawable.soldier, 1000, 6, 7)
+        JIHADIST(R.drawable.karatedoglr , 70 , 3 , 6),
+        TURTLE(R.drawable.cheripashka_mario, 80 , 3 , 6),
+        SHVARCNEGER(R.drawable.terminatorh_r , 90 , 3 , 6),
+        WAZE(R.drawable.waze , 90 , 5 , 10),
+        VAMINYON(R.drawable.minyon , 90 , 6 , 14),
+        BENDEL(R.drawable.bendel_r , 90 , 7 , 16),
+        HAUNTER(R.drawable.haunter, 90 , 8 , 18),
+        SOLDIER(R.drawable.soldier, 90, 9, 20)
         ;
 
         int drawableID;

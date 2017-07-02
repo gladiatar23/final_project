@@ -1,6 +1,7 @@
 package com.gameapps.alex.singlethreadgame;
 
 import android.util.Log;
+import android.util.Size;
 import android.view.MotionEvent;
 
 import com.gameapps.alex.singlethreadgame.activities.GameActivity;
@@ -12,6 +13,7 @@ import com.gameapps.alex.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.alex.singlethreadgame.ready_sprites.Player;
 import com.gameapps.alex.singlethreadgame.ready_sprites.ThrownEnemy;
 import com.gameapps.alex.singlethreadgame.ready_sprites.WorldManager;
+import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Sprite;
 
 import java.util.ArrayList;
@@ -26,8 +28,10 @@ public class SpriteCreator {
     private Player player;
     private BossEnemy boss;
 
-    private static final int enemy_width = 130;
-    private static final int enemy_height = 170;
+
+
+    private static final int enemy_width = 100;
+    private static final int enemy_height = 135;
 
 
     GameActivity.SpriteEssentialData spriteEssentialData;
@@ -53,14 +57,7 @@ public class SpriteCreator {
         int touchX =  (int) (event.getX() - spriteEssentialData.graphics.getLeft());
         int touchY = (int) (event.getY() - spriteEssentialData.graphics.getTop());
 
-//        if(event.getAction() == MotionEvent.ACTION_DOWN) {
-//            createStar(
-//                    touchX,
-//                    touchY,
-//                    spriteEssentialData.canvasSize.x / 20,
-//                    spriteEssentialData.canvasSize.y / 20
-//            );
-//        }
+
 //Working on lowering finger on the screen
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
 //            player.shootBullet(touchX , touchY);

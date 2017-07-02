@@ -11,8 +11,8 @@ import com.gameapps.alex.singlethreadgame.sprite_definition.Sprite;
 //The class defines all connected to pathToPicBullet shooting. height, width, speed, angle, ballistics, direction and image set
 public class BulletSprite extends Sprite {
 
-    public static final int BULLET_WIDTH = 100;
-    public static final int BULLET_HEIGHT = 100;
+    public static final int BULLET_WIDTH = 70;
+    public static final int BULLET_HEIGHT = 70;
 
 
     private static final double VERTICAL_ACCELERATION = 1; //gravity

@@ -1,10 +1,12 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -69,6 +72,11 @@ public class FacebookActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.txtStatus);
         login_button = (LoginButton) findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
+        if(!isNetworkConnected())
+        {
+            Toast.makeText(this , "You need internet connection!" , Toast.LENGTH_LONG).show();
+            finish();
+        }
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
@@ -83,6 +91,7 @@ public class FacebookActivity extends AppCompatActivity {
                 getFriendsAndMoveAct();
             }
         };
+
 
 
         accessTokenTracker.startTracking();
@@ -111,6 +120,11 @@ public class FacebookActivity extends AppCompatActivity {
         login_button.setReadPermissions("user_photos");
         login_button.registerCallback(callbackManager, callback);
 
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 
     @Override

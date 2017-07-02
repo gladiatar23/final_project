@@ -1,18 +1,17 @@
 package com.gameapps.alex.singlethreadgame.ready_sprites;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.util.Log;
-import android.view.View;
 
-import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.R;
 import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Sprite;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Created by user on 11/01/2017.
@@ -86,7 +85,41 @@ public class Player extends Sprite {
                 angle
                 );
     }
+    public static Human currentHero;
+    public static Bitmap currentHeroBitmap;
+    public static Set<Human> availableHeroes;
+    public static enum Human {
+        DEFAULT(R.drawable.stickman, R.drawable.stickman, GameSession.Bullet.SHURIKEN, 3, 5),
+        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, GameSession.Bullet.SICKLE, 8, 5),
+        MARIO(R.drawable.mario, R.drawable.marior, GameSession.Bullet.SPECIAL_STAR, 8, 5),
+        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, GameSession.Bullet.GRENADE, 5, 5),
+        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, GameSession.Bullet.SEVIVON, 6, 5),
+        MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, GameSession.Bullet.BANANA, 8, 2),
+        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , GameSession.Bullet.DIPERS, 8,5),
+        FRADY(R.drawable.frady_l , R.drawable.frady_r , GameSession.Bullet.PIZZA , 8,5),
+        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , GameSession.Bullet.MISSILE , 8,5);
 
+        public int pathToPicHero;
+        public int pathToPicBoss;
+        //        public int pathToPicBullet;
+        public GameSession.Bullet bullet;
+        public int fireRate;
+
+        public long initialBossHP;
+
+        Human(int pathToHeroPic, int pathToBossPic, GameSession.Bullet bullet, int fireRate, long initialBossHP) {
+            this.pathToPicHero = pathToHeroPic;
+            this.pathToPicBoss = pathToBossPic;
+            this.bullet = bullet;
+            this.fireRate = fireRate;
+            this.initialBossHP = initialBossHP;
+        }
+
+        public int getPathToPicBullet() {
+            return bullet.pathToPicBullet;
+        }
+
+    }
 
     public void getHit(Enemy e) {
         //TODO - if testing for death

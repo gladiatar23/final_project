@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.ImageProcessing;
@@ -38,6 +39,13 @@ public class FriendsListActivity extends AppCompatActivity {
         if(playerImage != null) {
             Bitmap bitmapUserStickman = ImageProcessing.drawableToBitmap(playerImage);
             bitmapUserStickman = ImageProcessing.identifyFace(this , bitmapUserStickman);
+
+
+
+            if(!ImageProcessing.isFaceDetectionSuccessful) {
+                Toast.makeText(this , "Unable to detect face, have this one instead" , Toast.LENGTH_LONG).show();   //showing regular stickman head through transparency
+                bitmapUserStickman = BitmapFactory.decodeResource(getResources(),R.drawable.one_pixel);
+            }
 
             Bitmap drawableBm = BitmapFactory.decodeResource(getResources(), R.drawable.stickman);
             bitmapUserStickman = ImageProcessing.layBitmapOnTop(bitmapUserStickman, drawableBm);   //head on stickman bitmapUserStickman

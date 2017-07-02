@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.android.gms.vision.Frame;
@@ -27,6 +28,7 @@ public class ImageProcessing {
 
     //---------------------------------Bitmap cropping---------------------------------//
 
+    public static boolean isFaceDetectionSuccessful;
 
     //    public BitmapDrawable identifyFace(int jpgDrawableId) {
     public static Bitmap identifyFace(Context context , Bitmap myBitmap) {
@@ -53,6 +55,8 @@ public class ImageProcessing {
         }
         Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
         SparseArray<Face> faces = faceDetector.detect(frame);
+        isFaceDetectionSuccessful = (faces.size() != 0);
+
         for(int i=0; i<faces.size(); i++) {
             Face thisFace = faces.valueAt(i);
             float x1 = thisFace.getPosition().x;
@@ -142,6 +146,9 @@ public class ImageProcessing {
         canvas.drawBitmap(bitmapBottom, 0 , 0, null);
         canvas.drawBitmap(bitmapTop, locationW, locationH, null);
 
+        int finalImageHeight = Math.max(locationH , bitmapBottom.getHeight());  //max of top-of-head and stickman height
+//        crop to get rid of excess area above
+        mergedBitmap = Bitmap.createBitmap(mergedBitmap, 0, 0 , mergedBitmap.getWidth(), finalImageHeight);  //crop out excess height
 
         return mergedBitmap;
     }

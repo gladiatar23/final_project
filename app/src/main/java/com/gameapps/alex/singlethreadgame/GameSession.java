@@ -225,13 +225,13 @@ public class GameSession {
     }
 
     public enum Human {
-        DEFAULT(R.drawable.stickman, R.drawable.stickman, Bullet.SHURIKEN, 3, 5),
+        DEFAULT(R.drawable.stickman, R.drawable.stickman, Bullet.DIPERS, 3, 5),
         BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, Bullet.SICKLE, 8, 5),
         MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 8, 5),
         TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, Bullet.GRENADE, 5, 5),
         ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 6, 5),
         MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, Bullet.BANANA, 8, 2),
-        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.GAYKA , 8,5),
+        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.SHURIKEN, 8,5),
         FRADY(R.drawable.frady_l , R.drawable.frady_r , Bullet.PIZZA , 8,5),
         GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , Bullet.MISSILE , 8,5);
 
@@ -263,9 +263,9 @@ public class GameSession {
         SPECIAL_STAR(R.drawable.special_star, 50, 20),
         GRENADE(R.drawable.grenade1, 55, 25),
         SEVIVON(R.drawable.sevivon, 60, 30),
-        MISSILE(R.drawable.missile_l, 65, 40),
+        MISSILE(R.drawable.gayka, 65, 40),
         BANANA(R.drawable.banan, 70, 43),
-        GAYKA(R.drawable.gayka, 80, 45),
+        DIPERS(R.drawable.dipers, 80, 45),
         PIZZA(R.drawable.pizza,80,48);
 
         public int pathToPicBullet;
