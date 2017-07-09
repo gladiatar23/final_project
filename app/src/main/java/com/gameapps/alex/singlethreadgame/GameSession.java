@@ -139,7 +139,8 @@ public class GameSession {
             }
 
             if (!isExisting) {
-                currentForTable = new LevelForTable(currentLevel.id, currentLevel.name(), 1, enemiesHit);
+                currentForTable = new LevelForTable(currentLevel.id, currentLevel.levelName, 1, enemiesHit);
+                Log.i("game_over_name", " " + currentLevel.levelName);
             } else {
                 currentForTable.setWon(1);
                 if (currentForTable.getBestScore() < score) {
@@ -185,25 +186,27 @@ public class GameSession {
     }
 
     public enum Level {
-        MOSCOW(0, 6, R.drawable.moscow, Enemy.EnemyType.JIHADIST, Human.BEAR),
-        HONGKONG(1, 6, R.drawable.hongkong, Enemy.EnemyType.TURTLE, Human.MARIO),
-        NEW_YORK(2, 6, R.drawable.newyork, Enemy.EnemyType.SHVARCNEGER, Human.TERMINATOR),
-        JERUSALEM(3, 6, R.drawable.jerusalem, Enemy.EnemyType.WAZE, Human.ROBORABI),
-        PARIS(4, 30, R.drawable.paris, Enemy.EnemyType.VAMINYON, Human.MINYON),
-        LONDON(5, 6, R.drawable.london, Enemy.EnemyType.BENDEL, Human.GOBLIN),
-        TOKYO(6, 6, R.drawable.tokyo, Enemy.EnemyType.HAUNTER, Human.MOTARO),
-        ROME(7, 6, R.drawable.rome, Enemy.EnemyType.SOLDIER, Human.FRADY),
+        MOSCOW(0, "MOSCOW", 6, R.drawable.moscow, Enemy.EnemyType.JIHADIST, Human.BEAR),
+        HONGKONG(1, "HONGKONG", 6, R.drawable.hongkong, Enemy.EnemyType.TURTLE, Human.MARIO),
+        NEW_YORK(2, "NEW_YORK", 6, R.drawable.newyork, Enemy.EnemyType.SHVARCNEGER, Human.TERMINATOR),
+        JERUSALEM(3, "JERUSALEM", 6, R.drawable.jerusalem, Enemy.EnemyType.WAZE, Human.ROBORABI),
+        PARIS(4, "PARIS", 30, R.drawable.paris, Enemy.EnemyType.VAMINYON, Human.MINYON),
+        LONDON(5, "LONDON", 6, R.drawable.london, Enemy.EnemyType.BENDEL, Human.GOBLIN),
+        TOKYO(6, "TOKYO", 6, R.drawable.tokyo, Enemy.EnemyType.HAUNTER, Human.MOTARO),
+        ROME(7, "ROME", 6, R.drawable.rome, Enemy.EnemyType.SOLDIER, Human.FRADY),
         ;
 
 
         public int id;
+        public String levelName;
         public int killsToWin;
         public int pathToBG;
         public Enemy.EnemyType enemyType;
         public Human unlocledPlayable;
 
-        Level(int id, int killsToWin, int pathToBG, Enemy.EnemyType enemyType, Human unlocledPlayable) {
+        Level(int id, String levelName , int killsToWin, int pathToBG, Enemy.EnemyType enemyType, Human unlocledPlayable) {
             this.id = id;
+            this.levelName = levelName;
             this.killsToWin = killsToWin;
             this.pathToBG = pathToBG;
             this.enemyType = enemyType;

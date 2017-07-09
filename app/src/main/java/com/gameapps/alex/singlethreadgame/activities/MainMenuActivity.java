@@ -51,6 +51,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             case R.id.vs_friends:
                 startActivity(new Intent(this, FacebookActivity.class));
                 break;
+            case R.id.scoreButton:
+                startActivity(new Intent(this, ScoreActivity.class));
+                break;
             default:
                 break;
         }

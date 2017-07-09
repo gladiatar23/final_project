@@ -75,6 +75,13 @@
             android:layout_weight="0.02"
             android:gravity="center"/>
 
+        <Button
+            android:id="@+id/scoreButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:onClick="onClick"/>
+
     </LinearLayout>
 
 </RelativeLayout>

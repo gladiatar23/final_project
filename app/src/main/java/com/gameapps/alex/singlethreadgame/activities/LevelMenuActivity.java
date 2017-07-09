@@ -138,7 +138,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         DBLevelHandler db = DBLevelHandler.getInstance(this);
 
         for(GameSession.Level lv : GameSession.Level.values()) {
-            LevelForTable lft = new LevelForTable(lv.id , "" , 0 , 0);
+            LevelForTable lft = new LevelForTable(lv.id , lv.levelName , 0 , 0);
             db.addLevel(lft , false);
         }
     }

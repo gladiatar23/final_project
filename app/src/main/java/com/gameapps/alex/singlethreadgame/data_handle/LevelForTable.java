@@ -48,6 +48,10 @@ public class LevelForTable {
         return isWon;
     }
 
+    public boolean getIsWon() {
+        return isWon==0? false : true;
+    }
+
     public void setWon(int won) {
         isWon = won;
     }
