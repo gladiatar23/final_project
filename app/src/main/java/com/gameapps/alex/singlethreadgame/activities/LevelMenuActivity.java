@@ -39,7 +39,6 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_menu);
 
-
         Display display = getWindowManager().getDefaultDisplay();
         Point canvasSize = new Point();
         display.getSize(canvasSize);
@@ -51,6 +50,10 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         int numOfLevels= GameSession.Level.values().length;
         levelButtons = new ArrayList<>();
         levelsLayout.removeAllViews();
+
+        System.gc();
+
+
         for (int i=0 ; i<numOfLevels ; i++){
             ImageButton bLevel =new ImageButton(this);
             bLevel.setOnClickListener(this);

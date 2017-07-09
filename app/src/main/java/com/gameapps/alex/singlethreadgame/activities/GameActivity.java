@@ -170,11 +170,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     public void goBackToLevelSelect() {
 //        startActivity(new Intent(this , LevelMenuActivity.class));
+        killThread();
         HeroMenuActivity.isBackFromStage = true;
 //        finish();
         Log.i("Finish" , "Finish1 "+HeroMenuActivity.isBackFromStage );
         Intent intent = new Intent(this , MainMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -221,6 +222,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     public void killThread() {
         singleThreadRunner.terminateRun();
+        singleThreadRunner = null;
+        System.gc();
     }
 
     @Override

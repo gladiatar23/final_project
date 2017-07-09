@@ -20,6 +20,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        System.gc();
+
         fullScreen();
         setContentView(R.layout.activity_main_menu);
 
