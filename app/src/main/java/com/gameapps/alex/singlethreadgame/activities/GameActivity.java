@@ -88,7 +88,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() {
         super.onPause();
 
-        singleThreadRunner.pauseRunning();
+        if(singleThreadRunner != null)
+           singleThreadRunner.pauseRunning();
 
     }
 
@@ -211,7 +212,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //        finish();
         Log.i("Finish" , "Finish1 "+HeroMenuActivity.isBackFromStage );
         Intent intent = new Intent(this , MainMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -257,7 +258,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void killThread() {
-        singleThreadRunner.terminateRunning();
+        if(singleThreadRunner != null)
+            singleThreadRunner.terminateRunning();
         singleThreadRunner = null;
         System.gc();
     }

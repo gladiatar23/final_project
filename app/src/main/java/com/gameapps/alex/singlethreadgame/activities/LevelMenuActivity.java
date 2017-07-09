@@ -65,6 +65,9 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
             bLevel.setImageBitmap(bitmap);
             levelsLayout.addView(bLevel);
             levelButtons.add(bLevel);
+
+            d = null;
+            bitmap = null;
         }
 
         placeAllLevelsInDB();
