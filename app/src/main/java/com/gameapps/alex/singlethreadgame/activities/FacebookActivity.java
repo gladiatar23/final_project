@@ -3,15 +3,12 @@ package com.gameapps.alex.singlethreadgame.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,10 +28,6 @@ import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
 import com.gameapps.alex.singlethreadgame.R;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class FacebookActivity extends AppCompatActivity {
 
@@ -59,7 +52,7 @@ public class FacebookActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this);
         login_button = (LoginButton) findViewById(R.id.login_button);
         textView = (TextView) findViewById(R.id.txtStatus);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.FaceOfBook);
         Log.i("get img view", " " + imageView.toString());
 
         FacebookSdk.sdkInitialize(getApplicationContext());

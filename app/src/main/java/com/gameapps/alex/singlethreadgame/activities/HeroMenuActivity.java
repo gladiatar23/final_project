@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -31,6 +32,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout heroLayout;
     List<GameSession.Human> heroesAvailableList;
     List<ImageButton> heroButtons;
+    Button backLevel;
 
 
     @Override
@@ -50,6 +52,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
         heroButtons = new ArrayList<>();
         heroLayout.removeAllViews();
 
+
         heroesAvailableList = new ArrayList<>(GameSession.availableHeroes);
         for(GameSession.Human hero : heroesAvailableList) {
             ImageButton bLevel =new ImageButton(this);
@@ -63,9 +66,11 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
             heroLayout.addView(bLevel);
             heroButtons.add(bLevel);
 
+
         }
 
-
+        backLevel = (Button)findViewById(R.id.backLevel);
+        backLevel.setOnClickListener(this);
 
 
 
@@ -73,13 +78,17 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        int indexOfPressedButton = heroLayout.indexOfChild(v);
-        GameSession.initializeStatics(false);
-        GameSession.currentHero= heroesAvailableList.get(indexOfPressedButton);
-        startActivity(new Intent(this, GameActivity.class));
+        if(v.getId()!=R.id.backLevel){
+            int indexOfPressedButton = heroLayout.indexOfChild(v);
+            GameSession.initializeStatics(false);
+            GameSession.currentHero = heroesAvailableList.get(indexOfPressedButton);
+            startActivity(new Intent(this, GameActivity.class));
+            Log.i("Hero button", "index is " + indexOfPressedButton);
 
-        Log.i("Hero button" , "index is " + indexOfPressedButton);
-
+        }
+        else {
+            finish();
+        }
     }
     public void leaveBackToStageSelect() {
         Log.i("Finish" , "Finish2 " );

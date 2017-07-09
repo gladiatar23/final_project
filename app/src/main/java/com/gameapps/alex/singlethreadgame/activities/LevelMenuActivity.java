@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -31,6 +32,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
     private int buttonWidth, buttonHeight;
     LinearLayout levelsLayout;
     List<ImageButton> levelButtons;
+    Button backMain;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         placeAllLevelsInDB();
 
         lockLevels();
+
 
     }
 
@@ -104,6 +107,9 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
         DBLevelHandler db = DBLevelHandler.getInstance(this);
 
         db.deleteTable();
+    }
+    public void goMain(View v){
+        finish();
     }
 
     public void goToFB(View view) {

@@ -231,7 +231,7 @@ public class GameSession {
         MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 8, 5),
         TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, Bullet.GRENADE, 5, 5),
         ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 6, 5),
-        MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, Bullet.BANANA, 8, 2),
+        MINYON(R.drawable.minions_l, R.drawable.minions_r, Bullet.BANANA, 8, 2),
         MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.SHURIKEN, 8,5),
         FRADY(R.drawable.frady_l , R.drawable.frady_r , Bullet.PIZZA , 8,5),
         GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , Bullet.MISSILE , 8,5);

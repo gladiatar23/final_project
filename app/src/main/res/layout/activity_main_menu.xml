@@ -6,8 +6,21 @@
     android:layout_height="match_parent"
     android:visibility="visible"
     android:background="#ffffffff"
+
     tools:context="com.gameapps.alex.singlethreadgame.activities.MainMenuActivity">
 
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="EXIT"
+        android:background="@drawable/buttonshape"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+
+        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -22,34 +35,45 @@
         android:orientation="vertical"
         android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="31dp">
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="510dp"
-            android:layout_height="135dp"
-            app:srcCompat="@drawable/throw_it" />
+            android:layout_height="117dp"
+            app:srcCompat="@drawable/throw_it"
+            android:gravity="center"/>
 
         <Button
-            android:scaleType="centerCrop"
             android:id="@+id/campaign_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            android:scaleType="centerCrop"
             android:text="campaign mode"
-            />
+            android:textColor="@color/colorPrimary"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:gravity="center"/>
 
         <Button
             android:id="@+id/vs_friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:textStyle="bold"
+            android:textSize="22dp"
             android:layout_below="@+id/campaign_mode"
             android:layout_centerHorizontal="true"
+
+            android:text="solo via facebook"
             android:layout_weight="0.02"
-            android:scaleType="centerCrop"
-            android:text="vs friends via facebook" />
+            android:gravity="center"/>
 
     </LinearLayout>
 

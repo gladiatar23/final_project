@@ -1,5 +1,6 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -43,6 +44,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         setContentView(R.layout.activity_main);
         shootSound = MediaPlayer.create(this,R.raw.xara);
 
@@ -169,8 +171,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void goBackToLevelSelect() {
 //        startActivity(new Intent(this , LevelMenuActivity.class));
         HeroMenuActivity.isBackFromStage = true;
-        finish();
+//        finish();
         Log.i("Finish" , "Finish1 "+HeroMenuActivity.isBackFromStage );
+        Intent intent = new Intent(this , MainMenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void winLevel() {
@@ -217,4 +222,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void killThread() {
         singleThreadRunner.terminateRun();
     }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        goBackToLevelSelect();
+    }
+
+
 }

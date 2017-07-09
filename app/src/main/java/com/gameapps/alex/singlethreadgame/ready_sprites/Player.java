@@ -23,8 +23,8 @@ public class Player extends Sprite {
     private static final int MOVE_SPEED = 10;
     private static final double RATIO_TO_SCREEN_HEIGHT = (double)1/3;
 
-    private static final double SHIELD_RATIO_MAX = 1.7;
-    private static final double SHIELD_RATIO_MIN = 1.5;
+    private static final double SHIELD_RATIO_MAX = 2.2;
+    private static final double SHIELD_RATIO_MIN = 1.9;
     private static final double DEGREES_PER_ITERATION = 0.33;
     private double shieldSineValue;
 
@@ -45,9 +45,7 @@ public class Player extends Sprite {
 
         shieldSineValue = DEGREES_PER_ITERATION;
 
-//        double hToWRatio = 2;
-//        int height = spriteEssentialData.canvasSize.y/3;
-//        this.size = new Size((int)(height/hToWRatio) , height);
+
 
         if(spriteEssentialData.gameSession.currentHeroBitmap != null) {
             setImageAndSizes(spriteEssentialData.gameSession.currentHeroBitmap , RATIO_TO_SCREEN_HEIGHT);
@@ -55,7 +53,7 @@ public class Player extends Sprite {
         else {
             setImageAndSizes(spriteEssentialData.gameSession.currentHero.pathToPicHero, RATIO_TO_SCREEN_HEIGHT);
         }
-        this.location = new Location(size.getWidth()/2 , spriteEssentialData.canvasSize.y * 4/7);
+        this.location = new Location(size.getWidth()/2+10 , spriteEssentialData.canvasSize.y * 4/7);
 
         try {
             gifFromResource = new pl.droidsonroids.gif.GifDrawable(spriteEssentialData.ctx.getResources(), R.drawable.oie_trans);

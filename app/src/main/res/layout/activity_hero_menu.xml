@@ -12,15 +12,29 @@
     android:background="#ffffffff"
     tools:context="com.gameapps.alex.singlethreadgame.activities.HeroMenuActivity">
 
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/world" />
 
+    <Button
+        android:id="@+id/backLevel"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:textSize="18dp"
+        android:background="@drawable/buttonshape"
+        android:textStyle="bold"
+        android:text="back" />
+
+
+
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:id="@+id/heroSelection"

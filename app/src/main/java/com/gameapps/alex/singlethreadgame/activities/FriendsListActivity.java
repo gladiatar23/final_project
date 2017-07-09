@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +23,6 @@ public class FriendsListActivity extends AppCompatActivity {
     public static Drawable playerImage;
 
 
-
     private ImageView userAvatar;
 
     @Override
@@ -34,17 +35,36 @@ public class FriendsListActivity extends AppCompatActivity {
 //        String jsondata = intent.getStringExtra(EXTRA_JSON_FRIENDS);
 
 
-
         userAvatar = (ImageView) findViewById(R.id.userAvatar);
-        if(playerImage != null) {
+
+        Button toPlay = (Button) findViewById(R.id.play_again);
+        toPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPlay();
+            }
+        });
+
+        Button back = (Button) findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBackToMain();
+            }
+        });
+
+
+    }
+
+    public void goToPlay() {
+        if (playerImage != null) {
             Bitmap bitmapUserStickman = ImageProcessing.drawableToBitmap(playerImage);
-            bitmapUserStickman = ImageProcessing.identifyFace(this , bitmapUserStickman);
+            bitmapUserStickman = ImageProcessing.identifyFace(this, bitmapUserStickman);
 
 
-
-            if(!ImageProcessing.isFaceDetectionSuccessful) {
-                Toast.makeText(this , "Unable to detect face, have this one instead" , Toast.LENGTH_LONG).show();   //showing regular stickman head through transparency
-                bitmapUserStickman = BitmapFactory.decodeResource(getResources(),R.drawable.one_pixel);
+            if (!ImageProcessing.isFaceDetectionSuccessful) {
+                Toast.makeText(this, "Unable to detect face, have this one instead", Toast.LENGTH_LONG).show();   //showing regular stickman head through transparency
+                bitmapUserStickman = BitmapFactory.decodeResource(getResources(), R.drawable.one_pixel);
             }
 
             Bitmap drawableBm = BitmapFactory.decodeResource(getResources(), R.drawable.stickman);
@@ -56,9 +76,8 @@ public class FriendsListActivity extends AppCompatActivity {
             GameSession.initializeStatics(true);
             startActivity(new Intent(this, GameActivity.class));
 //            userAvatar.setImageBitmap(bitmapUserStickman);
-
-
         }
+
 //        try {
 //            Log.i("daliughfdgiuh" , "here: " +imageUri.toString());
 //
@@ -90,9 +109,15 @@ public class FriendsListActivity extends AppCompatActivity {
 //        }
     }
 
+    public void goBackToMain() {
+        Intent intent = new Intent(this , MainMenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
-
-
-
-
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        goBackToMain();
+    }
 }

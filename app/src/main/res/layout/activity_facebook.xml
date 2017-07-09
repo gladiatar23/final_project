@@ -1,49 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
-    tools:context="com.gameapps.alex.singlethreadgame.activities.FacebookActivity">
+    tools:context="com.gameapps.alex.singlethreadgame.activities.FacebookActivity"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
 
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/fworld" />
 
-    <ImageView
         android:id="@+id/imageView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/com_facebook_button_background"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="243dp" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        app:srcCompat="@drawable/fworld"
+         />
+
+    <Button
+        android:id="@+id/backFromFB"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/buttonshape"
+        android:text="back"
+        android:textSize="18dp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+       />
 
     <TextView
         android:id="@+id/txtStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="103dp"
+        android:layout_height="58dp"
         android:text="Hello World!"
-        android:textColor="#0000CC"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385"
-        app:layout_constraintHorizontal_bias="0.031" />
+        android:textColor="@color/colorPrimary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/FaceOfBook"
+        android:layout_alignEnd="@+id/FaceOfBook"
+        android:layout_marginTop="12dp"
+        android:layout_alignStart="@+id/FaceOfBook" />
+
+
+
+    <ImageView
+        android:id="@+id/FaceOfBook"
+        android:layout_width="102dp"
+        android:layout_height="104dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/com_facebook_button_background"
+        tools:layout_editor_absoluteX="480dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/backFromFB"
+        android:layout_alignParentEnd="true" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        tools:layout_editor_absoluteY="87dp"
-        tools:layout_editor_absoluteX="103dp" />
+android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Button" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
