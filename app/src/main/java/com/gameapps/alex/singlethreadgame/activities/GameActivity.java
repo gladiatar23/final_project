@@ -1,9 +1,12 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +35,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     TextView scoreText;
     MediaPlayer shootSound;
 
+    private boolean isPaused;
+
 
     ImageButton upButton , downButton;
 
@@ -59,18 +64,49 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         activityData = new SpriteEssentialData(this);
         singleThreadRunner = new GameThread(activityData.graphics , activityData.logics , activityData.worldManager, activityData.spriteCollisions , activityData.gameSession);
         singleThreadRunner.start();
+
+        isPaused = false;
+        ( (Button) findViewById(R.id.button2)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pauseResume();
+            }
+        });
     }
+    public void pauseResume() {
+
+        if(isPaused) {
+            resumeThread();
+        }
+        else {
+            pauseThread();
+        }
+    }
+
 //Defines what happens onPause in the game. Currently the game annihilated
     @Override
     protected void onPause() {
         super.onPause();
 
-        singleThreadRunner.terminateRun();
+        singleThreadRunner.pauseRunning();
+
+    }
+
+    //Defines what happens onPause in the game. Currently the game annihilated
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+//        singleThreadRunner.terminateRunning();
+
+        goBackToLevelSelect();
+
     }
 //Defines what happens onResume of the game. Currently the game restart
     @Override
     protected void onResume() {
         super.onResume();
+        singleThreadRunner.resumeRunning();
 
 //        singleThreadRunner = new GameThread(activityData.graphics , activityData.logics);
 //        singleThreadRunner.start();
@@ -80,7 +116,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
 
-        singleThreadRunner.terminateRun();
+        singleThreadRunner.terminateRunning();
     }
 
 //   This method is automatically called when the user touches the screen
@@ -203,7 +239,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void restartGame(View v) {
-//        singleThreadRunner.terminateRun();
+//        singleThreadRunner.terminateRunning();
 //        activityData.logics.removeAllItems();
 //        activityData.graphics.removeAllItems();
 //
@@ -221,16 +257,57 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void killThread() {
-        singleThreadRunner.terminateRun();
+        singleThreadRunner.terminateRunning();
         singleThreadRunner = null;
         System.gc();
+    }
+    public void pauseThread() {
+        singleThreadRunner.pauseRunning();
+        isPaused = true;
+    }
+    public void resumeThread() {
+        singleThreadRunner.resumeRunning();
+        isPaused = false;
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        goBackToLevelSelect();
+        pauseThread();
+        doAlert();
     }
 
+    public void doAlert() {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle("Quit Game")
+                .setMessage("Are you sure you want to quit this game?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        goBackToLevelSelect(); // exit game
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        resumeThread();// do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+
+
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//
+//        singleThreadRunner.resumeRunning();
+//
+//    }
 
 }

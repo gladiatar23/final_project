@@ -26,6 +26,8 @@ public class GameThread extends Thread {
     private GameSession gameSession;
 
 
+    private Object mPauseLock;
+    private boolean mPaused;
 
     public GameThread(GameGraphics graphics, GameLogics logics, WorldManager worldManager, SpriteCollisions spriteCollisions , GameSession gameSession) {
         this.graphics = graphics;
@@ -33,12 +35,36 @@ public class GameThread extends Thread {
         this.worldManager = worldManager;
         this.spriteCollisions = spriteCollisions;
         this.gameSession = gameSession;
+
+        mPauseLock = new Object();
+        mPaused = false;
     }
 
-    public void terminateRun() {
+    public void terminateRunning() {
         Log.i("terminating thread" , "terminated " + this.toString());
         isRunning = false;  //indicating that thread needs to stop running
     }
+
+
+    /**
+     * Call this on pause.
+     */
+    public void pauseRunning() {
+        synchronized (mPauseLock) {
+            mPaused = true;
+        }
+    }
+
+    /**
+     * Call this on resume.
+     */
+    public void resumeRunning() {
+        synchronized (mPauseLock) {
+            mPaused = false;
+            mPauseLock.notifyAll();
+        }
+    }
+
 
     /**
      * do logics
@@ -48,11 +74,26 @@ public class GameThread extends Thread {
      */
     @Override
     public void run() {
+
+        doRunning();
+
+    }
+
+    private void doRunning() {
         Date startTime , endTime;
 
         isRunning = true;
         startTime = new Date();
         while (isRunning) {
+
+            synchronized (mPauseLock) {
+                while (mPaused) {
+                    try {
+                        mPauseLock.wait();
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
 
             //special logical frames
             worldManager.change();
@@ -82,7 +123,5 @@ public class GameThread extends Thread {
         }
 
         Log.i("terminating thread" , "fully stopped");
-
-
     }
 }
