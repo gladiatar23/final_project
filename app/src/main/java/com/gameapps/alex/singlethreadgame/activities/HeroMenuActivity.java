@@ -2,6 +2,7 @@ package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -58,21 +59,24 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
             ImageButton bLevel =new ImageButton(this);
             bLevel.setOnClickListener(this);
             heroLayout.setGravity(Gravity.CENTER_VERTICAL);
-
+            //heroLayout.setAlpha((float) 0.8);
             Drawable d = getResources().getDrawable(hero.pathToPicHero);
-            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
-            bitmap = Bitmap.createScaledBitmap(bitmap , buttonWidth , buttonHeight , false);
-            bLevel.setImageBitmap(bitmap);
+            Bitmap heroPic = ((BitmapDrawable)d).getBitmap();
+            heroPic = Bitmap.createScaledBitmap(heroPic , buttonWidth , buttonHeight , false);
+
+
+            bLevel.setImageBitmap(heroPic);
+            
+
+            //bLevel.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            //heroPic.setHasAlpha(true);
             heroLayout.addView(bLevel);
             heroButtons.add(bLevel);
-
 
         }
 
         backLevel = (Button)findViewById(R.id.backLevel);
         backLevel.setOnClickListener(this);
-
-
 
     }
 

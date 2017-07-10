@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,7 @@ import com.facebook.login.widget.ProfilePictureView;
 import com.gameapps.alex.singlethreadgame.R;
 import com.squareup.picasso.Picasso;
 
-public class FacebookActivity extends AppCompatActivity {
+public class FacebookActivity extends AppCompatActivity implements View.OnClickListener{
 
 //    private static final boolean isPermittedByFacebook = false;
 
@@ -40,6 +42,7 @@ public class FacebookActivity extends AppCompatActivity {
     ImageView imageView;
     LoginButton login_button;
     FacebookCallback<LoginResult> callback;
+    Button backFromFB;
 
 
     @Override
@@ -47,6 +50,8 @@ public class FacebookActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facebook);
+        backFromFB = (Button) findViewById(R.id.backFromFB);
+        backFromFB.setOnClickListener(this);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
@@ -217,4 +222,12 @@ public class FacebookActivity extends AppCompatActivity {
         return accessToken != null && !accessToken.isExpired();
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.backFromFB)
+        {
+            finish();
+        }
+
+    }
 }

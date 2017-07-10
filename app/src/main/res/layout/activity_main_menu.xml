@@ -19,7 +19,6 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:layout_margin="10dp"
-
         />
 
     <ImageView
@@ -46,40 +45,45 @@
 
         <Button
             android:id="@+id/campaign_mode"
-            android:layout_width="240dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="230sp"
+            android:layout_height="30sp"
+
+            android:layout_gravity="center_horizontal|center_vertical"
             android:background="@drawable/buttonshape"
-            android:scaleType="centerCrop"
+
             android:text="campaign mode"
             android:textColor="@color/colorPrimary"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:layout_margin="10dp"
-            android:gravity="center"/>
+            />
 
         <Button
-            android:id="@+id/vs_friends"
+            android:id="@+id/solo_game"
             android:background="@drawable/buttonshape"
             android:textColor="@color/colorPrimary"
-            android:layout_width="240dp"
-            android:layout_height="40dp"
+            android:layout_width="230sp"
+            android:layout_height="30sp"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:layout_below="@+id/campaign_mode"
             android:layout_centerHorizontal="true"
 
             android:text="solo via facebook"
-            android:layout_weight="0.02"
+
             android:gravity="center"/>
 
         <Button
             android:id="@+id/scoreButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_below="@+id/solo_game"
+            android:background="@drawable/buttonshape"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="230sp"
+            android:layout_height="30sp"
+            android:text="SCORES"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10sp"
             android:onClick="onClick"/>
 
     </LinearLayout>

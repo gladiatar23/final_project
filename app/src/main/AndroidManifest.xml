@@ -44,7 +44,8 @@
             android:name=".activities.FriendsListActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".activities.ManageFaceActivity" />
-        <activity android:name=".activities.ScoreActivity"></activity>
+        <activity android:name=".activities.ScoreActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

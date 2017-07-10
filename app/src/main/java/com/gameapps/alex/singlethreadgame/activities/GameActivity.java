@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView scoreText;
     MediaPlayer shootSound;
-
+//    Button backFromGame;
     private boolean isPaused;
 
 
@@ -50,7 +50,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
+//        backFromGame = (Button) findViewById(R.id.backFromGame);
+//        backFromGame.setOnClickListener(this);
         shootSound = MediaPlayer.create(this,R.raw.xara);
 
 
@@ -66,10 +68,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         singleThreadRunner.start();
 
         isPaused = false;
-        ( (Button) findViewById(R.id.button2)).setOnClickListener(new View.OnClickListener() {
+        ( (Button) findViewById(R.id.backFromGame)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pauseResume();
+                doAlert();
             }
         });
     }

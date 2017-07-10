@@ -63,6 +63,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
             Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
             bitmap = Bitmap.createScaledBitmap(bitmap , buttonWidth , buttonHeight , false);
             bLevel.setImageBitmap(bitmap);
+
             levelsLayout.addView(bLevel);
             levelButtons.add(bLevel);
 

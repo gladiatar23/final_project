@@ -5,10 +5,6 @@
     android:id="@+id/activity_level_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#ffffffff"
     tools:context="com.gameapps.alex.singlethreadgame.activities.LevelMenuActivity">
 
@@ -16,9 +12,9 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         app:srcCompat="@drawable/world"
-        android:padding="-5dp"
+
         />
 
 
@@ -51,8 +47,9 @@
         android:layout_height="30dp"
         android:background="@drawable/buttonshape"
         android:textStyle="bold"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:text="back"
+        android:layout_margin="10sp"
         android:onClick="goMain"
         />
 
@@ -61,7 +58,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_margin="5sp">
 
         <LinearLayout
             android:layout_width="fill_parent"

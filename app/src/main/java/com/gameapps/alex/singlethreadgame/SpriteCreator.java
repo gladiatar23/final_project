@@ -1,5 +1,6 @@
 package com.gameapps.alex.singlethreadgame;
 
+import android.graphics.Point;
 import android.util.Log;
 import android.util.Size;
 import android.view.MotionEvent;
@@ -29,6 +30,8 @@ public class SpriteCreator {
     private BossEnemy boss;
 
 
+    private static final double ENEMY_WIDTH_TO_SCREEN_WIDTH = (double)(1)/15;
+    private static final double ENEMY_HEIGHT_TO_OWN_WIDTH = 1.6;
 
     private static final int enemy_width = 100;
     private static final int enemy_height = 135;
@@ -89,10 +92,11 @@ public class SpriteCreator {
 //Function creates a new enemy, data sets width and height enemy,
 // receives a random number (for creating height location of the enemy). Adds to the list logic, graphics and annihilation
     public void createEnemy(Enemy.EnemyType et) {
+        Point p = getEnemySizes();
 
         Enemy enemy = new Enemy(et , spriteEssentialData ,
           spriteEssentialData.canvasRect.right+enemy_width/3 ,
-                MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , enemy_width , enemy_height
+                MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , p.x , p.y
         );
 
 
@@ -133,9 +137,11 @@ public class SpriteCreator {
 
     public void createThrownEnemy() {
 
+        Point p = getEnemySizes();
+
         //TODO - get angle and initial speed
         ThrownEnemy thrownEnemySprite = new ThrownEnemy(GameSession.currentLevel.enemyType , spriteEssentialData ,
-                boss.getLocation().getX(), boss.getLocation().getY(), enemy_width, enemy_height , boss.getAngleOfThrow() , boss.getThrowSpeed());
+                boss.getLocation().getX(), boss.getLocation().getY(), p.x, p.y , boss.getAngleOfThrow() , boss.getThrowSpeed());
 
         spriteEssentialData.graphics.addToManagedList(thrownEnemySprite);
         spriteEssentialData.logics.addToManagedList(thrownEnemySprite);
@@ -161,5 +167,16 @@ public class SpriteCreator {
 
     public void setBoss(BossEnemy boss) {
         this.boss = boss;
+    }
+
+    private Point getEnemySizes() {
+        int enemyWidthByRatio = (int) (ENEMY_WIDTH_TO_SCREEN_WIDTH * spriteEssentialData.canvasSize.x);
+        int enemyHeightByRatio = (int) (enemyWidthByRatio * ENEMY_HEIGHT_TO_OWN_WIDTH);
+
+        Log.i("sizes_are" , " " + enemyWidthByRatio + ", " + enemyHeightByRatio);
+        Log.i("sizes_are2" , " " + spriteEssentialData.canvasSize.x + ", " + spriteEssentialData.canvasSize.y);
+        Log.i("sizes_are3" , " " + spriteEssentialData.canvasRect.width() + ", " + spriteEssentialData.canvasRect.width());
+
+        return new Point(enemyWidthByRatio , enemyHeightByRatio);
     }
 }

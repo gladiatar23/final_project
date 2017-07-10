@@ -33,29 +33,25 @@
 
     <TextView
         android:id="@+id/txtStatus"
-        android:layout_width="103dp"
-        android:layout_height="58dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:text="Hello World!"
         android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_below="@+id/FaceOfBook"
         android:layout_alignEnd="@+id/FaceOfBook"
-        android:layout_marginTop="12dp"
+
         android:layout_alignStart="@+id/FaceOfBook" />
 
 
 
     <ImageView
         android:id="@+id/FaceOfBook"
-        android:layout_width="102dp"
-        android:layout_height="104dp"
+        android:layout_width="100sp"
+        android:layout_height="120sp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/com_facebook_button_background"
-        tools:layout_editor_absoluteX="480dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+
+        android:layout_margin="10sp"
         android:layout_alignTop="@+id/backFromFB"
         android:layout_alignParentEnd="true" />
 

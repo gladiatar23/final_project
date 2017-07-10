@@ -15,13 +15,13 @@ import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.ImageProcessing;
 import com.gameapps.alex.singlethreadgame.R;
 
-public class FriendsListActivity extends AppCompatActivity {
+public class FriendsListActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String EXTRA_USER_IMG = "EXTRA_USER_IMG";
     public static final String EXTRA_JSON_FRIENDS = "EXTRA_JSON_FRIENDS";
 
     public static Drawable playerImage;
-
+    Button backFromFriends;
 
     private ImageView userAvatar;
 
@@ -29,6 +29,8 @@ public class FriendsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
+        backFromFriends = (Button) findViewById(R.id.backFromFriends);
+        backFromFriends.setOnClickListener(this);
 
 //        Intent intent = getIntent();
 //        Uri imageUri = Uri.parse(intent.getStringExtra(EXTRA_USER_IMG));
@@ -45,7 +47,7 @@ public class FriendsListActivity extends AppCompatActivity {
             }
         });
 
-        Button back = (Button) findViewById(R.id.backButton);
+        Button back = (Button) findViewById(R.id.backFromFriends);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +119,14 @@ public class FriendsListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         goBackToMain();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.backFromFriends)
+        {
+            finish();
+        }
     }
 }

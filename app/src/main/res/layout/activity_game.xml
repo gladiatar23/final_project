@@ -31,6 +31,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/holo_orange_dark"
         android:textSize="18sp"
+        android:layout_margin="5sp"
          />
     <ImageButton
         android:layout_width="60dp"
@@ -46,10 +47,14 @@
         android:layout_marginBottom="11dp" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:id="@+id/backFromGame"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/buttonshape"
+        android:text="back"
+        android:textSize="18dp"
+        android:layout_margin="10dp"
+        android:textStyle="bold" />
 
     <GridLayout
         android:layout_width="match_parent"
