@@ -2,6 +2,7 @@ package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -33,8 +34,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     TextView scoreText;
-    MediaPlayer shootSound;
-//    Button backFromGame;
+    public static MediaPlayer shootSound;
+    public static MediaPlayer phaseEnterSound;
+//
     private boolean isPaused;
 
 
@@ -47,6 +49,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -54,6 +57,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //        backFromGame = (Button) findViewById(R.id.backFromGame);
 //        backFromGame.setOnClickListener(this);
         shootSound = MediaPlayer.create(this,R.raw.xara);
+        phaseEnterSound= MediaPlayer.create(this, R.raw.terminator);
 
 
         scoreText = (TextView)findViewById(R.id.scores);
@@ -130,7 +134,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onTouchEvent(event);
 
         activityData.spriteCreator.handleMotionEvent(event);
-        shootSound.start(); //TODO - move to doShooting in world manager
+
 
         return false;
     }
@@ -211,6 +215,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void goBackToLevelSelect() {
 //        startActivity(new Intent(this , LevelMenuActivity.class));
         killThread();
+
         HeroMenuActivity.isBackFromStage = true;
 //        finish();
         Log.i("Finish" , "Finish1 "+HeroMenuActivity.isBackFromStage );
@@ -230,6 +235,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 levelName, //levelname
                 isWon, //won
                 score  //score
+
         );
 
         //TODO - check if already won once, and if actually new high score
@@ -257,7 +263,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void playSound(View view){
-        shootSound.start();
+
     }
 
     public void killThread() {
@@ -285,7 +291,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void doAlert() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(this, R.style.MyAlertPopup);
         } else {
             builder = new AlertDialog.Builder(this);
         }

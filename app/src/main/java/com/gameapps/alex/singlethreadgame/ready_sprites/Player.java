@@ -122,6 +122,7 @@ public class Player extends Sprite {
                 location.getY(),
                 angle
                 );
+        GameActivity.shootSound.start();
     }
     public static Human currentHero;
     public static Bitmap currentHeroBitmap;

@@ -3,6 +3,7 @@ package com.gameapps.alex.singlethreadgame.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -39,7 +40,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
     private CallbackManager callbackManager;
-    ImageView imageView;
+    ImageView FaceOfBook;
     LoginButton login_button;
     FacebookCallback<LoginResult> callback;
     Button backFromFB;
@@ -50,6 +51,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facebook);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
         backFromFB = (Button) findViewById(R.id.backFromFB);
         backFromFB.setOnClickListener(this);
 
@@ -57,8 +59,8 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         AppEventsLogger.activateApp(this);
         login_button = (LoginButton) findViewById(R.id.login_button);
         textView = (TextView) findViewById(R.id.txtStatus);
-        imageView = (ImageView) findViewById(R.id.FaceOfBook);
-        Log.i("get img view", " " + imageView.toString());
+        FaceOfBook = (ImageView) findViewById(R.id.FaceOfBook);
+        Log.i("get img view", " " + FaceOfBook.toString());
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         ProfilePictureView profilePictureView;
@@ -151,7 +153,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
 
         Profile p = Profile.getCurrentProfile();
         if (p != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertPopup);
             builder.setMessage("Logged in - proceed as " + p.getFirstName() + " " + p.getLastName() + "?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         }
@@ -169,16 +171,16 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
 
         Picasso.with(getApplicationContext())
                 .load(url)
-                .into(imageView, new com.squareup.picasso.Callback() {
+                .into(FaceOfBook, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.i("getdsgsedimg", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
+
                         launchPopup();
                     }
 
                     @Override
                     public void onError() {
-                        Log.i("getdsgsedimg2", " sf dgrfdhdtgj dhsrfhsdfbadsg dasgdsag");
+
                     }
                 });
 
@@ -212,8 +214,10 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
             return;
 
 
-        Drawable imageDrawable = imageView.getDrawable();
+        Drawable imageDrawable = FaceOfBook.getDrawable();
+
         FriendsListActivity.playerImage = imageDrawable;
+        //TODO - SWITCH fACE
         startActivity(new Intent(this, FriendsListActivity.class));
     }
 

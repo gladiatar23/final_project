@@ -63,6 +63,7 @@ public class ImageProcessing {
             float y1 = thisFace.getPosition().y;
             float x2 = x1 + thisFace.getWidth();
             float y2 = y1 + thisFace.getHeight();
+
             tempBitmap = getCroppedBitmap(tempBitmap , new Rect((int)x1, (int)y1, (int)x2, (int)y2));
         }
 //        return new BitmapDrawable(context.getResources(),tempBitmap);
@@ -88,6 +89,8 @@ public class ImageProcessing {
         canvas.drawBitmap(bitmap, rectEllipse, rect, paint);
         return output;
     }
+
+
 
 
 
@@ -121,11 +124,11 @@ public class ImageProcessing {
     //---------------------------------Bitmap combining---------------------------------//
 
 
-
+//TODO
     public static Bitmap layBitmapOnTop(Bitmap bitmapTop, Bitmap bitmapBottom) {
-        final double HEAD_LOCATION_HORIZONTAL_RATIO = (double)1/4; //[6/24 - 8/24
+        final double HEAD_LOCATION_HORIZONTAL_RATIO = (double)48/192; //[6/24 - 8/24
         final double HEAD_LOCATION_VERTICAL_RATIO = 0;
-        final double HEAD_TO_STICK_RATIO = (double)1/3;
+        final double HEAD_TO_STICK_RATIO = (double)33/90;
 
         Bitmap mergedBitmap = null;
 

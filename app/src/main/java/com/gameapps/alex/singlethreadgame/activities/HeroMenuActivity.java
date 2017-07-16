@@ -1,6 +1,7 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -40,6 +41,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point canvasSize = new Point();
@@ -59,17 +61,10 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
             ImageButton bLevel =new ImageButton(this);
             bLevel.setOnClickListener(this);
             heroLayout.setGravity(Gravity.CENTER_VERTICAL);
-            //heroLayout.setAlpha((float) 0.8);
             Drawable d = getResources().getDrawable(hero.pathToPicHero);
             Bitmap heroPic = ((BitmapDrawable)d).getBitmap();
             heroPic = Bitmap.createScaledBitmap(heroPic , buttonWidth , buttonHeight , false);
-
-
             bLevel.setImageBitmap(heroPic);
-            
-
-            //bLevel.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            //heroPic.setHasAlpha(true);
             heroLayout.addView(bLevel);
             heroButtons.add(bLevel);
 

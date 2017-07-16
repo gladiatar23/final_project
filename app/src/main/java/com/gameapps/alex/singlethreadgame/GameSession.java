@@ -87,6 +87,7 @@ public class GameSession {
             }
         } else if (stagePhase == StagePhase.FINAL_BOSS_FIGHT) {
             if (s instanceof BossEnemy) {
+                GameActivity.phaseEnterSound.stop();
                 doWinBoss();
             }
         }
@@ -112,6 +113,7 @@ public class GameSession {
     public void doWinBoss() {
         if (isFacebook) {
             //TODO - if at last level, win
+
             currentLevel = Level.getNextLevelFor(currentLevel);
             ctorStuff();
             spriteEssentialData.graphics.placeBackground();
@@ -157,6 +159,7 @@ public class GameSession {
 
     public void doLose() {
         Log.i("game over", "LOSE!!");
+       GameActivity.phaseEnterSound.stop();
 
         new Timer().schedule(new TimerTask() {
             @Override

@@ -1,6 +1,7 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +22,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
         System.gc();
 
-//        fullScreen();
+
         setContentView(R.layout.activity_main_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
 
         campaignButton = (Button) findViewById(R.id.campaign_mode);
         vsButton = (Button) findViewById(R.id.solo_game);
@@ -51,7 +53,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, ScoreActivity.class));
                 break;
             case R.id.exit:
-                finish();
+                startActivity(new Intent(this, Score2Activity.class));
                 break;
             default:
                 break;

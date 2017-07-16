@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".MyApp"
@@ -43,8 +49,17 @@
         <activity
             android:name=".activities.FriendsListActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.ManageFaceActivity" />
-        <activity android:name=".activities.ScoreActivity"
+        <activity
+            android:name=".activities.ManageFaceActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activities.ScoreActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.GalleryActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activities.Score2Activity"
             android:screenOrientation="landscape"/>
     </application>
 

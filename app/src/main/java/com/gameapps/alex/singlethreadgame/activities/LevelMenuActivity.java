@@ -1,6 +1,7 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -38,6 +39,7 @@ public class LevelMenuActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point canvasSize = new Point();

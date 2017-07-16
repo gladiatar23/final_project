@@ -1,9 +1,12 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.Profile;
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.ImageProcessing;
 import com.gameapps.alex.singlethreadgame.R;
@@ -28,9 +32,11 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
         setContentView(R.layout.activity_friends_list);
         backFromFriends = (Button) findViewById(R.id.backFromFriends);
         backFromFriends.setOnClickListener(this);
+        launchPopup();
 
 //        Intent intent = getIntent();
 //        Uri imageUri = Uri.parse(intent.getStringExtra(EXTRA_USER_IMG));
@@ -59,6 +65,7 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void goToPlay() {
+
         if (playerImage != null) {
             Bitmap bitmapUserStickman = ImageProcessing.drawableToBitmap(playerImage);
             bitmapUserStickman = ImageProcessing.identifyFace(this, bitmapUserStickman);
@@ -128,5 +135,33 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
         {
             finish();
         }
+    }
+    private void launchPopup() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        jumpToGallery();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+
+                        break;
+                }
+            }
+        };
+
+        Profile p = Profile.getCurrentProfile();
+        if (p != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.MyAlertPopup);
+            builder.setMessage("Do you want to change face picture?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+    }
+    private void jumpToGallery() {
+        startActivity(new Intent(this, GalleryActivity.class));
     }
 }

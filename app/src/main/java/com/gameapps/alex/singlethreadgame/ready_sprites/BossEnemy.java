@@ -1,8 +1,10 @@
 package com.gameapps.alex.singlethreadgame.ready_sprites;
 
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.util.Size;
 
+import com.gameapps.alex.singlethreadgame.R;
 import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
@@ -32,7 +34,9 @@ public class BossEnemy extends Enemy {
     private long timeOfLastThrow;
     private long nextShootWait;
 
+
     GameSession.Human humanEnum;
+
 
     public BossEnemy(GameSession.Human humanEnum, GameActivity.SpriteEssentialData spriteEssentialData) {
         super(humanEnum, spriteEssentialData, 0 , 0 , 0 , 0);
@@ -50,6 +54,9 @@ public class BossEnemy extends Enemy {
 
         spriteEssentialData.spriteCreator.setBoss(this);
     }
+
+
+
 
     private void phaseEnter() {
         location.setX(location.getX() - ENTERING_SPEED);
@@ -90,6 +97,7 @@ public class BossEnemy extends Enemy {
     @Override
     public void change() {
         if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_ENTERING) {
+            GameActivity.phaseEnterSound.start();
             phaseEnter();
         }
         else if(spriteEssentialData.gameSession.stagePhase == GameSession.StagePhase.FINAL_BOSS_FIGHT) {

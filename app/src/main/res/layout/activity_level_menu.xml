@@ -25,6 +25,7 @@
         android:id="@+id/button"
         android:layout_toEndOf="@+id/showInLog"
         android:onClick="eraseDB"
+        android:visibility="invisible"
 
         />
 
@@ -36,6 +37,7 @@
         android:layout_toEndOf="@+id/backMain"
         android:id="@+id/showInLog"
         android:onClick="printDBToLog"
+        android:visibility="invisible"
         />
 
 
@@ -47,7 +49,7 @@
         android:layout_height="30dp"
         android:background="@drawable/buttonshape"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:text="back"
         android:layout_margin="10sp"
         android:onClick="goMain"

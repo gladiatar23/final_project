@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff"
+    tools:context="com.gameapps.alex.singlethreadgame.activities.GalleryActivity">
+
+    <Button
+        android:id="@+id/backFromGallery"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="BACK"
+        android:background="@drawable/buttonshape"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        />
+
+    <Button
+        android:layout_width="260sp"
+        android:layout_height="40sp"
+        android:textStyle="bold"
+        android:id="@+id/btn"
+        android:background="@drawable/buttonshape"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18dp"
+        android:text="Select or Capture Image"
+        android:layout_margin="10sp"
+        android:layout_below="@+id/chosenPIC"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/chosenPIC"
+        android:layout_centerVertical="true"
+
+         />
+
+</RelativeLayout>

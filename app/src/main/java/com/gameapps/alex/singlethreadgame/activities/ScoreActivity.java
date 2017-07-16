@@ -1,6 +1,9 @@
 package com.gameapps.alex.singlethreadgame.activities;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +28,7 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_score);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
         backFromScore = (Button)findViewById(R.id.backFromScore);
         backFromScore.setOnClickListener(this);
 
@@ -40,6 +44,11 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
 
         for (LevelForTable lft : allLevels) {
             ScoreLevelRow slr = new ScoreLevelRow(this , lft.getLevelName() , lft.getIsWon() , lft.getBestScore());
+            slr.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            //slr.setTextColor(Color.RED);
+            //slr.setTextColor(ContextCompat.getColor(context, R.color.some_color));
+
+
             scoresLayout.addView(slr);
 
             Log.i("levelllll", " " + lft.getLevelName());
@@ -67,7 +76,7 @@ public class ScoreActivity extends AppCompatActivity implements View.OnClickList
             tvIsWon.setText(String.valueOf(isWon));
             tvIsWon.setTextColor(0xffbdbdbd);
             TextView tvHighScore = new TextView(context);
-            tvHighScore.setTextColor(0xffbdbdbd);
+            tvHighScore.setTextColor(0x00bd00);
             tvHighScore.setText(String.valueOf(highScore));
 
             this.addView(tvLvName);
