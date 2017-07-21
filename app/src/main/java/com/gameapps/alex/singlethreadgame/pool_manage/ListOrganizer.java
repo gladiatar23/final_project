@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Phillip on 1/6/2017.
+ * Created by Alex on 1/6/2017.
  */
 
 public class ListOrganizer<T extends Discardable> implements ListOrganizerInterface <T> {

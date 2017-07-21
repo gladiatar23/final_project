@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +15,11 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gameapps.alex.singlethreadgame.GameGraphics;
@@ -29,6 +33,9 @@ import com.gameapps.alex.singlethreadgame.data_handle.LevelForTable;
 import com.gameapps.alex.singlethreadgame.ready_sprites.SpriteCollisions;
 import com.gameapps.alex.singlethreadgame.ready_sprites.WorldManager;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 //The main Class that Runs all the other classes.
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,7 +45,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public static MediaPlayer phaseEnterSound;
 //
     private boolean isPaused;
-
+    ImageView endGame;
 
     ImageButton upButton , downButton;
 
@@ -56,6 +63,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
 //        backFromGame = (Button) findViewById(R.id.backFromGame);
 //        backFromGame.setOnClickListener(this);
+        endGame=(ImageView)findViewById(R.id.winningSplashImage);
+        Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.end_game);
+        endGame.startAnimation(animation);
         shootSound = MediaPlayer.create(this,R.raw.xara);
         phaseEnterSound= MediaPlayer.create(this, R.raw.terminator);
 
@@ -70,7 +80,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         activityData = new SpriteEssentialData(this);
         singleThreadRunner = new GameThread(activityData.graphics , activityData.logics , activityData.worldManager, activityData.spriteCollisions , activityData.gameSession);
         singleThreadRunner.start();
-
+//Treatment of pressing the exit button
         isPaused = false;
         ( (Button) findViewById(R.id.backFromGame)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +90,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+    //Checking the running mode of the game
     public void pauseResume() {
 
         if(isPaused) {
@@ -123,8 +134,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        singleThreadRunner.terminateRunning();
+          finish();
+  //      singleThreadRunner.terminateRunning();
     }
 
 //   This method is automatically called when the user touches the screen
@@ -138,7 +149,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         return false;
     }
-
+//checking and Execution of movement buttons
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -207,23 +218,52 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
+//Set score on the play screen
     public void setScore(int currentScore) {
         scoreText.setText("" + currentScore);
     }
 
     public void goBackToLevelSelect() {
-//        startActivity(new Intent(this , LevelMenuActivity.class));
+        goBackToLevelSelect(false);
+    }
+    public void goBackToLevelSelect(boolean isJustWon) {
+        //        startActivity(new Intent(this , LevelMenuActivity.class));
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // this code will be executed after 2 seconds
+            }
+        }, 2000);
         killThread();
 
         HeroMenuActivity.isBackFromStage = true;
 //        finish();
-        Log.i("Finish" , "Finish1 "+HeroMenuActivity.isBackFromStage );
-        Intent intent = new Intent(this , MainMenuActivity.class);
+        Log.i("Finish" , "Finish1666 "+HeroMenuActivity.isBackFromStage );
+        //Intent intent = new Intent(this , MainMenuActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
 
+//        if(isJustWon) {
+//            pauseThread();
+//            ImageButton splashImage = (ImageButton) findViewById(R.id.winningSplashImage);
+//            splashImage.setVisibility(View.VISIBLE);
+//            final Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    Log.i("finishedd" , "asfasf");
+//                    finish();
+//                }
+//            }, 5000);
+//        }
+//        else {
+//            Log.i("finishedd" , "asfasf2");
+//
+//        }
+//        //startActivity(intent);
+     finish();
+    }
+  //  The function takes care of winning the game and updates the database in the victory phase and scoring
     public void winLevel() {
 //        SaveLoad.createAndSaveFile(this ,  getResources().getString(R.string.player_sav_name) , "");
         DBLevelHandler dblh = DBLevelHandler.getInstance(this);
@@ -265,29 +305,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void playSound(View view){
 
     }
-
+//kills the current game thread and clean the memory
     public void killThread() {
         if(singleThreadRunner != null)
             singleThreadRunner.terminateRunning();
         singleThreadRunner = null;
         System.gc();
     }
+//pause the game
     public void pauseThread() {
         singleThreadRunner.pauseRunning();
         isPaused = true;
     }
+    //resume the game from pause
     public void resumeThread() {
         singleThreadRunner.resumeRunning();
         isPaused = false;
     }
-
+    //pause the game
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
         pauseThread();
         doAlert();
     }
-
+//An alert message to the user whether he wants to quit the game
+    //checking the user's answer and act according to the answer
     public void doAlert() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

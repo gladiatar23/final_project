@@ -22,7 +22,7 @@ import com.google.android.gms.vision.face.FaceDetector;
 /**
  * Created by USER on 25/06/2017.
  */
-
+//Class of Face Recognition
 public class ImageProcessing {
 
 
@@ -40,7 +40,7 @@ public class ImageProcessing {
 //                // R.drawable.test1,
 //                options);
         Paint myRectPaint = new Paint();
-        myRectPaint.setStrokeWidth(5);
+        myRectPaint.setStrokeWidth(3);
         myRectPaint.setColor(Color.RED);
         myRectPaint.setStyle(Paint.Style.STROKE);
         Bitmap tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), Bitmap.Config.RGB_565);
@@ -63,29 +63,32 @@ public class ImageProcessing {
             float y1 = thisFace.getPosition().y;
             float x2 = x1 + thisFace.getWidth();
             float y2 = y1 + thisFace.getHeight();
+            Rect rect = new Rect((int)x1, (int)y1, (int)x2, (int)y2);
 
-            tempBitmap = getCroppedBitmap(tempBitmap , new Rect((int)x1, (int)y1, (int)x2, (int)y2));
+            tempBitmap = getCroppedBitmap(tempBitmap , rect);
         }
 //        return new BitmapDrawable(context.getResources(),tempBitmap);
         return tempBitmap;
     }
 
     public static Bitmap getCroppedBitmap(Bitmap bitmap , Rect rectEllipse) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap output = Bitmap.createBitmap(rectEllipse.width(),
+                rectEllipse.height(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
         final int color = 0xff424242;
         final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final Rect rect = new Rect(0, 0, rectEllipse.width(), rectEllipse.height());
 
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
 
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-                bitmap.getWidth() / 2, paint);
+        canvas.drawCircle(rectEllipse.width() / 2, rectEllipse.height() / 2,
+                rectEllipse.height() / 2, paint);
+//        canvas.drawOval(0, 0 , bitmap.getWidth()/2 , bitmap.getHeight()/2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+
         canvas.drawBitmap(bitmap, rectEllipse, rect, paint);
         return output;
     }
@@ -119,6 +122,9 @@ public class ImageProcessing {
         return bitmap;
     }
 
+    public static Bitmap scaleBitmap(Bitmap scaleMe , int width , int height) {
+        return Bitmap.createScaledBitmap(scaleMe, width, height, false);
+    }
 
 
     //---------------------------------Bitmap combining---------------------------------//
@@ -132,17 +138,12 @@ public class ImageProcessing {
 
         Bitmap mergedBitmap = null;
 
-        int w, h = 0;
-
-        h = bitmapTop.getHeight() + bitmapBottom.getHeight();
-        w = Math.max(bitmapBottom.getWidth() , bitmapTop.getWidth());
-
-        mergedBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        mergedBitmap = Bitmap.createBitmap(bitmapBottom.getWidth(), bitmapBottom.getHeight(), Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(mergedBitmap);
 
         int headSize = (int)(HEAD_TO_STICK_RATIO*bitmapBottom.getWidth());
-        bitmapTop = scaleBitmap(bitmapTop , headSize , headSize);
+        bitmapTop = scaleBitmap(bitmapTop , headSize , (int) (headSize*1.2)); //TODO - find better ratio and relocate the top
 
         int locationW = (int)(HEAD_LOCATION_HORIZONTAL_RATIO*bitmapBottom.getWidth());
         int locationH = (int)(HEAD_LOCATION_VERTICAL_RATIO*bitmapBottom.getHeight());
@@ -152,30 +153,6 @@ public class ImageProcessing {
         int finalImageHeight = Math.max(locationH , bitmapBottom.getHeight());  //max of top-of-head and stickman height
 //        crop to get rid of excess area above
         mergedBitmap = Bitmap.createBitmap(mergedBitmap, 0, 0 , mergedBitmap.getWidth(), finalImageHeight);  //crop out excess height
-
-        return mergedBitmap;
-    }
-
-    public static Bitmap scaleBitmap(Bitmap scaleMe , int width , int height) {
-        return Bitmap.createScaledBitmap(scaleMe, width, height, false);
-    }
-
-    public static Bitmap mergeBitmap(Bitmap bitmapTop, Bitmap bitmapBottom) {
-
-        Bitmap mergedBitmap = null;
-
-        int w, h = 0;
-
-        h = bitmapTop.getHeight() + bitmapBottom.getHeight();
-        w = Math.max(bitmapBottom.getWidth() , bitmapTop.getWidth());
-
-        mergedBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(mergedBitmap);
-
-        canvas.drawBitmap(bitmapTop, 0f, 0f, null);
-        canvas.drawBitmap(bitmapBottom, 0f, bitmapTop.getHeight(), null);
-
 
         return mergedBitmap;
     }

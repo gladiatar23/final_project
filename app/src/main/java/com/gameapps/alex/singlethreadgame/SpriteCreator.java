@@ -14,6 +14,7 @@ import com.gameapps.alex.singlethreadgame.ready_sprites.Enemy;
 import com.gameapps.alex.singlethreadgame.ready_sprites.Player;
 import com.gameapps.alex.singlethreadgame.ready_sprites.ThrownEnemy;
 import com.gameapps.alex.singlethreadgame.ready_sprites.WorldManager;
+import com.gameapps.alex.singlethreadgame.sprite_definition.Enums;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Location;
 import com.gameapps.alex.singlethreadgame.sprite_definition.Sprite;
 
@@ -30,11 +31,11 @@ public class SpriteCreator {
     private BossEnemy boss;
 
 
-    private static final double ENEMY_WIDTH_TO_SCREEN_WIDTH = (double)(1)/15;
+    private static final double ENEMY_WIDTH_TO_SCREEN_WIDTH = (double)1/15;
     private static final double ENEMY_HEIGHT_TO_OWN_WIDTH = 1.6;
 
     private static final int enemy_width = 100;
-    private static final int enemy_height = 135;
+   // private static final int enemy_height = 135;
 
 
     GameActivity.SpriteEssentialData spriteEssentialData;
@@ -80,9 +81,7 @@ public class SpriteCreator {
 
         spriteEssentialData.graphics.addToManagedList(h);
         spriteEssentialData.logics.addToManagedList(h);
-
         spriteEssentialData.spriteCollisions.addHuman(h);
-
         this.player = h;
 
         Log.i("added player" , "" + h);
@@ -99,16 +98,14 @@ public class SpriteCreator {
                 MyMath.getRandomUpTo(spriteEssentialData.canvasRect.bottom) , p.x , p.y
         );
 
-
+//The enemy adds to the lists
         spriteEssentialData.graphics.addToManagedList(enemy);
         spriteEssentialData.logics.addToManagedList(enemy);
-
         spriteEssentialData.spriteCollisions.addEnemy(enemy);
-
-//Print log
-        Log.i("added sprite" , "" + enemy);
+        //Log.i("added sprite" , "" + enemy);
     }
-
+    //The function accepts the boss attribute and creates a new boss.
+    // It adds it to the management lists
     public void createBoss(GameSession.Human humanEnum) {
         BossEnemy bossEnemy = new BossEnemy(humanEnum , spriteEssentialData);
 
@@ -168,7 +165,7 @@ public class SpriteCreator {
     public void setBoss(BossEnemy boss) {
         this.boss = boss;
     }
-
+//The function checks the size of the sprite boss and if it is too large it resizes it according of the canvas ratio
     private Point getEnemySizes() {
         int enemyWidthByRatio = (int) (ENEMY_WIDTH_TO_SCREEN_WIDTH * spriteEssentialData.canvasSize.x);
         int enemyHeightByRatio = (int) (enemyWidthByRatio * ENEMY_HEIGHT_TO_OWN_WIDTH);

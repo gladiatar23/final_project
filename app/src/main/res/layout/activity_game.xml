@@ -56,6 +56,18 @@
         android:layout_margin="10dp"
         android:textStyle="bold" />
 
+    <ImageButton
+        android:id="@+id/winningSplashImage"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/banan"
+        android:visibility="invisible"
+
+
+        />
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -87,6 +99,7 @@
 
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/arrow_down" />
+
     </GridLayout>
 
 

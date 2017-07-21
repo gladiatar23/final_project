@@ -84,11 +84,12 @@ public class WorldManager implements LogicalElement {
     public boolean isFlaggedForRemoval() {
         return false;
     }
-
+//Call function to create a new enemy
     private void createEnemy(Enemy.EnemyType et) {
         spriteEssentialData.spriteCreator.createEnemy(et);
     }
-
+//The function remove all sprites fromm the manage lists (spriteCollisions,logics and graphics)
+// and add back the main hero sprite to lists
     public void emptyAllBesidesPlayer() {
 
         spriteEssentialData.spriteCollisions.dumpEnemiesAndBullets();

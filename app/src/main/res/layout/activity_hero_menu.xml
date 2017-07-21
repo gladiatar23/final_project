@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/world" />
 
     <Button
-        android:id="@+id/backLevel"
+        android:id="@+id/backToLevels"
         android:layout_width="70dp"
         android:layout_height="30dp"
         android:textSize="18dp"

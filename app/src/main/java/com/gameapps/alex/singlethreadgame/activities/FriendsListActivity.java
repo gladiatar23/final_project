@@ -9,20 +9,26 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.Profile;
+import com.gameapps.alex.singlethreadgame.BuildConfig;
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.ImageProcessing;
 import com.gameapps.alex.singlethreadgame.R;
+import com.gameapps.alex.singlethreadgame.sprite_definition.Enums;
 
 public class FriendsListActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String EXTRA_USER_IMG = "EXTRA_USER_IMG";
     public static final String EXTRA_JSON_FRIENDS = "EXTRA_JSON_FRIENDS";
+
+    public static final int IMAGE_FRAME_WIDTH = 150;
+    public static final int IMAGE_FRAME_HEIGHT = 150;
 
     public static Drawable playerImage;
     Button backFromFriends;
@@ -68,6 +74,7 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
 
         if (playerImage != null) {
             Bitmap bitmapUserStickman = ImageProcessing.drawableToBitmap(playerImage);
+
             bitmapUserStickman = ImageProcessing.identifyFace(this, bitmapUserStickman);
 
 
@@ -76,6 +83,7 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
                 bitmapUserStickman = BitmapFactory.decodeResource(getResources(), R.drawable.one_pixel);
             }
 
+            Log.i("image_size_bitmap" , "sizes are: " + bitmapUserStickman.getWidth() + ", " + bitmapUserStickman.getHeight());
             Bitmap drawableBm = BitmapFactory.decodeResource(getResources(), R.drawable.stickman);
             bitmapUserStickman = ImageProcessing.layBitmapOnTop(bitmapUserStickman, drawableBm);   //head on stickman bitmapUserStickman
 
@@ -117,16 +125,17 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
 //            Object obj = adapter.getItem(i);
 //        }
     }
-
+//    TODO:
     public void goBackToMain() {
-        Intent intent = new Intent(this , MainMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+//        Intent intent = new Intent(this , MainMenuActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        goBackToMain();
+        finish();
     }
 
     @Override
@@ -136,6 +145,7 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
             finish();
         }
     }
+    //        Ask the user if he wants to change the image (from Facebook) he uses
     private void launchPopup() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -161,6 +171,7 @@ public class FriendsListActivity extends AppCompatActivity implements View.OnCli
                     .setNegativeButton("No", dialogClickListener).show();
         }
     }
+   // Goes to image selection activity
     private void jumpToGallery() {
         startActivity(new Intent(this, GalleryActivity.class));
     }

@@ -7,7 +7,7 @@ import com.gameapps.alex.singlethreadgame.GameGraphics;
 import com.gameapps.alex.singlethreadgame.GameLogics;
 
 /**
- * Created by Phillip on 1/7/2017.
+ * Created by Alex on 1/7/2017.
  */
 
 public interface SpriteCreationCause {

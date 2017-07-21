@@ -124,41 +124,41 @@ public class Player extends Sprite {
                 );
         GameActivity.shootSound.start();
     }
-    public static Human currentHero;
-    public static Bitmap currentHeroBitmap;
-    public static Set<Human> availableHeroes;
-    public static enum Human {
-        DEFAULT(R.drawable.stickman, R.drawable.stickman, GameSession.Bullet.SHURIKEN, 3, 5),
-        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, GameSession.Bullet.SICKLE, 8, 5),
-        MARIO(R.drawable.mario, R.drawable.marior, GameSession.Bullet.SPECIAL_STAR, 8, 5),
-        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, GameSession.Bullet.GRENADE, 5, 5),
-        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, GameSession.Bullet.SEVIVON, 6, 5),
-        MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, GameSession.Bullet.BANANA, 8, 2),
-        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , GameSession.Bullet.DIPERS, 8,5),
-        FRADY(R.drawable.frady_l , R.drawable.frady_r , GameSession.Bullet.PIZZA , 8,5),
-        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , GameSession.Bullet.MISSILE , 8,5);
-
-        public int pathToPicHero;
-        public int pathToPicBoss;
-        //        public int pathToPicBullet;
-        public GameSession.Bullet bullet;
-        public int fireRate;
-
-        public long initialBossHP;
-
-        Human(int pathToHeroPic, int pathToBossPic, GameSession.Bullet bullet, int fireRate, long initialBossHP) {
-            this.pathToPicHero = pathToHeroPic;
-            this.pathToPicBoss = pathToBossPic;
-            this.bullet = bullet;
-            this.fireRate = fireRate;
-            this.initialBossHP = initialBossHP;
-        }
-
-        public int getPathToPicBullet() {
-            return bullet.pathToPicBullet;
-        }
-
-    }
+//    public static Human currentHero;
+//    public static Bitmap currentHeroBitmap;
+//    public static Set<Human> availableHeroes;
+//    public static enum Human {
+//        DEFAULT(R.drawable.stickman, R.drawable.stickman, GameSession.Bullet.SHURIKEN, 3, 5),
+//        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, GameSession.Bullet.SICKLE, 8, 5),
+//        MARIO(R.drawable.mario, R.drawable.marior, GameSession.Bullet.SPECIAL_STAR, 8, 5),
+//        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, GameSession.Bullet.GRENADE, 5, 5),
+//        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, GameSession.Bullet.SEVIVON, 6, 5),
+//        MINYON(R.drawable.wolverine_l, R.drawable.wolverine_r, GameSession.Bullet.BANANA, 8, 2),
+//        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , GameSession.Bullet.DIPERS, 8,5),
+//        FRADY(R.drawable.frady_l , R.drawable.frady_r , GameSession.Bullet.PIZZA , 8,5),
+//        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , GameSession.Bullet.MISSILE , 8,5);
+//
+//        public int pathToPicHero;
+//        public int pathToPicBoss;
+//        //        public int pathToPicBullet;
+//        public GameSession.Bullet bullet;
+//        public int fireRate;
+//
+//        public long initialBossHP;
+//
+//        Human(int pathToHeroPic, int pathToBossPic, GameSession.Bullet bullet, int fireRate, long initialBossHP) {
+//            this.pathToPicHero = pathToHeroPic;
+//            this.pathToPicBoss = pathToBossPic;
+//            this.bullet = bullet;
+//            this.fireRate = fireRate;
+//            this.initialBossHP = initialBossHP;
+//        }
+//
+//        public int getPathToPicBullet() {
+//            return bullet.pathToPicBullet;
+//        }
+//
+//    }
 
     public boolean getHit(Enemy e) {
 
@@ -169,7 +169,6 @@ public class Player extends Sprite {
 
         //dead (rest in piss)
         flagForRemoval();
-//        spriteEssentialData.gameSession.handleOnPlayerSpriteHit(this , e);
         return true;
     }
 

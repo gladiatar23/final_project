@@ -152,7 +152,7 @@ public class GameSession {
 
             db.addLevel(currentForTable);
 
-            gameActivity.goBackToLevelSelect();
+            gameActivity.goBackToLevelSelect(true);
         }
 
     }
@@ -187,6 +187,12 @@ public class GameSession {
             }
         }
     }
+    //ENUM - especially a method parameter
+    //
+    //Level ENUM - Defines characteristics to the stages:
+    // ID number, stage name, number of enemies to kill for passing to the next level,
+    // path to the background image,enemy Enum relevant to the stage
+    // and the new hero that opens after passing the stage.
 
     public enum Level {
         MOSCOW(0, "MOSCOW", 6, R.drawable.moscow, Enemy.EnemyType.JIHADIST, Human.BEAR),
@@ -230,31 +236,30 @@ public class GameSession {
         }
 
     }
+    //Human ENUM - Defines characteristics to the main character and boss:
+    // path to the hero image sprit, path to the boss image sprit,
+    // enum bullet Relevant to the hero and the number of times you have to hit the boss to win the level
 
     public enum Human {
-        DEFAULT(R.drawable.stickman, R.drawable.stickman, Bullet.DIPERS, 3, 5),
-        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, Bullet.SICKLE, 8, 5),
-        MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 8, 5),
-        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, Bullet.GRENADE, 5, 5),
-        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 6, 5),
-        MINYON(R.drawable.minions_l, R.drawable.minions_r, Bullet.BANANA, 8, 2),
-        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.SHURIKEN, 8,5),
-        FRADY(R.drawable.frady_l , R.drawable.frady_r , Bullet.PIZZA , 8,5),
-        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , Bullet.MISSILE , 8,5);
+        DEFAULT(R.drawable.stickman, R.drawable.stickman, Bullet.DIPERS, 5),
+        BEAR(R.drawable.russianbear_l, R.drawable.russianbear_r, Bullet.SICKLE, 5),
+        MARIO(R.drawable.mario, R.drawable.marior, Bullet.SPECIAL_STAR, 5),
+        TERMINATOR(R.drawable.terminatorr_l, R.drawable.terminatorr_r, Bullet.GRENADE, 5),
+        ROBORABI(R.drawable.robo_rabi_l, R.drawable.robo_rabi_r, Bullet.SEVIVON, 5),
+        MINYON(R.drawable.minions_l, R.drawable.minions_r, Bullet.BANANA, 2),
+        MOTARO(R.drawable.motaro_l , R.drawable.motaro_r , Bullet.SHURIKEN,5),
+        FRADY(R.drawable.frady_l , R.drawable.frady_r , Bullet.PIZZA ,5),
+        GOBLIN(R.drawable.goblin_l , R.drawable.goblin_r , Bullet.MISSILE ,5);
 
         public int pathToPicHero;
         public int pathToPicBoss;
-        //        public int pathToPicBullet;
         public Bullet bullet;
-        public int fireRate;
-
         public long initialBossHP;
 
-        Human(int pathToHeroPic, int pathToBossPic, Bullet bullet, int fireRate, long initialBossHP) {
+        Human(int pathToHeroPic, int pathToBossPic, Bullet bullet, long initialBossHP) {
             this.pathToPicHero = pathToHeroPic;
             this.pathToPicBoss = pathToBossPic;
             this.bullet = bullet;
-            this.fireRate = fireRate;
             this.initialBossHP = initialBossHP;
         }
 
@@ -263,7 +268,9 @@ public class GameSession {
         }
 
     }
-
+// Bullet ENUM - Defines properties for bullet:
+// path to the image sprite of the bullet,
+// initiation speed parameter and vertical drop speed parameter
     public enum Bullet {
         SHURIKEN(R.drawable.shuriken, 80, 45),
         SICKLE(R.drawable.sickle_l, 45, 15),
@@ -309,7 +316,7 @@ public class GameSession {
 
         }
     }
-
+//StagePhase ENUM - Split the levels into sub-stages
     public enum StagePhase {
         MAIN_PHASE,
         FINAL_BOSS_ENTERING,

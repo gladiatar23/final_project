@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
+import com.gameapps.alex.singlethreadgame.ImageProcessing;
 import com.gameapps.alex.singlethreadgame.R;
 
 public class GalleryActivity extends AppCompatActivity implements View.OnClickListener{
@@ -114,6 +115,9 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
                 Uri contentURI = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+
+//                    bitmap = ImageProcessing.scaleBitmap(bitmap , FriendsListActivity.IMAGE_FRAME_WIDTH , FriendsListActivity.IMAGE_FRAME_HEIGHT);
+
                     //String path = saveImage(bitmap);
                     FriendsListActivity.playerImage= new BitmapDrawable(getResources(), bitmap);
 
@@ -131,6 +135,7 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             chosenPIC.setImageBitmap(thumbnail);
             //FriendsListActivity.playerImage = chosenPIC.getDrawable();
+//            thumbnail = ImageProcessing.scaleBitmap(thumbnail , FriendsListActivity.IMAGE_FRAME_WIDTH , FriendsListActivity.IMAGE_FRAME_HEIGHT);
             FriendsListActivity.playerImage= new BitmapDrawable(getResources(), thumbnail);
             //saveImage(thumbnail);
             Toast.makeText(GalleryActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
@@ -191,4 +196,8 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+    public void onBackPressed() {
+        finish();
+    }
+
 }

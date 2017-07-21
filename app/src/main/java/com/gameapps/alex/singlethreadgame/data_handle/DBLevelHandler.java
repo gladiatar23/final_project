@@ -24,7 +24,7 @@ public class DBLevelHandler extends SQLiteOpenHelper {
 
     private static final String TABLE_LEVELS = "levelsTable";
     private static final String KEY_ID = "id";
-    private static final String KEY_LEVEL_NAME = "levelName";
+    private static final String KEY_LEVEL_NAME = "levelNameField";
     private static final String KEY_IS_WON = "isWon";
     private static final String KEY_HIGH_SCORE = "bestScore";
 
@@ -42,7 +42,7 @@ public class DBLevelHandler extends SQLiteOpenHelper {
            "INTEGER",
            "INTEGER"
     };
-
+//Synchronize table of levels in the data base
     public static synchronized DBLevelHandler getInstance(Context ctx) {
         // Use the application context, which will ensure that you
         // don't accidentally leak an Activity's context.
@@ -101,7 +101,11 @@ public class DBLevelHandler extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT * FROM " + TABLE_LEVELS + " WHERE " + KEY_ID + "=" + stageID, null);
         c.moveToFirst();
         int isWon = 0;
-        isWon = Integer.parseInt(c.getString(LevelForTable.WON_INDEX));
+//        try {
+            isWon = Integer.parseInt(c.getString(LevelForTable.WON_INDEX));
+//        }catch(Exception e) {   //likely querying a nonexistant level
+//            return false;
+//        }
 
         return isWon != 0? true : false;
 

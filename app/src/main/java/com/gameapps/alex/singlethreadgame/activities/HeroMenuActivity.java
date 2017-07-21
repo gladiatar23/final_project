@@ -3,7 +3,6 @@ package com.gameapps.alex.singlethreadgame.activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 
 import com.gameapps.alex.singlethreadgame.GameSession;
 import com.gameapps.alex.singlethreadgame.R;
-import com.gameapps.alex.singlethreadgame.activities.GameActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
-
+//Request a screen size and set the size of the hero selection buttons
         Display display = getWindowManager().getDefaultDisplay();
         Point canvasSize = new Point();
         display.getSize(canvasSize);
@@ -51,11 +49,13 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
 
         heroLayout=(LinearLayout)findViewById(R.id.heroSelection);
 
-        int numOfHeros= GameSession.Human.values().length;
+        //int numOfHeros= GameSession.Human.values().length;
         heroButtons = new ArrayList<>();
         heroLayout.removeAllViews();
 
-
+//Checking of Heroes is available and saved in the list
+////Runs in the loop, creates the hero buttons, puts a relevant picture for each hero by id,
+// puts the clicks listener on buttons  and add them to view
         heroesAvailableList = new ArrayList<>(GameSession.availableHeroes);
         for(GameSession.Human hero : heroesAvailableList) {
             ImageButton bLevel =new ImageButton(this);
@@ -70,14 +70,15 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
-        backLevel = (Button)findViewById(R.id.backLevel);
+        backLevel = (Button)findViewById(R.id.backToLevels);
         backLevel.setOnClickListener(this);
 
     }
-
+//Checking of pressing a button according to ID. If the ID is not equal to backToLevels then check which stage is selected.
+// If it is, then the running of the activity is completed
     @Override
     public void onClick(View v) {
-        if(v.getId()!=R.id.backLevel){
+        if(v.getId()!=R.id.backToLevels){
             int indexOfPressedButton = heroLayout.indexOfChild(v);
             GameSession.initializeStatics(false);
             GameSession.currentHero = heroesAvailableList.get(indexOfPressedButton);
@@ -90,7 +91,7 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
         }
     }
     public void leaveBackToStageSelect() {
-        Log.i("Finish" , "Finish2 " );
+      //  Log.i("Finish" , "Finish2 " );
         finish();
 
     }
@@ -103,12 +104,15 @@ public class HeroMenuActivity extends AppCompatActivity implements View.OnClickL
         super.onPostResume();
 
         if(isBackFromStage) {
-            Log.i("Finish" , "Finish3 " );
+           // Log.i("Finish" , "Finish3 " );
             leaveBackToStageSelect();
 
         }
 
 
+    }
+    public void onBackPressed() {
+     finish();
     }
 
 }

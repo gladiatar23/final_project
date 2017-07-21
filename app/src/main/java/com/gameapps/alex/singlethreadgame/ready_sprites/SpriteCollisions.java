@@ -65,7 +65,7 @@ public class SpriteCollisions implements LogicalElement {
                         e.decHitPoints();
 
                     } else {
-                        Log.i("collision enemy bullet", "miss");
+                       // Log.i("collision enemy bullet", "miss");
                     }
                 }
             }

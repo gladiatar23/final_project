@@ -9,7 +9,7 @@ import com.gameapps.alex.singlethreadgame.ready_sprites.WorldManager;
 import java.util.Date;
 
 /**
- * Created by Phillip on 1/6/2017.
+ * Created by Alex on 1/6/2017.
  */
 //The Class Runs Threads .Defines sleep time and runtime for them (in order not to overload the CPU).
 // At the end of each run finishing them and start all over again

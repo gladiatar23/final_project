@@ -61,7 +61,7 @@ public class LevelForTable {
     public String toString() {
         return "LevelForTable{" +
                 "id=" + id +
-                ", levelName='" + levelName + '\'' +
+                ", levelNameField='" + levelName + '\'' +
                 ", isWon=" + isWon +
                 ", bestScore=" + bestScore +
                 '}';

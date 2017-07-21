@@ -28,7 +28,6 @@ import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
 import com.gameapps.alex.singlethreadgame.R;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +39,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
     private CallbackManager callbackManager;
-    ImageView FaceOfBook;
+    ImageView faceOfBook;
     LoginButton login_button;
     FacebookCallback<LoginResult> callback;
     Button backFromFB;
@@ -59,11 +58,11 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         AppEventsLogger.activateApp(this);
         login_button = (LoginButton) findViewById(R.id.login_button);
         textView = (TextView) findViewById(R.id.txtStatus);
-        FaceOfBook = (ImageView) findViewById(R.id.FaceOfBook);
-        Log.i("get img view", " " + FaceOfBook.toString());
+        faceOfBook = (ImageView) findViewById(R.id.FaceOfBook);
+        //Log.i("get img view", " " + faceOfBook.toString());
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        ProfilePictureView profilePictureView;
+        //ProfilePictureView profilePictureView;
         //innitConntrolers();
         //loginFB();
 
@@ -72,6 +71,9 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         textView = (TextView) findViewById(R.id.txtStatus);
         login_button = (LoginButton) findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
+
+        //Handling a situation where there is no Internet connection with a message to the user and back to the main screen
+        //If there is a connection, the game continues
         if(!isNetworkConnected())
         {
             Toast.makeText(this , "You need internet connection!" , Toast.LENGTH_LONG).show();
@@ -93,7 +95,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         };
 
 
-
+//Start communicating with Facebook
         accessTokenTracker.startTracking();
         profileTracker.startTracking();
 
@@ -121,9 +123,9 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         login_button.registerCallback(callbackManager, callback);
 
     }
+    //Check if there is an Internet connection
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null;
     }
 
@@ -158,20 +160,20 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
                     .setNegativeButton("No", dialogClickListener).show();
         }
     }
-
+//    Getting data from Facebook (name and picture)
     void getDataFromFBProfile(Profile profile) {
         if (profile == null) {
             return;
         }
         textView.setText("Hello "+profile.getName());
 
-        Uri url = profile.getProfilePictureUri(150, 150);
+        Uri url = profile.getProfilePictureUri(FriendsListActivity.IMAGE_FRAME_WIDTH, FriendsListActivity.IMAGE_FRAME_HEIGHT);
 
         Log.i("get img", " " + url);
-
+//        Converting the picture from uri to drawable and put the pic into ImageView
         Picasso.with(getApplicationContext())
                 .load(url)
-                .into(FaceOfBook, new com.squareup.picasso.Callback() {
+                .into(faceOfBook, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
 
@@ -214,7 +216,7 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
             return;
 
 
-        Drawable imageDrawable = FaceOfBook.getDrawable();
+        Drawable imageDrawable = faceOfBook.getDrawable();
 
         FriendsListActivity.playerImage = imageDrawable;
         //TODO - SWITCH fACE
@@ -234,4 +236,8 @@ public class FacebookActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
+    public void onBackPressed() {
+        finish();
+    }
+
 }
